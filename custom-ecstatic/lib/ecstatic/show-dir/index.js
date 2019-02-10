@@ -26,6 +26,8 @@ module.exports = (opts) => {
   const si = opts.si;
   const weakEtags = opts.weakEtags;
 
+  // node express app middleware format
+  // req for request and res to response
   return function middleware(req, res, next) {
     // Figure out the path for the file from the given url
     const parsed = url.parse(req.url);
