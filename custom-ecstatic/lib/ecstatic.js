@@ -383,6 +383,7 @@ module.exports = function createMiddleware(_dir, _options) {
                 return;
               }
               if (opts.showDir) {
+                // Adding showDir as middleware
                 showDir(opts, stat)(req, res);
                 return;
               }
