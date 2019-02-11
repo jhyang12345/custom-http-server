@@ -4,12 +4,14 @@ const styles = require('./styles');
 const permsToString = require('./perms-to-string');
 const sizeToString = require('./size-to-string');
 const sortFiles = require('./sort-files');
+// fs stands for file system
 const fs = require('fs');
 const path = require('path');
 const he = require('he');
 const etag = require('../etag');
 const url = require('url');
 const status = require('../status-handlers');
+const render_methods = require("../render-helpers/renderMethods")
 
 const supportedIcons = styles.icons;
 const css = styles.css;
@@ -94,32 +96,7 @@ module.exports = (opts) => {
           html += '<table>';
 
           const failed = false;
-          const writeRow = (file) => {
-            // render a row given a [name, stat] tuple
-            const isDir = file[1].isDirectory && file[1].isDirectory();
-            let href = `${parsed.pathname.replace(/\/$/, '')}/${encodeURIComponent(file[0])}`;
-
-            // append trailing slash and query for dir entry
-            if (isDir) {
-              href += `/${he.encode((parsed.search) ? parsed.search : '')}`;
-            }
-
-            const displayName = he.encode(file[0]) + ((isDir) ? '/' : '');
-            const ext = file[0].split('.').pop();
-            const classForNonDir = supportedIcons[ext] ? ext : '_page';
-            const iconClass = `icon-${isDir ? '_blank' : classForNonDir}`;
-
-            // TODO: use stylessheets?
-            html += `${'<tr>' +
-              '<td><i class="icon '}${iconClass}"></i></td>`;
-            if (!hidePermissions) {
-              html += `<td class="perms"><code>(${permsToString(file[1])})</code></td>`;
-            }
-            html +=
-              `<td class="file-size"><code>${sizeToString(file[1], humanReadable, si)}</code></td>` +
-              `<td class="display-name"><a href="${href}">${displayName}</a></td>` +
-              '</tr>\n';
-          };
+          const writeRow = render_methods.writeRow;
 
           dirs.sort((a, b) => a[0].toString().localeCompare(b[0].toString())).forEach(writeRow);
           renderFiles.sort((a, b) => a.toString().localeCompare(b.toString())).forEach(writeRow);

@@ -71,6 +71,7 @@
     "he": "^1.2.0",
     "http-proxy": "^1.8.1",
     "mime": "^2.4.0",
+    "mime-types": "^2.1.21",
     "opener": "~1.4.0",
     "optimist": "0.6.x",
     "portfinder": "^1.0.13",
