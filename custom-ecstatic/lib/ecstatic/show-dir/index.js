@@ -1,8 +1,7 @@
 'use strict';
 
 const styles = require('./styles');
-const permsToString = require('./perms-to-string');
-const sizeToString = require('./size-to-string');
+
 const sortFiles = require('./sort-files');
 // fs stands for file system
 const fs = require('fs');
@@ -11,18 +10,17 @@ const he = require('he');
 const etag = require('../etag');
 const url = require('url');
 const status = require('../status-handlers');
-const render_methods = require("../render-helpers/renderMethods")
+const RenderHelper = require("../render-helpers/RenderHelper")
 
-const supportedIcons = styles.icons;
-const css = styles.css;
+
+
 
 module.exports = (opts) => {
   // opts are parsed by opts.js, defaults already applied
   const cache = opts.cache;
   const root = path.resolve(opts.root);
   const baseDir = opts.baseDir;
-  const humanReadable = opts.humanReadable;
-  const hidePermissions = opts.hidePermissions;
+
   const handleError = opts.handleError;
   const showDotfiles = opts.showDotfiles;
   const si = opts.si;
@@ -78,42 +76,26 @@ module.exports = (opts) => {
         res.setHeader('cache-control', cache);
 
         function render(dirs, renderFiles, lolwuts) {
+
+          const renderHelper = new RenderHelper(parsed)
+          const failed = false;
+          const writeRow = renderHelper.writeRow.bind(renderHelper)
+
           // each entry in the array is a [name, stat] tuple
 
-          let html = `${[
-            '<!doctype html>',
-            '<html>',
-            '  <head>',
-            '    <meta charset="utf-8">',
-            '    <meta name="viewport" content="width=device-width">',
-            `    <title>Index of ${he.encode(pathname)}</title>`,
-            `    <style type="text/css">${css}</style>`,
-            '  </head>',
-            '  <body>',
-            `<h1>Index of ${he.encode(pathname)}</h1>`,
-          ].join('\n')}\n`;
 
-          html += '<table>';
+          console.log("parsed value", parsed)
 
-          const failed = false;
-          const writeRow = render_methods.writeRow;
 
           dirs.sort((a, b) => a[0].toString().localeCompare(b[0].toString())).forEach(writeRow);
           renderFiles.sort((a, b) => a.toString().localeCompare(b.toString())).forEach(writeRow);
           lolwuts.sort((a, b) => a[0].toString().localeCompare(b[0].toString())).forEach(writeRow);
 
-          html += '</table>\n';
-          html += `<br><address>Node.js ${
-            process.version
-            }/ <a href="https://github.com/jfhbrook/node-ecstatic">ecstatic</a> ` +
-            `server running @ ${
-            he.encode(req.headers.host || '')}</address>\n` +
-            '</body></html>'
-          ;
+          renderHelper.finishHtml()
 
           if (!failed) {
             res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.end(html);
+            res.end(renderHelper.html);
           }
         }
 
