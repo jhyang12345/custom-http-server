@@ -75,6 +75,8 @@
     "opener": "~1.4.0",
     "optimist": "0.6.x",
     "portfinder": "^1.0.13",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
     "union": "~0.4.3",
     "url-join": "^4.0.0"
   },

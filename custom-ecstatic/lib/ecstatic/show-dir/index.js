@@ -1,19 +1,13 @@
 'use strict';
 
-const styles = require('./styles');
-
 const sortFiles = require('./sort-files');
 // fs stands for file system
 const fs = require('fs');
 const path = require('path');
-const he = require('he');
 const etag = require('../etag');
 const url = require('url');
 const status = require('../status-handlers');
 const RenderHelper = require("../render-helpers/RenderHelper")
-
-
-
 
 module.exports = (opts) => {
   // opts are parsed by opts.js, defaults already applied
