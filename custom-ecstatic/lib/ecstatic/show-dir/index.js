@@ -8,6 +8,7 @@ const etag = require('../etag');
 const url = require('url');
 const status = require('../status-handlers');
 const RenderHelper = require("../render-helpers/RenderHelper")
+const JsonHelper = require("../render-helpers/JsonHelper")
 
 module.exports = (opts) => {
   // opts are parsed by opts.js, defaults already applied
@@ -71,7 +72,7 @@ module.exports = (opts) => {
 
         function render(dirs, renderFiles, lolwuts) {
 
-          const renderHelper = new RenderHelper(parsed)
+          const renderHelper = new JsonHelper(parsed)
           const failed = false;
           const writeRow = renderHelper.writeRow.bind(renderHelper)
 

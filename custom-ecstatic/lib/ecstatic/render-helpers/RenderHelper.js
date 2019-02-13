@@ -11,6 +11,7 @@ class RenderHelper {
     constructor(parsed) {
         console.log("Constructor called")
         this.parsed = parsed;
+        this.pathname = decodeURIComponent(parsed.pathname)
         this.html = ""
         this.humanReadable = true
         this.hidePermissions = true
