@@ -1,5 +1,3 @@
-import {renderToString} from "react-dom/server"
-
 class ReactHelper {
     constructor(parsed) {
         this.parsed = parsed;
