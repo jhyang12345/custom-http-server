@@ -1,9 +1,12 @@
 import React from "react"
+import { FileWrapper } from "./File"
+
 
 class FileComponent extends React.Component {
     render() {
         return (
-            <div>File</div>
+            <FileWrapper>File</FileWrapper>
+            // null
         )
     }
 }

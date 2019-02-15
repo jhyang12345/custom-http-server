@@ -1,4 +1,5 @@
-import React, { Component } from "react"
+import React, { Component, Fragment } from "react"
+import FileComponent from "./FileComponent"
 
 class App extends Component {
     
@@ -9,7 +10,15 @@ class App extends Component {
         const { pathName, content } = directoryObject
 
         return (
-            <h1>{pathName}</h1>
+            <Fragment>
+                <h1>{pathName}</h1>
+
+                <ul>
+                    {content.map((file, i) => (
+                        <FileComponent key={i} />
+                    ))}
+                </ul>
+            </Fragment>
         )
     }
 }
