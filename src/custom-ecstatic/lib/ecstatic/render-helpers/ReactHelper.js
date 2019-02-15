@@ -1,3 +1,7 @@
+import React, { Component } from 'react'
+import { renderToString } from 'react-dom/server'
+import { App } from "../components/App"
+
 class ReactHelper {
     constructor(parsed) {
         this.parsed = parsed;
@@ -10,6 +14,8 @@ class ReactHelper {
     }
 
     finishHtml() {
+        const content = renderToString(<App />)
+        console.log("Content", content)
         this.html = `
             <!DOCTYPE html>
             <html>
@@ -17,7 +23,7 @@ class ReactHelper {
                 
                 </head>
                 <body>
-                    <div id="app">React Dom</div>
+                    <div id="app">${content}</div>
                 </body>
             </html>
         `

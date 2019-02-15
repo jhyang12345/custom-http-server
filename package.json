@@ -14,8 +14,9 @@
   "scripts": {
     "start": "node ./bin/http-server",
     "pretest": "common bin/http-server lib/ test",
-    "build": "babel src -d dev",
-    "test": "vows --spec --isolate"
+    "build": "babel src -d dev --copy-files",
+    "test": "vows --spec --isolate",
+    "parcel": "parcel ./bin/http-server ."
   },
   "files": [
     "lib",
@@ -83,6 +84,7 @@
     "mime-types": "^2.1.21",
     "opener": "~1.4.0",
     "optimist": "0.6.x",
+    "parcel-bundler": "^1.11.0",
     "portfinder": "^1.0.13",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
