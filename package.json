@@ -16,7 +16,7 @@
     "pretest": "common bin/http-server lib/ test",
     "build": "babel src -d dev",
     "test": "vows --spec --isolate"
-  }, 
+  },
   "files": [
     "lib",
     "bin"
@@ -67,6 +67,9 @@
     }
   ],
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "colors": "1.0.3",
     "corser": "~2.0.0",
     "express": "^4.16.4",
@@ -83,14 +86,14 @@
     "url-join": "^4.0.0"
   },
   "devDependencies": {
-    "common-style": "^3.0.0",
-    "request": "^2.88.0",
-    "vows": "0.7.x",
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.4",
+    "common-style": "^3.0.0",
+    "request": "^2.88.0",
+    "vows": "0.7.x",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2"
   },
