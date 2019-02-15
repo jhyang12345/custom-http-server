@@ -73,7 +73,7 @@ module.exports = (opts) => {
 
         function render(dirs, renderFiles, lolwuts) {
 
-          const renderHelper = new ReactHelper(parsed)
+          const renderHelper = new JsonHelper(parsed)
           const failed = false;
           const writeRow = renderHelper.writeRow.bind(renderHelper)
 
@@ -87,7 +87,7 @@ module.exports = (opts) => {
           renderFiles.sort((a, b) => a.toString().localeCompare(b.toString())).forEach(writeRow);
           lolwuts.sort((a, b) => a[0].toString().localeCompare(b[0].toString())).forEach(writeRow);
 
-          renderHelper.finishHtml()
+          renderHelper.finishHtml.call(renderHelper)
 
           if (!failed) {
             res.writeHead(200, { 'Content-Type': 'text/html' });

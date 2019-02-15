@@ -3,6 +3,10 @@ const he = require('he');
 const permsToString = require('../show-dir/perms-to-string');
 const sizeToString = require('../show-dir/size-to-string');
 
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import App from "../components/App"
+
 const supportedIcons = styles.icons;
 const css = styles.css;
 
@@ -47,7 +51,17 @@ class JsonHelper {
     }
 
     finishHtml() {
-        this.html = JSON.stringify(this.object)
+        const reactString = renderToString(<App directoryObject={this.object} />)
+        this.html = `
+            <!DOCTYPE html >
+            <html>
+                <head>
+
+                </head>
+                <body>
+                    <div id="app">${reactString}</div>
+                </body>
+            </html>`
     }
 
 }
