@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { renderToString } from 'react-dom/server'
-import { App } from "../components/App"
+import App from "../components/App"
 
 class ReactHelper {
     constructor(parsed) {
