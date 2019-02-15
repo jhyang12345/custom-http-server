@@ -14,9 +14,9 @@
   "scripts": {
     "start": "node ./bin/http-server",
     "pretest": "common bin/http-server lib/ test",
-    "babel": "babel custom-ecstatic/lib/ecstatic/components -d custom-ecstatic/lib/ecstatic/views",
+    "build": "babel src -d dev",
     "test": "vows --spec --isolate"
-  },
+  }, 
   "files": [
     "lib",
     "bin"
