@@ -1,6 +1,6 @@
 import React from "react"
-import { FileWrapper, FileName } from "./File"
-
+import { FileWrapper, FileName, FileIcon } from "./File"
+import prettyFileIcons from '../pretty-file-icons'
 
 class FileComponent extends React.Component {
     
@@ -12,10 +12,21 @@ class FileComponent extends React.Component {
             ext,
         } = file
 
-        console.log(displayName)
-        
+        const isDir = stat.isDirectory()
+        let fileIcon;
+
+        if (isDir) {
+            fileIcon = null
+        } else {
+            fileIcon = prettyFileIcons.getIcon(displayName, 'svg')
+        }
+        console.log(fileIcon, displayName)
+
         return (
             <FileWrapper>
+                <FileIcon 
+                    fileIcon={fileIcon}
+                />
                 <FileName>
                     {displayName}
                 </FileName>

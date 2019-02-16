@@ -24,7 +24,7 @@
   ],
   "nodemonConfig": {
     "ignore": [
-       "dev/*"
+      "dev/*"
     ]
   },
   "contributors": [
