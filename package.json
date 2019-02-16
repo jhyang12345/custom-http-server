@@ -14,7 +14,7 @@
   "scripts": {
     "start": "node ./bin/http-server",
     "pretest": "common bin/http-server lib/ test",
-    "build": "babel src -d dev --copy-files",
+    "build": "babel src --watch -d dev --copy-files",
     "test": "vows --spec --isolate",
     "parcel": "parcel ./bin/http-server ."
   },

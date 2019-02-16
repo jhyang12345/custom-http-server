@@ -11,14 +11,18 @@ class App extends Component {
 
         return (
             <Fragment>
-                <AppContainer />>
+                <AppContainer />
                 <h1>{pathName}</h1>
 
-                <ul>
-                    {content.map((file, i) => (
-                        <FileComponent key={i} />
-                    ))}
-                </ul>
+                <div id="page_container">
+                    <ul>
+                        {content.map((file, i) => (
+                            <FileComponent key={i} />
+                        ))}
+                    </ul>
+
+                </div>
+
             </Fragment>
         )
     }
@@ -44,6 +48,11 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+}
+#page_container {
+    width: 680px;
+    margin-left: auto;
+    margin-right: auto;
 }
 `
 
