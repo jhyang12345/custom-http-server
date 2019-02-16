@@ -78,11 +78,6 @@ module.exports = (opts) => {
           const writeRow = renderHelper.writeRow.bind(renderHelper)
 
           // each entry in the array is a [name, stat] tuple
-
-
-          console.log("parsed value", parsed)
-
-
           dirs.sort((a, b) => a[0].toString().localeCompare(b[0].toString())).forEach(writeRow);
           renderFiles.sort((a, b) => a.toString().localeCompare(b.toString())).forEach(writeRow);
           lolwuts.sort((a, b) => a[0].toString().localeCompare(b[0].toString())).forEach(writeRow);

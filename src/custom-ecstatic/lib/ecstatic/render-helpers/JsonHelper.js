@@ -6,6 +6,7 @@ const sizeToString = require('../show-dir/size-to-string');
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import App from "../components/App"
+import { ServerStyleSheet } from 'styled-components'
 
 const supportedIcons = styles.icons;
 const css = styles.css;
@@ -52,11 +53,15 @@ class JsonHelper {
 
     finishHtml() {
         const reactString = renderToString(<App directoryObject={this.object} />)
+
+        const sheet = new ServerStyleSheet(); // <-- creating out stylesheet
+        const styles = sheet.getStyleTags();
         this.html = `
             <!DOCTYPE html >
             <html>
                 <head>
-
+                    <title>Indexing directory</title>
+                    ${styles}
                 </head>
                 <body>
                     <div id="app">${reactString}</div>

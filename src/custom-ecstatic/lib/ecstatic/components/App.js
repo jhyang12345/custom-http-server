@@ -4,7 +4,6 @@ import FileComponent from "./FileComponent"
 class App extends Component {
     
     render() {
-        console.log("Current props", this.props)
         const { directoryObject } = this.props
 
         const { pathName, content } = directoryObject

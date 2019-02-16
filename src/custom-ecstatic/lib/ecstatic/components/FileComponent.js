@@ -3,10 +3,12 @@ import { FileWrapper } from "./File"
 
 
 class FileComponent extends React.Component {
+    
     render() {
+        console.log(FileWrapper)
+
         return (
             <FileWrapper>File</FileWrapper>
-            // null
         )
     }
 }
