@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react"
 import FileComponent from "./FileComponent"
 import { createGlobalStyle } from 'styled-components'
+import FilesContainerComponent from "./FilesContainerComponent";
 
 class App extends Component {
     
@@ -15,6 +16,7 @@ class App extends Component {
                 <h1>{pathName}</h1>
 
                 <div id="page_container">
+                    <FilesContainerComponent content={content}/>
                     <ul>
                         {content.map((file, i) => (
                             <FileComponent key={i} />

@@ -6,7 +6,7 @@ class FileComponent extends React.Component {
     
     render() {
         return (
-            <FileWrapper>File</FileWrapper>
+            <FileWrapper>Something else</FileWrapper>
         )
     }
 }

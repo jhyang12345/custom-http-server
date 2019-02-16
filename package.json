@@ -12,9 +12,9 @@
     "command"
   ],
   "scripts": {
-    "start": "node ./bin/http-server",
+    "start": "nodemon --exec babel-node ./bin/http-server",
     "pretest": "common bin/http-server lib/ test",
-    "build": "babel src --watch -d dev --copy-files",
+    "build": "babel src -d dev --copy-files",
     "test": "vows --spec --isolate",
     "parcel": "parcel ./bin/http-server ."
   },
@@ -69,6 +69,7 @@
   ],
   "dependencies": {
     "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-cli": "^6.26.0",
@@ -82,6 +83,7 @@
     "http-proxy": "^1.8.1",
     "mime": "^2.4.0",
     "mime-types": "^2.1.21",
+    "nodemon": "^1.18.10",
     "opener": "~1.4.0",
     "optimist": "0.6.x",
     "parcel-bundler": "^1.11.0",
