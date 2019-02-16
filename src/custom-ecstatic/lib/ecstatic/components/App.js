@@ -16,13 +16,7 @@ class App extends Component {
                 <h1>{pathName}</h1>
 
                 <div id="page_container">
-                    <FilesContainerComponent content={content}/>
-                    <ul>
-                        {content.map((file, i) => (
-                            <FileComponent key={i} />
-                        ))}
-                    </ul>
-
+                    <FilesContainerComponent content={content} />
                 </div>
 
             </Fragment>

@@ -12,7 +12,7 @@
     "command"
   ],
   "scripts": {
-    "start": "nodemon --exec babel-node ./bin/http-server",
+    "start": "nodemon  --exec \"yarn build && node ./bin/http-server\"",
     "pretest": "common bin/http-server lib/ test",
     "build": "babel src -d dev --copy-files",
     "test": "vows --spec --isolate",
@@ -22,6 +22,11 @@
     "lib",
     "bin"
   ],
+  "nodemonConfig": {
+    "ignore": [
+       "dev/*"
+    ]
+  },
   "contributors": [
     {
       "name": "Charlie Robbins",

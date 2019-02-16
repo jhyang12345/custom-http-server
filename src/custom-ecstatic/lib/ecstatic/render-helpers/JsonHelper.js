@@ -37,6 +37,8 @@ class JsonHelper {
             href += `/${he.encode((parsed.search) ? parsed.search : '')}`;
         }
 
+        // file = ["filename", stat]
+
         const displayName = he.encode(file[0]) + ((isDir) ? '/' : '');
         const ext = file[0].split('.').pop();
         const classForNonDir = supportedIcons[ext] ? ext : '_page';
@@ -47,6 +49,8 @@ class JsonHelper {
           ext: ext,
           classForNonDir: classForNonDir,
           iconClass: iconClass,  
+          href: href,
+          stat: file[1],
         })
    
     }
