@@ -35,17 +35,23 @@ class FileIcon extends React.Component {
                 loaded: true,
                 img: data,
             }))
-
+            data.toString('base64')
         });
     }
 
     render() {
         const { fileIcon } = this.props
         console.log("fileIcon render:", fileIcon)
-        
+
+        const imgSource = "data:image/svg;base64," + this.state.img
+
         return (
             <FileIconComponent>
-                <img src={"/pretty-file-icons/" + fileIcon} />
+                {
+                    this.state.loaded === true
+                    ? <img src={imgSource} />
+                    : null
+                }
             </FileIconComponent>
         )
     }

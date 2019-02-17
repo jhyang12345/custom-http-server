@@ -65,12 +65,14 @@ class JsonHelper {
             <html>
                 <head>
                     <title>Indexing directory</title>
+                    
                     ${styles}
                 </head>
                 <body>
-                    <div id="app">${reactString}</div>
+                    <div id="root">${reactString}</div>
+                    <script type="text/javascript" src="./bundle.js"></script>
                 </body>
-            </html>`
+            </html>`;
     }
 
 }

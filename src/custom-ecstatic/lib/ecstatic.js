@@ -198,6 +198,8 @@ module.exports = function createMiddleware(_dir, _options) {
         path.relative(path.join('/', baseDir), pathname)
       )
     );
+
+    console.log("File here", file, __dirname)
     gzipped = `${file}.gz`;
 
     if (serverHeader !== false) {
@@ -225,7 +227,6 @@ module.exports = function createMiddleware(_dir, _options) {
       status[405](res, next);
       return;
     }
-
 
     function serve(stat) {
       // Do a MIME lookup, fall back to octet-stream and handle gzip
@@ -382,6 +383,7 @@ module.exports = function createMiddleware(_dir, _options) {
                 status[500](res, next, { error: autoIndexError });
                 return;
               }
+              // Testing without showDir
               if (opts.showDir) {
                 // Adding showDir as middleware
                 showDir(opts, stat)(req, res);
@@ -397,6 +399,7 @@ module.exports = function createMiddleware(_dir, _options) {
             showDir(opts, stat)(req, res);
           }
         } else {
+          // serve if not a directory?.?
           serve(stat);
         }
       });
