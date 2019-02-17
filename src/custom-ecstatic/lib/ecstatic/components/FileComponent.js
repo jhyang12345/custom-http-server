@@ -20,7 +20,6 @@ class FileComponent extends React.Component {
         } else {
             fileIcon = prettyFileIcons.getIcon(displayName, 'svg')
         }
-        console.log(fileIcon, displayName)
 
         return (
             <FileWrapper>
