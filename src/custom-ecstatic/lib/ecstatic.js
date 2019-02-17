@@ -12,6 +12,7 @@ const version = require('../package.json').version;
 const status = require('./ecstatic/status-handlers');
 const generateEtag = require('./ecstatic/etag');
 const optsParser = require('./ecstatic/opts');
+import staticFileName from './staticFiles'
 
 let ecstatic = null;
 
@@ -184,6 +185,8 @@ module.exports = function createMiddleware(_dir, _options) {
     }
     */
 
+    
+
     try {
       decodeURIComponent(req.url); // check validity of url
       pathname = decodePathname(parsed.pathname);
@@ -192,14 +195,18 @@ module.exports = function createMiddleware(_dir, _options) {
       return;
     }
 
+    console.log("File here", staticFileName(pathname));
+    pathname = staticFileName(pathname);
+
     file = path.normalize(
       path.join(
         root,
         path.relative(path.join('/', baseDir), pathname)
       )
     );
+    
+    console.log("File here", file)
 
-    console.log("File here", file, __dirname)
     gzipped = `${file}.gz`;
 
     if (serverHeader !== false) {
