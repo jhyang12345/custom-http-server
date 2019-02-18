@@ -196,14 +196,18 @@ module.exports = function createMiddleware(_dir, _options) {
     }
 
     console.log("File here", staticFileName(pathname));
-    pathname = staticFileName(pathname);
 
-    file = path.normalize(
-      path.join(
-        root,
-        path.relative(path.join('/', baseDir), pathname)
-      )
-    );
+    if (pathname !== staticFileName(pathname)) {
+      file = staticFileName(pathname)
+    } else {
+      file = path.normalize(
+        path.join(
+          root,
+          path.relative(path.join('/', baseDir), pathname)
+        )
+      );
+    }
+
     
     console.log("File here", file)
 
