@@ -1,7 +1,7 @@
 import path from 'path'
 
 const mapper = {
-    "/client/bundle.js": "ecstatic/client/index.js"
+    "/client/bundle.js": "../../../assets/client.js"
 }
 
 export default function staticFileName(pathname) {
