@@ -2,7 +2,7 @@
   "name": "http-server",
   "version": "0.11.1",
   "description": "A simple zero-configuration command-line http server",
-  "main": "./lib/http-server",
+  "main": "./bin/http-server",
   "repository": {
     "type": "git",
     "url": "git://github.com/indexzero/http-server.git"
@@ -12,9 +12,10 @@
     "command"
   ],
   "scripts": {
-    "start": "nodemon  --exec \"yarn build && node ./bin/http-server\"",
+    "start": "nodemon  --exec \"yarn run pack && yarn build && node ./bin/http-server\"",
     "pretest": "common bin/http-server lib/ test",
     "build": "babel src -d dev --copy-files",
+    "pack": "webpack --config webpack.config.js",
     "test": "vows --spec --isolate",
     "parcel": "parcel ./bin/http-server ."
   },
@@ -24,7 +25,7 @@
   ],
   "nodemonConfig": {
     "ignore": [
-      "dev/*"
+      "dev/*", "assets/*"
     ]
   },
   "contributors": [
@@ -104,8 +105,8 @@
     "common-style": "^3.0.0",
     "request": "^2.88.0",
     "vows": "0.7.x",
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2"
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
   },
   "bugs": {
     "url": "https://github.com/nodeapps/http-server/issues"
