@@ -12,7 +12,7 @@ class FileComponent extends React.Component {
             ext,
         } = file
 
-        const isDir = stat.isDirectory()
+        const isDir = stat.isDir
         let fileIcon;
 
         if (isDir) {

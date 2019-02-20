@@ -29,14 +29,14 @@ class FileIcon extends React.Component {
         const prettyPath = path.join(__dirname, "../../pretty-file-icons/svg")
         const filePath = path.join(prettyPath, fileIcon)
         
-        fs.readFile(filePath, (err, data) => {
-            if (err) throw err;
-            this.setState(() => ({
-                loaded: true,
-                img: data,
-            }))
-            data.toString('base64')
-        });
+        // fs.readFile(filePath, (err, data) => {
+        //     if (err) throw err;
+        //     this.setState(() => ({
+        //         loaded: true,
+        //         img: data,
+        //     }))
+        //     data.toString('base64')
+        // });
     }
 
     render() {
