@@ -65,7 +65,7 @@ class JsonHelper {
             <html>
                 <head>
                     <title>Indexing directory</title>
-                    
+                    <script>window.__INITIAL__DATA__ = ${JSON.stringify({ directoryObject : this.object })}</script>
                     ${styles}
                 </head>
                 <body>
