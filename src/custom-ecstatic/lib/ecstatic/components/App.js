@@ -13,8 +13,6 @@ class App extends Component {
         return (
             <Fragment>
                 <AppContainer />
-                <h1>{pathName}</h1>
-
                 <div id="page_container">
                     <FilesContainerComponent content={content} />
                 </div>
@@ -44,6 +42,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+    font-family: 'Roboto', sans-serif;
 }
 #page_container {
     width: 680px;
