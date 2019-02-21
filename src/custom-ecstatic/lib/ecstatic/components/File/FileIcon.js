@@ -46,9 +46,6 @@ class FileIcon extends React.Component {
     }
 
     render() {
-        const { fileIcon } = this.props
-        console.log("fileIcon render:", this.state.loaded)
-
         const imgSource = this.state.img
 
         return (
@@ -71,6 +68,14 @@ const FileIconComponent = styled.div`
         display: inline-block;
         max-width: 100%;
         max-height: 100%;
+    }
+
+    & i {
+        display: block;
+        color: #88cdf8;
+        text-align: center;
+        line-height: 56px;
+        font-size: 40px;
     }
 `
 export default FileIcon
