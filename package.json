@@ -83,6 +83,7 @@
     "colors": "1.0.3",
     "corser": "~2.0.0",
     "express": "^4.16.4",
+    "font-awesome": "^4.7.0",
     "fs": "^0.0.1-security",
     "he": "^1.2.0",
     "http-proxy": "^1.8.1",

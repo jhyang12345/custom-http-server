@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { getIcon } from '../../pretty-file-icons'
 import fs from 'fs'
 import path from 'path'
+import FileIconImage from './FileIconImage'
 
 class FileIcon extends React.Component {
 
@@ -18,7 +19,6 @@ class FileIcon extends React.Component {
     // componentDidMount only called in client side
     componentDidMount() {
         this.handleInitialData()
-        console.log("Initial load")
     }
 
     // doesn't get called in the server side
@@ -28,6 +28,10 @@ class FileIcon extends React.Component {
 
         // if fileIcon is null it's a directory
         if (fileIcon === null) {
+            this.setState({
+                loaded: true,
+                img: null,
+            })
             return
         }
 
@@ -51,7 +55,7 @@ class FileIcon extends React.Component {
             <FileIconComponent>
                 {
                     this.state.loaded === true
-                    ? <img src={imgSource} />
+                    ? <FileIconImage imgSource={imgSource} />
                     : null
                 }
             </FileIconComponent>
