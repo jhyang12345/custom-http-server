@@ -6,14 +6,19 @@ import path from 'path'
 
 class FileIcon extends React.Component {
 
+    // beware not to call handleInitialData in constructor
     constructor(props) {
         super(props);
         this.state = {
             loaded: false,
             img: null,
         }
+    }
 
+    // componentDidMount only called in client side
+    componentDidMount() {
         this.handleInitialData()
+        console.log("Initial load")
     }
 
     // doesn't get called in the server side
@@ -26,24 +31,21 @@ class FileIcon extends React.Component {
             return
         }
 
-        const prettyPath = path.join(__dirname, "../../pretty-file-icons/svg")
+        const prettyPath = path.join(__dirname, "/pretty-file-icons/svg")
         const filePath = path.join(prettyPath, fileIcon)
+
+        this.setState({
+            loaded: true,
+            img: filePath,
+        })
         
-        // fs.readFile(filePath, (err, data) => {
-        //     if (err) throw err;
-        //     this.setState(() => ({
-        //         loaded: true,
-        //         img: data,
-        //     }))
-        //     data.toString('base64')
-        // });
     }
 
     render() {
         const { fileIcon } = this.props
-        console.log("fileIcon render:", fileIcon)
+        console.log("fileIcon render:", this.state.loaded)
 
-        const imgSource = "data:image/svg;base64," + this.state.img
+        const imgSource = this.state.img
 
         return (
             <FileIconComponent>
