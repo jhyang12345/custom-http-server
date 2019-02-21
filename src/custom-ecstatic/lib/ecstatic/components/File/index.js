@@ -12,7 +12,6 @@ export const FileWrapper = styled.div`
 export const FileName = styled.div`
     font-size: 1.4em;
     flex: 1;
-    background-color: #AFFFAA;
 `
 
 export  { FileIcon }
