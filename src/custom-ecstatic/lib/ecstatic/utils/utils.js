@@ -11,3 +11,20 @@ export function stripSlashes(value) {
    if (pathName[pathName.length - 1] === "/") pathName = pathName.substring(0, pathName.length - 1)
    return pathName
 }
+
+// sort reverse for now
+export function sortByModifiedTime(content) {
+   const directories = []
+   const files = []
+
+   for (let item of content) {
+      const { stat } = item
+      if (stat.isDir) directories.push(item)
+      else files.push(item)
+   }
+
+   directories.sort((a, b) => (new Date(b.stat.mtime) - new Date(a.stat.mtime)))
+   files.sort((a, b) => (new Date(b.stat.mtime) - new Date(a.stat.mtime)))
+
+   return [...directories, ...files]
+}
