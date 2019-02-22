@@ -1,19 +1,24 @@
 import React, {Fragment} from "react"
 import styled from 'styled-components'
-import { HeaderItemComponent } from './FileList'
+import { HeaderItemComponent, SubDirectoryComponent } from './FileList'
 
 class FileListHeaderComponent extends React.Component {
     render() {
 
         const { pathName } = this.props
-
+        console.log("PathName", getRenderedPathName(pathName))
         return (
             <Fragment>
                 <FileListHeader>
-                    <div class="directory-header">
-                        Serving... {getRenderedPathName(pathName)}
+                    <div className="directory-header">
+                        Serving 
+                        <SubDirectoryComponent
+                            pathName={"root"}
+                            isRoot={true}
+                        />
+                        {getRenderedPathName(pathName)}
                     </div>
-                    <div class="inner-container">
+                    <div className="inner-container">
                         <HeaderItemComponent
                             flex={1}
                             title="Name" />
@@ -33,9 +38,24 @@ class FileListHeaderComponent extends React.Component {
     }
 }
 
-function getRenderedPathName(pathName) {
+function getRenderedPathName(pathN) {
+    let pathName = pathN.trim()
+    if(pathName.length === 0) return null
+    if(pathName[0] === "/") pathName = pathName.substring(1, pathName.length - 1)
+    if (pathName.length === 0) return null
+    if (pathName[pathName.length - 1] === "/") pathName = pathName.substring(0, pathName.length - 1)
+    if (pathName.length === 0) return null
+
     const dirs = pathName.split("/")
-    return dirs[-1]
+    console.log("Dirs", dirs)
+    return (
+        dirs.map((dir, i) => (
+            <SubDirectoryComponent
+                pathName={dir}
+            />
+        ))
+    )
+    // return dirs[dirs.length - 1]
 }
 
 const FileListHeader = styled.div`

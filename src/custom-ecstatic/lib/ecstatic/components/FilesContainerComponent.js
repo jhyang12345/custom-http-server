@@ -6,7 +6,7 @@ import FileListHeaderComponent from './FileListHeaderComponent'
 class FilesContainerComponent extends React.Component {
     render() {
         const { content, pathName } = this.props
-        
+
         return (
             <Fragment>
                 <FileListHeaderComponent pathName={pathName}/>

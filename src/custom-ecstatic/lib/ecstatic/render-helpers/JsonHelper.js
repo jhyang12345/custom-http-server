@@ -75,7 +75,7 @@ class JsonHelper {
                 </head>
                 <body>
                     <div id="root">${reactString}</div>
-                    <script type="text/javascript" src="./client/bundle.js"></script>
+                    <script type="text/javascript" src="/client/bundle.js"></script>
                 </body>
             </html>`;
     }

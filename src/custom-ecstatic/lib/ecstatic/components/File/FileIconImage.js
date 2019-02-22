@@ -6,8 +6,6 @@ class FileIconImage extends React.Component {
     render() {
         const { imgSource } = this.props
 
-        console.log("Image source:", imgSource)
-
         return (
             (
             imgSource !== null
