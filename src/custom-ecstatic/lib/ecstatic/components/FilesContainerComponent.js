@@ -5,11 +5,11 @@ import FileListHeaderComponent from './FileListHeaderComponent'
 
 class FilesContainerComponent extends React.Component {
     render() {
-        const { content } = this.props
+        const { content, pathName } = this.props
         
         return (
             <Fragment>
-                <FileListHeaderComponent/>
+                <FileListHeaderComponent pathName={pathName}/>
                 <FilesContainer>
                     {content.map((file, i) => (
                         <FileComponent key={i}

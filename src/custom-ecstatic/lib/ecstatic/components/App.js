@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react"
 import FileComponent from "./FileComponent"
 import { createGlobalStyle } from 'styled-components'
-import FilesContainerComponent from "./FilesContainerComponent";
+import FilesContainerComponent from "./FilesContainerComponent"
+import LeftSideBarComponent from "./LeftSideBarComponent"
 
 class App extends Component {
     
@@ -13,8 +14,14 @@ class App extends Component {
         return (
             <Fragment>
                 <AppContainer />
+                {/* Will not be used to show current directory */}
+                <LeftSideBarComponent 
+                />
                 <div id="page_container">
-                    <FilesContainerComponent content={content} />
+                    <FilesContainerComponent 
+                        content={content} 
+                        pathName={pathName}
+                        />
                 </div>
 
             </Fragment>

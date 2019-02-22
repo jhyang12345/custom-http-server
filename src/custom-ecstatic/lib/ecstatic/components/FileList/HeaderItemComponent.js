@@ -11,6 +11,7 @@ class HeaderItemComponent extends React.Component {
             <HeaderItem
                 {...this.props}>
                 {title}
+                <i class="fas fa-caret-down"></i>
             </HeaderItem>
         )
 
@@ -19,10 +20,17 @@ class HeaderItemComponent extends React.Component {
 
 const HeaderItem = styled.div`
     height: 100%;
-    line-height: 60px;
+    line-height: 50px;
+    font-size: 0.8em;
+    color: #777;
+    padding-left: 12px;
     flex: ${props => props.flex !== null ? props.flex : null};
     width: ${props => props.width !== null ? props.width : null };
     text-align: ${props => props.alignRight === true ? "right" : "left"};
+
+    & .fa-caret-down {
+        margin-left: 6px;
+    }
 `
 
 export default HeaderItemComponent
