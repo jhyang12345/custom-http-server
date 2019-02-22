@@ -1,5 +1,7 @@
 import React from "react"
-import { FileWrapper, FileName, FileIcon } from "./File"
+import Moment from "react-moment"
+import { bytesToSize } from "../utils/utils"
+import { FileWrapper, FileName, FileIcon, FileSize, FileModifiedDate } from "./File"
 import prettyFileIcons from '../pretty-file-icons'
 
 class FileComponent extends React.Component {
@@ -21,6 +23,8 @@ class FileComponent extends React.Component {
             fileIcon = prettyFileIcons.getIcon(displayName, 'svg')
         }
 
+        
+        console.log(stat.mtime)
         return (
             <FileWrapper>
                 <FileIcon 
@@ -29,6 +33,15 @@ class FileComponent extends React.Component {
                 <FileName>
                     {displayName}
                 </FileName>
+                <FileSize>
+                    {bytesToSize(stat.size)}
+                </FileSize>
+                <FileModifiedDate>
+                    <Moment
+                        format="YYYY-MM-DD HH:mm">
+                        {stat.mtime}
+                    </Moment>
+                </FileModifiedDate>
             </FileWrapper>
         )
     }
