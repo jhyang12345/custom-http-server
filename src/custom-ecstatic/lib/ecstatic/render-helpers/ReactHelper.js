@@ -18,7 +18,6 @@ class ReactHelper {
     // not being used now
     finishHtml() {
         const content = renderToString(<App />)
-        console.log("Content", content)
 
         const sheet = new ServerStyleSheet(); // <-- creating out stylesheet
         const styles = sheet.getStyleTags(); // <--

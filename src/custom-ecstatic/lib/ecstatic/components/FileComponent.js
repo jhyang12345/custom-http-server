@@ -23,8 +23,6 @@ class FileComponent extends React.Component {
             fileIcon = prettyFileIcons.getIcon(displayName, 'svg')
         }
 
-        
-        console.log(stat.mtime)
         return (
             <FileWrapper>
                 <FileIcon 

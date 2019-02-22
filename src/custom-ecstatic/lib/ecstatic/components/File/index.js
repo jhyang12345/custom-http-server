@@ -24,6 +24,7 @@ export const FileName = styled.div`
 export const FileSize = styled.div`
     width: 80px;
     line-height: 80px;
+    color: #999;
 `
 
 export const FileModifiedDate = styled.div`
@@ -31,10 +32,6 @@ export const FileModifiedDate = styled.div`
     width: 160px;
     line-height: 80px;
     color: #999;
-    text-align: right;
-`
-
-export const FileMoment = styled(Moment)`
     text-align: right;
 `
 
