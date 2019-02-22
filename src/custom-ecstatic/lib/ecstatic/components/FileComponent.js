@@ -1,14 +1,28 @@
+import path from 'path'
 import React from "react"
 import Moment from "react-moment"
 import { bytesToSize } from "../utils/utils"
 import { FileWrapper, FileName, FileIcon, FileSize, FileModifiedDate } from "./File"
 import prettyFileIcons from '../pretty-file-icons'
+import { stripSlashes } from '../utils/utils'
 
 class FileComponent extends React.Component {
     
-    render() {
+    handleClick = () => {
         const { file } = this.props
         const {
+            displayName,
+        } = file
+        
+        const curPath = window.location.pathname
+        
+        // TODO : solve issue with react router?.?
+        window.location.href = path.join(curPath, displayName)
+    }
+
+    render() {
+        const { file } = this.props
+        let {
             stat,
             displayName,
             ext,
@@ -22,9 +36,11 @@ class FileComponent extends React.Component {
         } else {
             fileIcon = prettyFileIcons.getIcon(displayName, 'svg')
         }
+        displayName = stripSlashes(displayName);
 
         return (
-            <FileWrapper>
+            <FileWrapper
+                onClick={this.handleClick}>
                 <FileIcon 
                     fileIcon={fileIcon}
                 />

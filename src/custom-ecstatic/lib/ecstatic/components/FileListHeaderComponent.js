@@ -1,6 +1,7 @@
 import React, {Fragment} from "react"
 import styled from 'styled-components'
 import { HeaderItemComponent, SubDirectoryComponent } from './FileList'
+import { stripSlashes } from '../utils/utils'
 
 class FileListHeaderComponent extends React.Component {
     render() {
@@ -39,11 +40,7 @@ class FileListHeaderComponent extends React.Component {
 }
 
 function getRenderedPathName(pathN) {
-    let pathName = pathN.trim()
-    if(pathName.length === 0) return null
-    if(pathName[0] === "/") pathName = pathName.substring(1, pathName.length - 1)
-    if (pathName.length === 0) return null
-    if (pathName[pathName.length - 1] === "/") pathName = pathName.substring(0, pathName.length - 1)
+    let pathName = stripSlashes(pathN)
     if (pathName.length === 0) return null
 
     const dirs = pathName.split("/")
