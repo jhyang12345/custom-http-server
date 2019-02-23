@@ -2,7 +2,9 @@ import styled from 'styled-components'
 import FileIcon from './FileIcon'
 import Moment from 'react-moment'
 
-export const FileWrapper = styled.div`
+export const FileWrapper = styled.a`
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid #CCC;

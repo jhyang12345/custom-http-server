@@ -51,6 +51,31 @@ export function sortByName(content) {
       else if (a.displayName > b.displayName) return 1
       return 0
    })
-   
+
+   return [...directories, ...files]
+}
+
+export function sortBySize(content) {
+   const directories = []
+   const files = []
+
+   for (let item of content) {
+      const { stat } = item
+      if (stat.isDir) directories.push(item)
+      else files.push(item)
+   }
+
+   directories.sort((a, b) => {
+      if (a.stat.size < b.stat.size) return 1
+      else if (a.stat.size > b.stat.size) return -1
+      return 0
+   })
+
+   files.sort((a, b) => {
+      if (a.stat.size < b.stat.size) return 1
+      else if (a.stat.size > b.stat.size) return -1
+      return 0
+   })
+
    return [...directories, ...files]
 }

@@ -40,6 +40,7 @@ class FileComponent extends React.Component {
 
         return (
             <FileWrapper
+                href={"./" + displayName}
                 onClick={this.handleClick}>
                 <FileIcon 
                     fileIcon={fileIcon}
