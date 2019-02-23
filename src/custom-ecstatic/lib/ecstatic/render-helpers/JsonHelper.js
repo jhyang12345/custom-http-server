@@ -4,6 +4,9 @@ const permsToString = require('../show-dir/perms-to-string');
 const sizeToString = require('../show-dir/size-to-string');
 
 import React from 'react'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import reducer from '../reducers'
 import { renderToString } from 'react-dom/server'
 import App from "../components/App"
 import { ServerStyleSheet } from 'styled-components'
@@ -59,7 +62,14 @@ class JsonHelper {
     }
 
     finishHtml() {
-        const reactString = renderToString(<App directoryObject={this.object} />)
+
+        const store = createStore(reducer)
+
+        const reactString = renderToString(
+            <Provider store={store}>
+                <App directoryObject={this.object} />
+            </Provider>
+        )
 
         const sheet = new ServerStyleSheet(); // <-- creating out stylesheet
         const styles = sheet.getStyleTags();

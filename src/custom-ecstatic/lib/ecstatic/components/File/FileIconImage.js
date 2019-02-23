@@ -10,7 +10,7 @@ class FileIconImage extends React.Component {
             (
             imgSource !== null
             ? <img src={imgSource} />
-            : <i class="fas fa-folder"></i>
+            : <i className="fas fa-folder"></i>
             ) 
         )
     }

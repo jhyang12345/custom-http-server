@@ -11,7 +11,7 @@ class HeaderItemComponent extends React.Component {
             <HeaderItem
                 {...this.props}>
                 {title}
-                <i class="fas fa-caret-down"></i>
+                <i className="fas fa-caret-down"></i>
             </HeaderItem>
         )
 

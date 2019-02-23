@@ -9,7 +9,7 @@ class SubDirectoryComponent extends React.Component {
                 {...this.props}>
                 {
                 isRoot !== true
-                ? <i class="fas fa-chevron-right"></i>
+                ? <i className="fas fa-chevron-right"></i>
                 : null
                 }
                 { pathName }
