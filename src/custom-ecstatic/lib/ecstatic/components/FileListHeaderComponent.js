@@ -2,7 +2,7 @@ import React, {Fragment} from "react"
 import styled from 'styled-components'
 import { HeaderItemComponent, SubDirectoryComponent } from './FileList'
 import { stripSlashes } from '../utils/utils'
-import { sortByModifiedTime } from '../actions/currentDirectory'
+import { createSortByModifiedTimeAction, createSortByNameAction } from '../actions/currentDirectory'
 
 class FileListHeaderComponent extends React.Component {
     render() {
@@ -23,7 +23,9 @@ class FileListHeaderComponent extends React.Component {
                     <div className="inner-container">
                         <HeaderItemComponent
                             flex={1}
-                            title="Name" />
+                            title="Name"
+                            action={createSortByNameAction()}
+                            />
                         <HeaderItemComponent
                             width={"80px"}
                             title="Size"
@@ -31,7 +33,7 @@ class FileListHeaderComponent extends React.Component {
                         <HeaderItemComponent
                             width={"160px"}
                             title="Modified Time"
-                            action={sortByModifiedTime()}
+                            action={createSortByModifiedTimeAction()}
                             alignRight={true}
                         />
                     </div>

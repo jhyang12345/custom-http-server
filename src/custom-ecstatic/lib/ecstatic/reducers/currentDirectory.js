@@ -1,5 +1,5 @@
-import { FETCH_DIRECTORY, SORT_BY_MODIFIED_TIME } from '../actions/currentDirectory'
-import { sortByModifiedTime } from '../utils/utils'
+import { FETCH_DIRECTORY, SORT_BY_MODIFIED_TIME, SORT_BY_NAME } from '../actions/currentDirectory'
+import { sortByModifiedTime, sortByName } from '../utils/utils'
 
 export default function currentDirectory (state = {}, action) {
     switch (action.type) {
@@ -12,6 +12,11 @@ export default function currentDirectory (state = {}, action) {
             return {
                 ...state,
                 content: [...sortByModifiedTime(state.content)]
+            }
+        case SORT_BY_NAME:
+            return {
+                ...state,
+                content: [...sortByName(state.content)]
             }
         default:
             return state
