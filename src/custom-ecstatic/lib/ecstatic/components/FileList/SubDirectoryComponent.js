@@ -2,11 +2,19 @@ import React from "react"
 import styled from 'styled-components'
 
 class SubDirectoryComponent extends React.Component {
+    handleClick = () => {
+        const { actualPath } = this.props
+
+        // TODO: handle link traveling in the future
+        window.location.href = actualPath
+    }
+
     render() {
         const { pathName, isRoot } = this.props
         return (
             <SubDirectory
-                {...this.props}>
+                {...this.props}
+                onClick={this.handleClick}>
                 {
                 isRoot !== true
                 ? <i className="fas fa-chevron-right"></i>

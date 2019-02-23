@@ -27,7 +27,6 @@ class FilesContainerComponent extends React.Component {
 }
 
 function mapStateToProps({currentDirectory}) {
-    console.log("CurrentState", currentDirectory)
     return {
         currentDirectory,
     }

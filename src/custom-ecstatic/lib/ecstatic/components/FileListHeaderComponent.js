@@ -17,6 +17,7 @@ class FileListHeaderComponent extends React.Component {
                         <SubDirectoryComponent
                             pathName={"root"}
                             isRoot={true}
+                            actualPath="/"
                         />
                         {getRenderedPathName(pathName)}
                     </div>
@@ -55,14 +56,17 @@ function getRenderedPathName(pathN) {
     if (pathName.length === 0) return null
 
     const dirs = pathName.split("/")
-    
+    let joinedPath = ""
     return (
-        dirs.map((dir, i) => (
+        dirs.map((dir, i) => {
+            joinedPath = joinedPath + "/" + dir
+            return (
             <SubDirectoryComponent
                 pathName={dir}
+                actualPath={joinedPath}
                 key={i}
             />
-        ))
+        )})
     )
     // return dirs[dirs.length - 1]
 }
