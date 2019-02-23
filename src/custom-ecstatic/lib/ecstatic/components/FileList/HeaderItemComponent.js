@@ -3,10 +3,9 @@ import styled from 'styled-components'
 
 class HeaderItemComponent extends React.Component {
     
-
     render() {
         const { title } = this.props
-        console.log(this.props)
+
         return (
             <HeaderItem
                 {...this.props}>

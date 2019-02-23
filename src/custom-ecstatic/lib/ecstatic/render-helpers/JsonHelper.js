@@ -7,6 +7,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducer from '../reducers'
+import middleware from '../middleware'
 import { renderToString } from 'react-dom/server'
 import App from "../components/App"
 import { ServerStyleSheet } from 'styled-components'
@@ -63,7 +64,11 @@ class JsonHelper {
 
     finishHtml() {
 
-        const store = createStore(reducer)
+        let initialState = {
+            currentDirectory: this.object,
+        }
+
+        const store = createStore(reducer, initialState, middleware)
 
         const reactString = renderToString(
             <Provider store={store}>

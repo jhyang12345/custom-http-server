@@ -1,5 +1,7 @@
 import React, {Fragment} from 'react'
 import styled from 'styled-components'
+import { fetchDirectory } from '../actions/currentDirectory'
+import { connect } from 'react-redux'
 
 class LeftSideBarComponent extends React.Component {
     constructor(props) {
@@ -21,12 +23,19 @@ class LeftSideBarComponent extends React.Component {
         this.setState({ width: (window.innerWidth - 680) / 2, height: window.innerHeight });
     }
 
+    handleClick = () => {
+        const { dispatch } = this.props
+        console.log(dispatch)
+        dispatch(fetchDirectory())
+    }
+
     render() {
         const { width } = this.state
         const { pathName } = this.props
 
         return (
             <LeftSideBar
+                onClick={this.handleClick}
                 width={width + "px"}>
 
             </LeftSideBar>
@@ -46,4 +55,4 @@ const LeftSideBar = styled.div`
     z-index: 5;
 `
 
-export default LeftSideBarComponent
+export default connect()(LeftSideBarComponent)

@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react"
+import { connect } from 'react-redux'
 import FileComponent from "./FileComponent"
 import { createGlobalStyle } from 'styled-components'
 import FilesContainerComponent from "./FilesContainerComponent"
@@ -58,4 +59,4 @@ time, mark, audio, video {
 }
 `
 
-export default App
+export default connect()(App)

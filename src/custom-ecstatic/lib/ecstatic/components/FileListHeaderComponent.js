@@ -7,7 +7,7 @@ class FileListHeaderComponent extends React.Component {
     render() {
 
         const { pathName } = this.props
-        console.log("PathName", getRenderedPathName(pathName))
+        
         return (
             <Fragment>
                 <FileListHeader>
@@ -44,11 +44,12 @@ function getRenderedPathName(pathN) {
     if (pathName.length === 0) return null
 
     const dirs = pathName.split("/")
-    console.log("Dirs", dirs)
+    
     return (
         dirs.map((dir, i) => (
             <SubDirectoryComponent
                 pathName={dir}
+                key={i}
             />
         ))
     )
