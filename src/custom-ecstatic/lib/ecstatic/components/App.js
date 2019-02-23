@@ -24,7 +24,7 @@ class App extends Component {
                 <LeftSideBarComponent 
                 />
                 <div id="page_container">
-                    <FilesContainerComponent />
+                    <FilesContainerComponent/>
                 </div>
 
             </Fragment>

@@ -9,7 +9,7 @@ class FilesContainerComponent extends React.Component {
     render() {
         const { content, pathName } = this.props.currentDirectory
 
-        const directoryContent = sortByModifiedTime(content)
+        const directoryContent = content
 
         return (
             <Fragment>

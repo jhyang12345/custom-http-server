@@ -1,14 +1,22 @@
 import React from "react"
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+
 
 class HeaderItemComponent extends React.Component {
+
+    handleClick = () => {
+        const { action, dispatch } = this.props
+        dispatch(action)
+    }
     
     render() {
         const { title } = this.props
 
         return (
             <HeaderItem
-                {...this.props}>
+                {...this.props}
+                onClick={this.handleClick}>
                 {title}
                 <i className="fas fa-caret-down"></i>
             </HeaderItem>
@@ -32,4 +40,4 @@ const HeaderItem = styled.div`
     }
 `
 
-export default HeaderItemComponent
+export default connect()(HeaderItemComponent)

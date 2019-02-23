@@ -2,6 +2,7 @@ import React, {Fragment} from "react"
 import styled from 'styled-components'
 import { HeaderItemComponent, SubDirectoryComponent } from './FileList'
 import { stripSlashes } from '../utils/utils'
+import { sortByModifiedTime } from '../actions/currentDirectory'
 
 class FileListHeaderComponent extends React.Component {
     render() {
@@ -30,6 +31,7 @@ class FileListHeaderComponent extends React.Component {
                         <HeaderItemComponent
                             width={"160px"}
                             title="Modified Time"
+                            action={sortByModifiedTime()}
                             alignRight={true}
                         />
                     </div>
