@@ -23,8 +23,6 @@ export default function currentDirectory (state = {}, action) {
     }
 }
 
-
-
 // example object
 // {
 //     pathName: "",

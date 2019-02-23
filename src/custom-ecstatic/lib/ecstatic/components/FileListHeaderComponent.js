@@ -2,11 +2,11 @@ import React, {Fragment} from "react"
 import styled from 'styled-components'
 import { HeaderItemComponent, SubDirectoryComponent } from './FileList'
 import { stripSlashes } from '../utils/utils'
-import { createSortByModifiedTimeAction, createSortByNameAction } from '../actions/currentDirectory'
+import { createSortByModifiedTimeAction, createSortByNameAction, createSortBySizeAction } from '../actions/currentDirectory'
+import { createSetSortMethodName, createSetSortMethodModifiedTime, createSetSortMethodSize } from '../actions/sortMethod'
 
 class FileListHeaderComponent extends React.Component {
     render() {
-
         const { pathName } = this.props
         
         return (
@@ -24,16 +24,23 @@ class FileListHeaderComponent extends React.Component {
                         <HeaderItemComponent
                             flex={1}
                             title="Name"
+                            type="name"
                             action={createSortByNameAction()}
+                            sortType={createSetSortMethodName()}
                             />
                         <HeaderItemComponent
                             width={"80px"}
                             title="Size"
+                            type="size"
+                            action={createSortBySizeAction()}
+                            sortType={createSetSortMethodSize()}
                         />
                         <HeaderItemComponent
                             width={"160px"}
                             title="Modified Time"
+                            type="modified"
                             action={createSortByModifiedTimeAction()}
+                            sortType={createSetSortMethodModifiedTime()}
                             alignRight={true}
                         />
                     </div>

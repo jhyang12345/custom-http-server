@@ -5,9 +5,11 @@ import { connect } from 'react-redux'
 
 class HeaderItemComponent extends React.Component {
 
+    // sortType is the sortType, action is the actual sorting
     handleClick = () => {
-        const { action, dispatch } = this.props
+        const { action, sortType, dispatch } = this.props
         dispatch(action)
+        dispatch(sortType)
     }
     
     render() {
@@ -21,7 +23,6 @@ class HeaderItemComponent extends React.Component {
                 <i className="fas fa-caret-down"></i>
             </HeaderItem>
         )
-
     }
 }
 
@@ -29,15 +30,22 @@ const HeaderItem = styled.div`
     height: 100%;
     line-height: 50px;
     font-size: 0.8em;
-    color: #777;
+    color: ${props => props.sortMethod === props.type ? "#568bb3" : "#ccc"};
     padding-left: 12px;
     flex: ${props => props.flex !== null ? props.flex : null};
     width: ${props => props.width !== null ? props.width : null };
     text-align: ${props => props.alignRight === true ? "right" : "left"};
+    ${'' /* font-weight: ${props => props.sortMethod === props.type ? "bold" : "normal"} */}
 
     & .fa-caret-down {
         margin-left: 6px;
     }
 `
 
-export default connect()(HeaderItemComponent)
+function mapStateToProps({ sortMethod }) {
+    return {
+        sortMethod,
+    }
+}
+
+export default connect(mapStateToProps)(HeaderItemComponent)
