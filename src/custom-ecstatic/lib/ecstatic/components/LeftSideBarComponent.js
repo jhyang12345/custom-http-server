@@ -24,9 +24,7 @@ class LeftSideBarComponent extends React.Component {
     }
 
     handleClick = () => {
-        const { dispatch } = this.props
-        console.log(dispatch)
-        dispatch(fetchDirectory())
+
     }
 
     render() {

@@ -7,6 +7,11 @@ import LeftSideBarComponent from "./LeftSideBarComponent"
 
 class App extends Component {
     
+    // TODO: Make request for current directory information here
+    componentDidMount() {
+        
+    }
+
     render() {
         const { directoryObject } = this.props
 
@@ -19,10 +24,7 @@ class App extends Component {
                 <LeftSideBarComponent 
                 />
                 <div id="page_container">
-                    <FilesContainerComponent 
-                        content={content} 
-                        pathName={pathName}
-                        />
+                    <FilesContainerComponent />
                 </div>
 
             </Fragment>
