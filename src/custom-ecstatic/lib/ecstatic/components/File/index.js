@@ -20,6 +20,7 @@ export const FileName = styled.div`
     flex: 1;
     color: #555;
     line-height: 60px;
+    padding-right: 12px;
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;

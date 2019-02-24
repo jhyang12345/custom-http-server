@@ -62,7 +62,7 @@ class FileIcon extends React.Component {
 
 // use & operator to target inner elements?.?
 const FileIconComponent = styled.div`
-    width: 80px;
+    width: 50px;
     padding: 12px;
     & img {
         display: inline-block;
