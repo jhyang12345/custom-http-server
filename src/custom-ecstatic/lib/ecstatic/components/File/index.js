@@ -35,6 +35,7 @@ export const FileModifiedDate = styled.div`
     line-height: 80px;
     color: #999;
     text-align: right;
+    padding-right: 12px;
 `
 
 export  { FileIcon }

@@ -32,6 +32,7 @@ const HeaderItem = styled.div`
     font-size: 0.8em;
     color: ${props => props.sortMethod === props.type ? "#568bb3" : "#ccc"};
     padding-left: 12px;
+    padding-right: 12px;
     flex: ${props => props.flex !== null ? props.flex : null};
     width: ${props => props.width !== null ? props.width : null };
     text-align: ${props => props.alignRight === true ? "right" : "left"};
