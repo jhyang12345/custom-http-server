@@ -27,21 +27,21 @@ class FileListHeaderComponent extends React.Component {
                             title="Name"
                             type="name"
                             action={createSortByNameAction()}
-                            sortType={createSetSortMethodName()}
+
                             />
                         <HeaderItemComponent
                             width={"80px"}
                             title="Size"
                             type="size"
                             action={createSortBySizeAction()}
-                            sortType={createSetSortMethodSize()}
+
                         />
                         <HeaderItemComponent
                             width={"160px"}
                             title="Modified Time"
                             type="modified"
                             action={createSortByModifiedTimeAction()}
-                            sortType={createSetSortMethodModifiedTime()}
+
                             alignRight={true}
                         />
                     </div>

@@ -7,9 +7,8 @@ class HeaderItemComponent extends React.Component {
 
     // sortType is the sortType, action is the actual sorting
     handleClick = () => {
-        const { action, sortType, dispatch } = this.props
+        const { action, dispatch } = this.props
         dispatch(action)
-        dispatch(sortType)
     }
     
     render() {

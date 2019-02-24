@@ -74,7 +74,7 @@ export function sortByName(content, reverse=false) {
    return [...directories, ...files]
 }
 
-export function sortBySize(content, reverse=true) {
+export function sortBySize(content, reverse=false) {
    const directories = []
    const files = []
 
@@ -84,7 +84,7 @@ export function sortBySize(content, reverse=true) {
       else files.push(item)
    }
 
-   if (!reverse) {
+   if (reverse) {
       directories.sort((a, b) => {
          if (a.stat.size < b.stat.size) return 1
          else if (a.stat.size > b.stat.size) return -1

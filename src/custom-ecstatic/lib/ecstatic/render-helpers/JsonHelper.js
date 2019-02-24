@@ -68,6 +68,7 @@ class JsonHelper {
             currentDirectory: {
                 ...this.object,
                 method: "name",
+                reverse: false,
             },
         }
 
