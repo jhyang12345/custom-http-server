@@ -8,15 +8,13 @@ import middleware from '../middleware'
 
 console.log(window.__INITIAL__DATA__)
 
-let initialState = {
-    currentDirectory: window.__INITIAL__DATA__.directoryObject,
-}
+let initialState = window.__INITIAL__DATA__
 
 const store = createStore(reducer, initialState, middleware)
 
 ReactDom.hydrate(
     <Provider store={store}>
-        <App directoryObject={window.__INITIAL__DATA__.directoryObject} />
+        <App/>
     </Provider>
     ,
     document.getElementById('root')

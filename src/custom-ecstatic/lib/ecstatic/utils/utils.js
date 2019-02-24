@@ -13,7 +13,7 @@ export function stripSlashes(value) {
 }
 
 // sort reverse for now newest top
-export function sortByModifiedTime(content) {
+export function sortByModifiedTime(content, reverse=false) {
    const directories = []
    const files = []
 
@@ -23,14 +23,19 @@ export function sortByModifiedTime(content) {
       else files.push(item)
    }
 
-   directories.sort((a, b) => (new Date(b.stat.mtime) - new Date(a.stat.mtime)))
-   files.sort((a, b) => (new Date(b.stat.mtime) - new Date(a.stat.mtime)))
+   if (!reverse) {
+      directories.sort((a, b) => (new Date(b.stat.mtime) - new Date(a.stat.mtime)))
+      files.sort((a, b) => (new Date(b.stat.mtime) - new Date(a.stat.mtime)))
+   } else {
+      directories.sort((b, a) => (new Date(b.stat.mtime) - new Date(a.stat.mtime)))
+      files.sort((b, a) => (new Date(b.stat.mtime) - new Date(a.stat.mtime)))
+   }
 
    return [...directories, ...files]
 }
 
 // sort by name
-export function sortByName(content) {
+export function sortByName(content, reverse=false) {
    const directories = []
    const files = []
 
@@ -40,22 +45,36 @@ export function sortByName(content) {
       else files.push(item)
    }
 
-   directories.sort((a, b) => {
-      if (a.displayName < b.displayName) return -1
-      else if (a.displayName > b.displayName) return 1
-      return 0
-   })
+   if (!reverse) {
+      directories.sort((a, b) => {
+         if (a.displayName < b.displayName) return -1
+         else if (a.displayName > b.displayName) return 1
+         return 0
+      })
 
-   files.sort((a, b) => {
-      if (a.displayName < b.displayName) return -1
-      else if (a.displayName > b.displayName) return 1
-      return 0
-   })
+      files.sort((a, b) => {
+         if (a.displayName < b.displayName) return -1
+         else if (a.displayName > b.displayName) return 1
+         return 0
+      })
+   } else {
+      directories.sort((b, a) => {
+         if (a.displayName < b.displayName) return -1
+         else if (a.displayName > b.displayName) return 1
+         return 0
+      })
+
+      files.sort((b, a) => {
+         if (a.displayName < b.displayName) return -1
+         else if (a.displayName > b.displayName) return 1
+         return 0
+      })
+   }
 
    return [...directories, ...files]
 }
 
-export function sortBySize(content) {
+export function sortBySize(content, reverse=true) {
    const directories = []
    const files = []
 
@@ -65,17 +84,32 @@ export function sortBySize(content) {
       else files.push(item)
    }
 
-   directories.sort((a, b) => {
-      if (a.stat.size < b.stat.size) return 1
-      else if (a.stat.size > b.stat.size) return -1
-      return 0
-   })
+   if (!reverse) {
+      directories.sort((a, b) => {
+         if (a.stat.size < b.stat.size) return 1
+         else if (a.stat.size > b.stat.size) return -1
+         return 0
+      })
 
-   files.sort((a, b) => {
-      if (a.stat.size < b.stat.size) return 1
-      else if (a.stat.size > b.stat.size) return -1
-      return 0
-   })
+      files.sort((a, b) => {
+         if (a.stat.size < b.stat.size) return 1
+         else if (a.stat.size > b.stat.size) return -1
+         return 0
+      })
+   } else {
+      directories.sort((b, a) => {
+         if (a.stat.size < b.stat.size) return 1
+         else if (a.stat.size > b.stat.size) return -1
+         return 0
+      })
+
+      files.sort((b, a) => {
+         if (a.stat.size < b.stat.size) return 1
+         else if (a.stat.size > b.stat.size) return -1
+         return 0
+      })
+   }
+
 
    return [...directories, ...files]
 }

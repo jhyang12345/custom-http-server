@@ -30,7 +30,7 @@ const HeaderItem = styled.div`
     height: 100%;
     line-height: 50px;
     font-size: 0.8em;
-    color: ${props => props.sortMethod === props.type ? "#568bb3" : "#ccc"};
+    color: ${props => props.currentDirectory.method === props.type ? "#568bb3" : "#ccc"};
     padding-left: 12px;
     padding-right: 12px;
     flex: ${props => props.flex !== null ? props.flex : null};
@@ -43,9 +43,9 @@ const HeaderItem = styled.div`
     }
 `
 
-function mapStateToProps({ sortMethod }) {
+function mapStateToProps({ currentDirectory }) {
     return {
-        sortMethod,
+        currentDirectory,
     }
 }
 

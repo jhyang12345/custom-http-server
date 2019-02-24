@@ -13,9 +13,9 @@ class App extends Component {
     }
 
     render() {
-        const { directoryObject } = this.props
+        const { currentDirectory } = this.props
 
-        const { pathName, content } = directoryObject
+        const { pathName, content } = currentDirectory
 
         return (
             <Fragment>
@@ -61,4 +61,10 @@ time, mark, audio, video {
 }
 `
 
-export default connect()(App)
+function mapStateToProps({ currentDirectory }) {
+    return {
+        currentDirectory
+    }
+}
+
+export default connect(mapStateToProps)(App)
