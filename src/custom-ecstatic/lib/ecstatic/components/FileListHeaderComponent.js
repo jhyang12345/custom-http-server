@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { HeaderItemComponent, SubDirectoryComponent } from './FileList'
 import { stripSlashes } from '../utils/utils'
 import { createSortByModifiedTimeAction, createSortByNameAction, createSortBySizeAction } from '../actions/currentDirectory'
-import { createSetSortMethodName, createSetSortMethodModifiedTime, createSetSortMethodSize } from '../actions/sortMethod'
 
 class FileListHeaderComponent extends React.Component {
     render() {
