@@ -8,31 +8,34 @@ export const FileWrapper = styled.a`
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid #CCC;
-    height: 80px;
+    height: 60px;
     width: 100%;
-
     &:hover {
         cursor: pointer;
     }
 `
 
 export const FileName = styled.div`
-    font-size: 1.4em;
+    font-size: 1.2em;
     flex: 1;
     color: #555;
-    line-height: 80px;
+    line-height: 60px;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
 `
 
 export const FileSize = styled.div`
-    width: 80px;
-    line-height: 80px;
+    width: 60px;
+    line-height: 60px;
+    font-size: 0.9em;
     color: #999;
 `
 
 export const FileModifiedDate = styled.div`
-    font-size: 1.0em;
+    font-size: 0.9em;
     width: 160px;
-    line-height: 80px;
+    line-height: 60px;
     color: #999;
     text-align: right;
     padding-right: 12px;

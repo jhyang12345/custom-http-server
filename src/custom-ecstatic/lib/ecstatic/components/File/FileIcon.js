@@ -74,8 +74,8 @@ const FileIconComponent = styled.div`
         display: block;
         color: #88cdf8;
         text-align: center;
-        line-height: 56px;
-        font-size: 40px;
+        line-height: 36px;
+        font-size: 30px;
     }
 `
 export default FileIcon
