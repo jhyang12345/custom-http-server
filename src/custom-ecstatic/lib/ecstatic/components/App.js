@@ -21,8 +21,8 @@ class App extends Component {
             <Fragment>
                 <AppContainer />
                 {/* Will not be used to show current directory */}
-                <LeftSideBarComponent 
-                />
+                {/* <LeftSideBarComponent 
+                /> */}
                 <div id="page_container">
                     <FilesContainerComponent/>
                 </div>
@@ -54,10 +54,16 @@ time, mark, audio, video {
 	vertical-align: baseline;
     font-family: 'Roboto', sans-serif;
 }
+
+body {
+    background-color: "#DFDFDF"
+}
+
 #page_container {
     width: 680px;
     margin-left: auto;
     margin-right: auto;
+    background-color: #FFF;
 }
 `
 
