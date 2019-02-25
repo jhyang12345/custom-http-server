@@ -43,10 +43,14 @@ class JsonHelper {
 
         // file = ["filename", stat]
 
-        const displayName = he.encode(file[0]) + ((isDir) ? '/' : '');
+        console.log("FileName", file[0])
+
+        const displayName = (file[0]) + ((isDir) ? '/' : '');
         const ext = file[0].split('.').pop();
         const classForNonDir = supportedIcons[ext] ? ext : '_page';
         const iconClass = `icon-${isDir ? '_blank' : classForNonDir}`;
+
+        console.log("DisplayName", displayName)
 
         this.object.content.push({
           displayName: displayName,
@@ -86,6 +90,8 @@ class JsonHelper {
             <!DOCTYPE html >
             <html>
                 <head>
+                    <meta charset="utf-8">
+                    <meta name="viewport" content="width=device-width">
                     <title>Indexing directory</title>
                     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
                     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
