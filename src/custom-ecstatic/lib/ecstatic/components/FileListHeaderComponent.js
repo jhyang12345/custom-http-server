@@ -6,17 +6,19 @@ import { createSortByModifiedTimeAction, createSortByNameAction, createSortBySiz
 
 class FileListHeaderComponent extends React.Component {
     render() {
-        const { pathName } = this.props
+        const { pathName, width } = this.props
+        console.log("Current width", width)
         
         return (
             <Fragment>
-                <FileListHeader>
+                <FileListHeader
+                    {...this.props}>
                     <div className="directory-header">
                         Serving 
                         <SubDirectoryComponent
                             pathName={"root"}
                             isRoot={true}
-                            actualPath="/"
+                            actualPath="/" 
                         />
                         {getRenderedPathName(pathName)}
                     </div>
@@ -72,7 +74,7 @@ function getRenderedPathName(pathN) {
 
 const FileListHeader = styled.div`
     
-    width: 100%;
+     width: ${props => props.width};
     ${'' /* box-shadow: 0px 3px 8px #AAA; */}
 
     &:hover {
@@ -81,14 +83,15 @@ const FileListHeader = styled.div`
 
     position: fixed;
     top: 0px;
-    left: 0px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: #FFF;
 
     & > .inner-container {
         height: 50px;
         margin-left: auto;
         margin-right: auto;
-        width: 680px;
+        width: ${props => props.width};
         display: flex;
         flex-direction: row;
         border-bottom: 1px solid #CCC;
@@ -100,7 +103,7 @@ const FileListHeader = styled.div`
         padding-left: 12px;
         margin-left: auto;
         margin-right: auto;
-        width: 680px;
+        width: ${props => props.width};
         font-size: 1.4em;
         box-sizing: border-box;
     }

@@ -23,9 +23,7 @@ class App extends Component {
                 {/* Will not be used to show current directory */}
                 {/* <LeftSideBarComponent 
                 /> */}
-                <div id="page_container">
-                    <FilesContainerComponent/>
-                </div>
+                <FilesContainerComponent/>
 
             </Fragment>
         )
