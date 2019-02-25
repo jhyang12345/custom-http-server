@@ -29,7 +29,7 @@ class SubDirectoryComponent extends React.Component {
 
 const SubDirectory = styled.span`
     display: inline-block;
-    height: 80px;
+    height: 60px;
     padding: 0px 5px;
     color: ${props => props.isRoot !== true ? "#777" : "#6495ED"};
     margin-left: ${props => props.isRoot !== true ? "0px" : "4px"};

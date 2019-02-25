@@ -5,6 +5,8 @@ import FileComponent from './FileComponent'
 import FileListHeaderComponent from './FileListHeaderComponent'
 import { sortByModifiedTime } from '../utils/utils'
 
+const minWidthThreshold = 680
+
 class FilesContainerComponent extends React.Component {
 
     constructor(props) {
@@ -25,7 +27,10 @@ class FilesContainerComponent extends React.Component {
 
     // update width to exclude side bars
     updateWindowDimensions() {
-        this.setState({ width: (window.innerWidth) - 240 * 2, height: window.innerHeight });
+        let newWidth = (window.innerWidth) - 240 * 2;
+        if (newWidth < minWidthThreshold) newWidth += 240
+        if (newWidth < minWidthThreshold) newWidth += 240
+        this.setState({ width: newWidth, height: window.innerHeight });
     }
 
     handleClick = () => {

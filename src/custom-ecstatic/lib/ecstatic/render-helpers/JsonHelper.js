@@ -43,14 +43,10 @@ class JsonHelper {
 
         // file = ["filename", stat]
 
-        console.log("FileName", file[0])
-
         const displayName = (file[0]) + ((isDir) ? '/' : '');
         const ext = file[0].split('.').pop();
         const classForNonDir = supportedIcons[ext] ? ext : '_page';
         const iconClass = `icon-${isDir ? '_blank' : classForNonDir}`;
-
-        console.log("DisplayName", displayName)
 
         this.object.content.push({
           displayName: displayName,

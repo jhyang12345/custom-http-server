@@ -1,13 +1,13 @@
 import React, {Fragment} from "react"
 import styled from 'styled-components'
 import { HeaderItemComponent, SubDirectoryComponent } from './FileList'
+import SearchComponent from './SearchComponent'
 import { stripSlashes } from '../utils/utils'
 import { createSortByModifiedTimeAction, createSortByNameAction, createSortBySizeAction } from '../actions/currentDirectory'
 
 class FileListHeaderComponent extends React.Component {
     render() {
-        const { pathName, width } = this.props
-        console.log("Current width", width)
+        const { pathName } = this.props
         
         return (
             <Fragment>
@@ -21,6 +21,7 @@ class FileListHeaderComponent extends React.Component {
                             actualPath="/" 
                         />
                         {getRenderedPathName(pathName)}
+                        <SearchComponent/>
                     </div>
                     <div className="inner-container">
                         <HeaderItemComponent
@@ -98,8 +99,9 @@ const FileListHeader = styled.div`
     }
 
     & > .directory-header {
-        height: 80px;
-        line-height: 80px;
+        position: relative;
+        height: 60px;
+        line-height: 60px;
         padding-left: 12px;
         margin-left: auto;
         margin-right: auto;

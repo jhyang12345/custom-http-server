@@ -1,6 +1,7 @@
 import React from "react"
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { handleSortAction } from '../../actions/currentDirectory'
 
 
 class HeaderItemComponent extends React.Component {
@@ -8,7 +9,7 @@ class HeaderItemComponent extends React.Component {
     // sortType is the sortType, action is the actual sorting
     handleClick = () => {
         const { action, dispatch } = this.props
-        dispatch(action)
+        dispatch(handleSortAction(action))
     }
     
     render() {

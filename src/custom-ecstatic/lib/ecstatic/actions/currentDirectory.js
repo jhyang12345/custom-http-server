@@ -27,3 +27,13 @@ export function createSortBySizeAction() {
         type: SORT_BY_SIZE,
     }
 }
+
+// Look into how thunk works functions are handled?.?
+export function handleSortAction(sortAction) {
+    return (dispatch, getState) => {
+        dispatch(sortAction)
+        return () => {
+            
+        }
+    }
+}

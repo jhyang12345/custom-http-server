@@ -100,6 +100,7 @@
     "react-dom": "^16.8.1",
     "react-moment": "^0.8.4",
     "react-redux": "^6.0.1",
+    "react-redux-loading": "^1.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.1.3",
