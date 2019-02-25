@@ -27,9 +27,11 @@ export const FileName = styled.div`
 `
 
 export const FileSize = styled.div`
-    width: 60px;
+    width: 80px;
     line-height: 60px;
     font-size: 0.9em;
+    padding: 0px 12px;
+    text-align: right;
     color: #999;
 `
 

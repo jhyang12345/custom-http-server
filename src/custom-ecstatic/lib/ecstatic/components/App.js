@@ -57,6 +57,10 @@ body {
     background-color: "#DFDFDF"
 }
 
+div {
+    box-sizing: border-box;
+}
+
 #page_container {
     width: 680px;
     margin-left: auto;

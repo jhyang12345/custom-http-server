@@ -25,7 +25,7 @@ class FilesContainerComponent extends React.Component {
 
     // update width to exclude side bars
     updateWindowDimensions() {
-        this.setState({ width: (window.innerWidth - 240) / 2, height: window.innerHeight });
+        this.setState({ width: (window.innerWidth) - 240 * 2, height: window.innerHeight });
     }
 
     handleClick = () => {
