@@ -31,8 +31,11 @@ const SearchBar = styled.input.attrs({
 })`
     display: inline-block;
     width: 200px;
-    background-color: #FA6700;
     height: 30px;
+    margin-right: 8px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #AAA;
 `
 
 export default SearchBarComponent

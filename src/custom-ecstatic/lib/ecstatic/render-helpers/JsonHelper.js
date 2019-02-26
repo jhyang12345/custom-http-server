@@ -91,12 +91,15 @@ class JsonHelper {
                     <title>Indexing directory</title>
                     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
                     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-                    <script>window.__INITIAL__DATA__ = ${JSON.stringify(initialState)}</script>
+                    
                     ${styles}
+
+                    <script>window.__INITIAL__DATA__ = ${JSON.stringify(initialState)}</script>
+                    
                 </head>
                 <body>
                     <div id="root">${reactString}</div>
-                    <script type="text/javascript" src="/client/bundle.js"></script>
+                    <script src="/client/bundle.js"></script>
                 </body>
             </html>`;
     }

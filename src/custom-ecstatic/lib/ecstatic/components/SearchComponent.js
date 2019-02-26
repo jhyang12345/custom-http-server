@@ -28,6 +28,7 @@ const SearchBox = styled.span`
     & > .fas {
         font-size: 0.6em;
         color: #999;
+        vertical-align: middle;
     }
 `
 

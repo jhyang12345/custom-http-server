@@ -4,6 +4,7 @@ import FileComponent from "./FileComponent"
 import { createGlobalStyle } from 'styled-components'
 import FilesContainerComponent from "./FilesContainerComponent"
 import LeftSideBarComponent from "./LeftSideBarComponent"
+import { Normalize } from 'styled-normalize'
 
 class App extends Component {
     
@@ -19,6 +20,7 @@ class App extends Component {
 
         return (
             <Fragment>
+                <Normalize />
                 <AppContainer />
                 {/* Will not be used to show current directory */}
                 {/* <LeftSideBarComponent 

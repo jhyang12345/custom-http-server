@@ -14,7 +14,14 @@ module.exports = {
       { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader", 
         query: {
           presets: ['@babel/react', '@babel/env']
-        } 
+        },
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
       }
     ],
  },
