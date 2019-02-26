@@ -68,4 +68,5 @@ function mapStateToProps({currentDirectory}) {
     }
 }
 
+export const FILE_CONTAINER_COMPONENT = 
 export default connect(mapStateToProps)(FilesContainerComponent)

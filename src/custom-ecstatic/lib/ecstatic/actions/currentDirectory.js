@@ -32,8 +32,9 @@ export function createSortBySizeAction() {
 export function handleSortAction(sortAction) {
     return (dispatch, getState) => {
         dispatch(sortAction)
+        // return a new promise
         return () => {
-            
+
         }
     }
 }
