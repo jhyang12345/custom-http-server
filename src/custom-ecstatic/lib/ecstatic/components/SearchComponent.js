@@ -1,11 +1,13 @@
 import React from "react"
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { SearchBarComponent } from './Search'
 
 class SearchComponent extends React.Component {
     render() {
         return (
             <SearchBox>
+                <SearchBarComponent />
                 <i className="fas fa-search"></i>
             </SearchBox>
         )
