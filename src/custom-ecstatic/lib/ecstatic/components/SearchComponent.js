@@ -1,14 +1,31 @@
 import React from "react"
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { SearchBarComponent } from './Search'
+import { SearchBarComponent, SearchButtonComponent } from './Search'
 
 class SearchComponent extends React.Component {
+
+    state = {
+        barRevealed: true,
+    }
+
+    handleFocus = () => {
+        this.setState((prevState) => ({
+            barRevealed: !prevState.barRevealed,
+        }))
+        console.log(this.state)
+    }
+
     render() {
+        const { barRevealed } = this.state
         return (
             <SearchBox>
-                <SearchBarComponent />
-                <i className="fas fa-search"></i>
+                <SearchBarComponent 
+                    revealed={barRevealed}
+                />
+                <SearchButtonComponent
+                    handleFocus={this.handleFocus}
+                    />
             </SearchBox>
         )
     }
@@ -23,7 +40,7 @@ const SearchBox = styled.span`
     padding-right: 12px;
     display: inline-box;
     margin-left: auto;
-    
+    overflow: hidden;  
 
     & > .fas {
         font-size: 0.6em;

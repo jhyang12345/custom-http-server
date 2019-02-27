@@ -59,7 +59,7 @@ body {
     background-color: "#DFDFDF"
 }
 
-div {
+div,span {
     box-sizing: border-box;
 }
 

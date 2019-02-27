@@ -17,10 +17,12 @@ class SearchBarComponent extends React.Component {
 
     render() {
         const { searchText } = this.state
+        const { revealed } = this.props
         return (
             <SearchBar 
                 onChange={this.handleChange}
                 value={searchText}
+                revealed={revealed}
             />
         )
     }
@@ -36,6 +38,10 @@ const SearchBar = styled.input.attrs({
     outline: none;
     border: none;
     border-bottom: 1px solid #AAA;
+    z-index: 0;
+    transform: ${props => props.revealed === true ? 'translateX(0%)' : 'translateX(100%)'};
+    opacity: ${props => props.revealed === true ? '1' : '0'};
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 `
 
 export default SearchBarComponent
