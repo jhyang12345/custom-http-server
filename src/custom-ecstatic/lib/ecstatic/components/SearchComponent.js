@@ -24,6 +24,7 @@ class SearchComponent extends React.Component {
                     revealed={barRevealed}
                 />
                 <SearchButtonComponent
+                    revealed={barRevealed}
                     handleFocus={this.handleFocus}
                     />
             </SearchBox>

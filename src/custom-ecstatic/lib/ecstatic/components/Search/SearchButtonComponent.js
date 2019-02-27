@@ -2,14 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 
 class SearchButtonComponent extends React.Component {
+
     render() {
-        const { handleFocus } = this.props
+        const { handleFocus, revealed } = this.props
         return (
             <SearchButton
                 onClick={handleFocus}
                 style={{ zIndex: 1 }}>
-                <i
-                    className="fas fa-search"></i>
+                {(
+                    revealed === true 
+                    ? <i className="fas fa-times"></i>
+                    : <i className="fas fa-search"></i>
+                )}
+                
             </SearchButton>
   
         )
@@ -19,7 +24,8 @@ class SearchButtonComponent extends React.Component {
 const SearchButton = styled.span`
     display: inline-block;
     height: 100%;
-    padding: 12px;
+    line-height: 60px;
+    padding: 8px;
     position: relative;
 
     & > .fas {

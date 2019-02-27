@@ -30,6 +30,7 @@ class SearchBarComponent extends React.Component {
 
 const SearchBar = styled.input.attrs({
     type: 'text',
+    placeholder: 'Search...',
 })`
     display: inline-block;
     width: 200px;
@@ -48,6 +49,11 @@ const SearchBar = styled.input.attrs({
     transition: transform 0.3s ease-out, opacity 0.3s ease-out;
     font-size: 0.7em;
     color: #333;
+
+    &::placeholder {
+        color: #CCC;
+    }
+
 `
 
 export default SearchBarComponent
