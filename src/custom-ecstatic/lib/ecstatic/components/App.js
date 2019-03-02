@@ -14,10 +14,6 @@ class App extends Component {
         
     }
 
-    handleClick = (evt) => {
-
-    }
-
     render() {
         const { currentDirectory } = this.props
 
@@ -31,9 +27,7 @@ class App extends Component {
                 {/* Will not be used to show current directory */}
                 {/* <LeftSideBarComponent 
                 /> */}
-                <FilesContainerComponent
-                    onClick={this.handleClick}
-                />
+                <FilesContainerComponent />
                 <PopupComponent/>
             </Fragment>
         )

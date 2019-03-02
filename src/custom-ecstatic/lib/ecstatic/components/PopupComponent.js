@@ -40,8 +40,10 @@ const PopupBackground = styled.div`
     left: 0px;
     z-index: 5;
     background-color: #333;
-    opacity: 0.3;
     display: ${props => props.open === true ? 'block' : 'none'};
+    
+    opacity: ${props => props.open === true ? 0.3 : 0};
+    transition: opacity 1s;
 `
 
 const Popup = styled.div`
@@ -54,6 +56,9 @@ const Popup = styled.div`
     border-radius: 4px;
     box-shadow: 1px 1px 3px 1px #CCC;
     display: ${props => props.open === true ? 'block' : 'none'};
+
+    opacity: ${props => props.open === true ? 1 : 0};
+    transition: opacity 1s;
 `
 
 const PopupItem = styled.div`
