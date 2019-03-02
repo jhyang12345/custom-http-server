@@ -4,6 +4,7 @@ import FileComponent from "./FileComponent"
 import { createGlobalStyle } from 'styled-components'
 import FilesContainerComponent from "./FilesContainerComponent"
 import LeftSideBarComponent from "./LeftSideBarComponent"
+import PopupComponent from './PopupComponent'
 import { Normalize } from 'styled-normalize'
 
 class App extends Component {
@@ -13,20 +14,27 @@ class App extends Component {
         
     }
 
+    handleClick = (evt) => {
+
+    }
+
     render() {
         const { currentDirectory } = this.props
 
         const { pathName, content } = currentDirectory
 
         return (
-            <Fragment>
+            <Fragment
+                >
                 <Normalize />
                 <AppContainer />
                 {/* Will not be used to show current directory */}
                 {/* <LeftSideBarComponent 
                 /> */}
-                <FilesContainerComponent/>
-
+                <FilesContainerComponent
+                    onClick={this.handleClick}
+                />
+                <PopupComponent/>
             </Fragment>
         )
     }
@@ -55,8 +63,15 @@ time, mark, audio, video {
     font-family: 'Roboto', sans-serif;
 }
 
+html {
+    width: 100%;
+    height: 100%;
+}
+
 body {
-    background-color: "#DFDFDF"
+    background-color: "#DFDFDF";
+    width: 100%;
+    height: 100%;
 }
 
 div,span {

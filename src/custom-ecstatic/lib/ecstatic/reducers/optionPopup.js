@@ -3,6 +3,8 @@ import { OPEN_POPUP, CLOSE_POPUP, SET_POPUP_INFO } from '../actions/optionPopup'
 let defaultState = {
     open: false,
     url: "",
+    clientX: 0,
+    clientY: 0,
 }
 
 export default function optionPopup (state=defaultState, action) {
@@ -20,7 +22,9 @@ export default function optionPopup (state=defaultState, action) {
         case SET_POPUP_INFO :
             return {
                 ...state,
-                url: action.popupInfo,
+                url: action.popupInfo.url,
+                clientX: action.popupInfo.clientX,
+                clientY: action.popupInfo.clientY,
             }
         default:
             return state

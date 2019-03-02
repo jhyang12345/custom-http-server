@@ -20,3 +20,10 @@ export function setPopupInfo(popupInfo) {
         popupInfo,
     }
 }
+
+export function handleOpenPopup(popupInfo) {
+    return(dispatch) => {
+        dispatch(setPopupInfo(popupInfo))
+        dispatch(openPopup())
+    }
+}

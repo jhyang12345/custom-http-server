@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Moment from "react-moment"
 import { bytesToSize } from "../utils/utils"
 import { FileWrapper, FileName, FileIcon, FileSize, FileModifiedDate } from "./File"
+import { handleOpenPopup } from '../actions/optionPopup'
 import prettyFileIcons from '../pretty-file-icons'
 import { stripSlashes } from '../utils/utils'
 
@@ -23,7 +24,20 @@ class FileComponent extends React.Component {
 
     handleRightClick = (evt) => {
         evt.preventDefault()
+        const { dispatch, file } = this.props
+        let {
+            displayName,
+        } = file
         const { clientX, clientY } = evt
+
+        const curPath = window.location.pathname
+
+        const popupInfo = {
+            url: path.join(curPath, displayName),
+            clientX: clientX,
+            clientY: clientY,
+        }
+        dispatch(handleOpenPopup(popupInfo))
     }
 
     render() {
