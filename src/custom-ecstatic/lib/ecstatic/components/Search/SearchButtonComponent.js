@@ -4,40 +4,55 @@ import styled, {keyframes, css} from 'styled-components'
 class SearchButtonComponent extends React.Component {
 
     state = {
+        revealedIcon: false,
         animate: false,
+        swapPicture: false,
     }
 
     constructor(props) {
         super(props)
     }
 
+    componentDidMount() {
+        this.setState(() => ({
+            animate: false,
+            revealedIcon: this.props.revealed,
+        }))
+    }
+
+    // keep check of previous props here
     componentDidUpdate(prevProps) {
         if(prevProps.revealed != this.props.revealed) {
             this.setState(() => ({
                 animate: true,
+                revealedIcon: prevProps.revealed,
+            }))
+        }
+
+    }
+
+    transitionEndCallback = () => {
+        if(this.state.animate === true) {
+            this.setState(() => ({
+                animate: false,
+                revealedIcon: this.props.revealed,
             }))
         }
     }
 
-    animationEndCallback = () => {
-        console.log("animationEndCallback")
-        this.setState(() => ({
-            animate: false,
-        }))
-    }
-
     render() {
-        const { handleFocus, revealed } = this.props
+        const { handleFocus } = this.props
+        const { revealedIcon } = this.state
 
         return (
             <SearchButton
                 onClick={handleFocus}
                 style={{ zIndex: 1 }}
                 animate={this.state.animate}
-                onAnimationEnd={this.animationEndCallback}
+                onTransitionEnd={this.transitionEndCallback}
                 >
                 {(
-                    revealed === true 
+                    revealedIcon === true 
                     ? <i className="fas fa-times"></i>
                     : <i className="fas fa-search"></i>
                 )}
@@ -76,7 +91,8 @@ const SearchButton = styled.span`
     padding: 8px;
     position: relative;
 
-    animation: ${animation};
+    opacity: ${props => props.animate === true ? 0 : 1};
+    transition: opacity 0.15s ease-out;
     
     & > .fas {
         font-size: 0.6em;
