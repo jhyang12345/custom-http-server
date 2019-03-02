@@ -1,10 +1,14 @@
 import React from 'react'
-import styled, {keyframes} from 'styled-components'
+import styled, {keyframes, css} from 'styled-components'
 
 class SearchButtonComponent extends React.Component {
 
     state = {
         animate: false,
+    }
+
+    constructor(props) {
+        super(props)
     }
 
     componentDidUpdate(prevProps) {
@@ -15,14 +19,22 @@ class SearchButtonComponent extends React.Component {
         }
     }
 
+    animationEndCallback = () => {
+        console.log("animationEndCallback")
+        this.setState(() => ({
+            animate: false,
+        }))
+    }
+
     render() {
         const { handleFocus, revealed } = this.props
-        console.log("animate", this.state.animate)
+
         return (
             <SearchButton
                 onClick={handleFocus}
                 style={{ zIndex: 1 }}
                 animate={this.state.animate}
+                onAnimationEnd={this.animationEndCallback}
                 >
                 {(
                     revealed === true 
@@ -48,6 +60,15 @@ const iconAnimation = keyframes`
     }
 `
 
+const animation = props => (
+    props.animate == true 
+    ? css`
+        ${iconAnimation} 0.5s ease-in-out;
+        `
+    : null
+)
+
+
 const SearchButton = styled.span`
     display: inline-block;
     height: 100%;
@@ -55,7 +76,7 @@ const SearchButton = styled.span`
     padding: 8px;
     position: relative;
 
-    animation: ${iconAnimation} 1s ease-in-out;
+    animation: ${animation};
     
     & > .fas {
         font-size: 0.6em;
