@@ -1,5 +1,6 @@
 import path from 'path'
 import React from "react"
+import { connect } from 'react-redux'
 import Moment from "react-moment"
 import { bytesToSize } from "../utils/utils"
 import { FileWrapper, FileName, FileIcon, FileSize, FileModifiedDate } from "./File"
@@ -18,6 +19,11 @@ class FileComponent extends React.Component {
         
         // TODO : solve issue with react router?.?
         window.location.href = path.join(curPath, displayName)
+    }
+
+    handleRightClick = (evt) => {
+        evt.preventDefault()
+        const { clientX, clientY } = evt
     }
 
     render() {
@@ -41,7 +47,8 @@ class FileComponent extends React.Component {
         return (
             <FileWrapper
                 href={"./" + displayName}
-                onClick={this.handleClick}>
+                onClick={this.handleClick}
+                onContextMenu={this.handleRightClick}>
                 <FileIcon 
                     fileIcon={fileIcon}
                 />
@@ -88,4 +95,4 @@ class FileComponent extends React.Component {
 //      ctime: 2019-02-16T07:20:27.923Z,
 //      birthtime: 2019-02-15T13:17:20.686Z } }
 
-export default FileComponent
+export default connect()(FileComponent)
