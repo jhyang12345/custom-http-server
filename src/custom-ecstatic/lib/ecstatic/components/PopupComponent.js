@@ -1,7 +1,7 @@
 import React, {Fragment} from "react"
 import { connect } from "react-redux"
 import styled from "styled-components"
-import { closePopup, copyToClipboard } from '../actions/optionPopup'
+import { closePopup, copyToClipboard, copyFileNameToClipboard } from '../actions/optionPopup'
 
 class PopupComponent extends React.Component {
 
@@ -26,6 +26,13 @@ class PopupComponent extends React.Component {
 
         this.closePopup()
     }
+
+    copyFileName = () => {
+        const { dispatch } = this.props
+        dispatch(copyFileNameToClipboard())
+
+        this.closePopup()
+    }
     
     render() {
         const { clientX, clientY, open } = this.props
@@ -41,6 +48,10 @@ class PopupComponent extends React.Component {
                     <PopupItem
                         onClick={this.copyLink}>
                         Copy
+                    </PopupItem>
+                    <PopupItem
+                        onClick={this.copyFileName}>
+                        Copy File Name
                     </PopupItem>
                     <PopupItem>Delete</PopupItem>
                 </Popup>

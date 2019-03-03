@@ -1,4 +1,4 @@
-import { OPEN_POPUP, CLOSE_POPUP, SET_POPUP_INFO, COPY_TO_CLIPBOARD } from '../actions/optionPopup'
+import { OPEN_POPUP, CLOSE_POPUP, SET_POPUP_INFO, COPY_TO_CLIPBOARD, COPY_FILE_NAME_TO_CLIPBOARD } from '../actions/optionPopup'
 import copy from 'copy-to-clipboard'
 
 let defaultState = {
@@ -6,6 +6,7 @@ let defaultState = {
     url: "",
     clientX: 0,
     clientY: 0,
+    fileName: "",
 }
 
 export default function optionPopup (state=defaultState, action) {
@@ -27,6 +28,12 @@ export default function optionPopup (state=defaultState, action) {
             }
         case COPY_TO_CLIPBOARD : {
             copy(state.url)
+            return {
+                ...state,
+            }
+        }
+        case COPY_FILE_NAME_TO_CLIPBOARD : {
+            copy(state.fileName)
             return {
                 ...state,
             }
