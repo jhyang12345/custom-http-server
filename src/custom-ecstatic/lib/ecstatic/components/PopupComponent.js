@@ -1,29 +1,51 @@
 import React, {Fragment} from "react"
 import { connect } from "react-redux"
 import styled from "styled-components"
-import { closePopup } from '../actions/optionPopup'
+import { closePopup, copyToClipboard } from '../actions/optionPopup'
 
 class PopupComponent extends React.Component {
+
+    state = {
+        visible: false,
+    }
 
     closePopup = () => {
         const { dispatch } = this.props
         dispatch(closePopup())
     }
+
+    componentDidMount() {
+        this.setState(() => ({
+            visible: true,
+        }))
+    }
+
+    copyLink = () => {
+        const { dispatch } = this.props
+        dispatch(copyToClipboard())
+
+        this.closePopup()
+    }
     
     render() {
-        console.log(this.props)
         const { clientX, clientY, open } = this.props
+        const { visible } = this.state
         return (
             <Fragment>
                 <Popup
                     open={open}
+                    visible={visible}
                     clientX={clientX}
                     clientY={clientY}>
-                    <PopupItem>Copy</PopupItem>
+                    <PopupItem
+                        onClick={this.copyLink}>
+                        Copy
+                    </PopupItem>
                     <PopupItem>Delete</PopupItem>
                 </Popup>
                 <PopupBackground 
                     open={open}
+                    visible={visible}
                     onClick={this.closePopup}
                 />
             </Fragment>
@@ -41,8 +63,8 @@ const PopupBackground = styled.div`
     z-index: 5;
     background-color: #333;
     display: ${props => props.open === true ? 'block' : 'none'};
-    
-    opacity: ${props => props.open === true ? 0.3 : 0};
+
+    opacity: ${props => props.visible === true ? 0.3 : 0};
     transition: opacity 1s;
 `
 
@@ -57,8 +79,12 @@ const Popup = styled.div`
     box-shadow: 1px 1px 3px 1px #CCC;
     display: ${props => props.open === true ? 'block' : 'none'};
 
-    opacity: ${props => props.open === true ? 1 : 0};
+    opacity: ${props => props.visible === true ? 1 : 0};
     transition: opacity 1s;
+
+    &:hover {
+        cursor: pointer;
+    }
 `
 
 const PopupItem = styled.div`

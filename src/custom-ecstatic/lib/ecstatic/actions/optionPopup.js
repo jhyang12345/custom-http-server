@@ -1,6 +1,7 @@
 export const OPEN_POPUP = 'OPEN_POPUP'
 export const CLOSE_POPUP = 'CLOSE_POPUP'
 export const SET_POPUP_INFO = 'SET_POPUP_INFO'
+export const COPY_TO_CLIPBOARD = 'COPY_TO_CLIPBOARD'
 
 export function openPopup() {
     return {
@@ -18,6 +19,12 @@ export function setPopupInfo(popupInfo) {
     return {
         type: SET_POPUP_INFO,
         popupInfo,
+    }
+}
+
+export function copyToClipboard() {
+    return {
+        type: COPY_TO_CLIPBOARD,
     }
 }
 
