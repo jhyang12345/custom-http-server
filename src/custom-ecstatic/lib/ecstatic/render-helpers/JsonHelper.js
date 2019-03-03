@@ -54,6 +54,7 @@ class JsonHelper {
           classForNonDir: classForNonDir,
           iconClass: iconClass,  
           href: href,
+          key: href + file[1].size,
           stat: {
             ...file[1],
             isDir: file[1].isDirectory(),

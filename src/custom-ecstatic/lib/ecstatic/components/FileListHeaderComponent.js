@@ -83,6 +83,7 @@ const FileListHeader = styled.div`
     }
 
     position: fixed;
+    z-index: 3;
     top: 0px;
     left: 50%;
     transform: translateX(-50%);

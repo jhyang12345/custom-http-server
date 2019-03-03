@@ -4,6 +4,7 @@ import { FilesContainer } from './FilesContainer'
 import FileComponent from './FileComponent'
 import FileListHeaderComponent from './FileListHeaderComponent'
 import { sortByModifiedTime } from '../utils/utils'
+import FlipMove from 'react-flip-move'
 
 const minWidthThreshold = 680
 
@@ -11,14 +12,20 @@ class FilesContainerComponent extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { width: minWidthThreshold, height: 0 };
+        this.state = {
+            width: minWidthThreshold,
+            height: 0,
+            animate: false,
+            content: this.props.currentDirectory.content,
+        };
+
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
-
     componentDidMount() {
-        this.updateWindowDimensions();
-        window.addEventListener('resize', this.updateWindowDimensions);
+        this.updateWindowDimensions()
+        window.addEventListener('resize', this.updateWindowDimensions)
+
     }
 
     componentWillUnmount() {
@@ -37,8 +44,16 @@ class FilesContainerComponent extends React.Component {
 
     }
 
+    flipMoveEndCallback = () => {
+        console.log("Flip Move finished")
+        this.setState(() => ({
+            animate: false,
+            content: this.props.currentDirectory.content,
+        }));
+    }
+
     render() {
-        const { content, pathName } = this.props.currentDirectory
+        const { pathName, content } = this.props.currentDirectory
         const { width } = this.state
 
         const directoryContent = content
@@ -51,15 +66,29 @@ class FilesContainerComponent extends React.Component {
                     />
                 <FilesContainer
                     width={width + "px"}>
-                    {directoryContent.map((file, i) => (
-                        <FileComponent key={i}
-                            file={file}
-                        />
-                    ))}
+                    <FlipMove>
+                        {directoryContent.map((file, i) => (
+                            <FileComponent key={file.key}
+                                file={file}
+                            />
+                        ))}
+                    </FlipMove>
+
                 </FilesContainer>
             </Fragment>
         )
     }
+}
+
+// function to compare lists via key
+function compareList(prevList, afterList) {
+    if(prevList.length != afterList.length) return false
+    for(let i = 0; i < prevList.length; ++i) {
+        if(prevList[i].key != afterList[i].key) {
+            return false
+        }
+    }
+    return true
 }
 
 function mapStateToProps({currentDirectory}) {

@@ -6,7 +6,6 @@ class SearchButtonComponent extends React.Component {
     state = {
         revealedIcon: false,
         animate: false,
-        swapPicture: false,
     }
 
     constructor(props) {
