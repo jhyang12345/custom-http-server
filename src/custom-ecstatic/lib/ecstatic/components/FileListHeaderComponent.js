@@ -70,7 +70,6 @@ function getRenderedPathName(pathN) {
             />
         )})
     )
-    // return dirs[dirs.length - 1]
 }
 
 const FileListHeader = styled.div`

@@ -44,14 +44,6 @@ class FilesContainerComponent extends React.Component {
 
     }
 
-    flipMoveEndCallback = () => {
-        console.log("Flip Move finished")
-        this.setState(() => ({
-            animate: false,
-            content: this.props.currentDirectory.content,
-        }));
-    }
-
     render() {
         const { pathName, content } = this.props.currentDirectory
         const { width } = this.state
@@ -97,5 +89,4 @@ function mapStateToProps({currentDirectory}) {
     }
 }
 
-export const FILE_CONTAINER_COMPONENT = 'FILE_CONTAINER_COMPONENT'
 export default connect(mapStateToProps)(FilesContainerComponent)

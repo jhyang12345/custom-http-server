@@ -1,11 +1,6 @@
-[![build status](https://img.shields.io/travis/indexzero/http-server.svg?style=flat-square)](https://travis-ci.org/indexzero/http-server)
-[![dependencies status](https://img.shields.io/david/indexzero/http-server.svg?style=flat-square)](https://david-dm.org/indexzero/http-server)
-[![npm](https://img.shields.io/npm/v/http-server.svg?style=flat-square)](https://www.npmjs.com/package/http-server)
-[![license](https://img.shields.io/github/license/indexzero/http-server.svg?style=flat-square)](https://github.com/indexzero/http-server)
+# custom-http-server: a command-line not-so-simple http server
 
-# http-server: a command-line http server
-
-`http-server` is a simple, zero-configuration command-line http server.  It is powerful enough for production usage, but it's simple and hackable enough to be used for testing, local development, and learning.
+`custom-http-server` is a simple, UI friendly version of the http-server package. It adds on to the basic functionality that http-server provides, and adds UI components to make it more user friendly.
 
 ![](https://github.com/nodeapps/http-server/raw/master/screenshots/public.png)
 
