@@ -72,12 +72,15 @@ div,span {
     box-sizing: border-box;
 }
 
-#page_container {
-    width: 680px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #FFF;
+.block-copy {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; 
 }
+
 `
 
 function mapStateToProps({ currentDirectory }) {

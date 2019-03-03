@@ -61,6 +61,7 @@ class FileComponent extends React.Component {
 
         return (
             <FileWrapper
+                className="block-copy"
                 href={"./" + displayName}
                 onClick={this.handleClick}
                 onContextMenu={this.handleRightClick}>

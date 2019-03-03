@@ -33,6 +33,7 @@ class PopupComponent extends React.Component {
         return (
             <Fragment>
                 <Popup
+                    className="block-copy"
                     open={open}
                     visible={visible}
                     clientX={clientX}
