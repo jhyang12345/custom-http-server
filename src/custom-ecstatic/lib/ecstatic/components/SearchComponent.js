@@ -2,6 +2,7 @@ import React from "react"
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { SearchBarComponent, SearchButtonComponent } from './Search'
+import { setSearchKeyword } from '../actions/currentDirectory'
 
 class SearchComponent extends React.Component {
 
@@ -13,7 +14,7 @@ class SearchComponent extends React.Component {
         this.setState((prevState) => ({
             barRevealed: !prevState.barRevealed,
         }))
-        console.log(this.state)
+        
     }
 
     render() {
@@ -44,4 +45,4 @@ const SearchBox = styled.span`
     overflow: hidden;  
 `
 
-export default SearchComponent
+export default connect()(SearchComponent)

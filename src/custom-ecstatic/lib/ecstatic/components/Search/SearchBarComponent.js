@@ -19,6 +19,13 @@ class SearchBarComponent extends React.Component {
         dispatch(setSearchKeyword(searchText))
     }
 
+    handleTransitionEnd = (evt) => {
+        const { dispatch, revealed } = this.props
+        if (!revealed) {
+            dispatch(setSearchKeyword(""));
+        }
+    }
+
     render() {
         const { searchText } = this.state
         const { revealed } = this.props
@@ -27,6 +34,7 @@ class SearchBarComponent extends React.Component {
                 onChange={this.handleChange}
                 value={searchText}
                 revealed={revealed}
+                onTransitionEnd={this.handleTransitionEnd}
             />
         )
     }
