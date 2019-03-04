@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { setSearchKeyword } from "../../actions/currentDirectory";
 
 class SearchBarComponent extends React.Component {
 
@@ -9,10 +10,13 @@ class SearchBarComponent extends React.Component {
     }
 
     handleChange = (evt) => {
+        const { dispatch } = this.props
         const searchText = evt.target.value
         this.setState(() => ({
           searchText,  
         }))
+
+        dispatch(setSearchKeyword(searchText))
     }
 
     render() {
@@ -56,4 +60,4 @@ const SearchBar = styled.input.attrs({
 
 `
 
-export default SearchBarComponent
+export default connect()(SearchBarComponent)
