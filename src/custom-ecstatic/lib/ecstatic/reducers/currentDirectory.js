@@ -1,4 +1,4 @@
-import { FETCH_DIRECTORY, SORT_BY_MODIFIED_TIME, SORT_BY_NAME, SORT_BY_SIZE } from '../actions/currentDirectory'
+import { FETCH_DIRECTORY, SORT_BY_MODIFIED_TIME, SORT_BY_NAME, SORT_BY_SIZE, SET_SEARCH_KEYWORD } from '../actions/currentDirectory'
 import { sortByModifiedTime, sortByName, sortBySize } from '../utils/utils'
 
 export default function currentDirectory (state = {}, action) {
@@ -41,6 +41,11 @@ export default function currentDirectory (state = {}, action) {
                     ? !state.reverse
                     : false,
             }
+        case SET_SEARCH_KEYWORD: 
+            return {
+                ...state,
+                keyword: action.keyword,
+            }
         default:
             return state
     }
@@ -50,6 +55,7 @@ export default function currentDirectory (state = {}, action) {
 // {
 //     pathName: "",
 //     method: "",
+//     keyword: "",
 //     reverse: false,
 //     contents: [statObjects],
 // }
