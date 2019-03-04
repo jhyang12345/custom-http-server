@@ -45,10 +45,10 @@ class FilesContainerComponent extends React.Component {
     }
 
     render() {
-        const { pathName, content } = this.props.currentDirectory
+        const { pathName, visibleContent } = this.props.currentDirectory
         const { width } = this.state
 
-        const directoryContent = content
+        const directoryContent = visibleContent;
 
         return (
             <Fragment>

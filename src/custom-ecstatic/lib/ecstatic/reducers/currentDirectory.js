@@ -1,5 +1,5 @@
 import { FETCH_DIRECTORY, SORT_BY_MODIFIED_TIME, SORT_BY_NAME, SORT_BY_SIZE, SET_SEARCH_KEYWORD } from '../actions/currentDirectory'
-import { sortByModifiedTime, sortByName, sortBySize } from '../utils/utils'
+import { sortByModifiedTime, sortByName, sortBySize, filterByKeywords } from '../utils/utils'
 
 export default function currentDirectory (state = {}, action) {
     switch (action.type) {
@@ -7,14 +7,15 @@ export default function currentDirectory (state = {}, action) {
             return {
                 ...state,
                 ...action.currentDirectory,
+                visibleContent: action.currentDirectory.content,
             }
         case SORT_BY_MODIFIED_TIME :
             return {
                 ...state,
                 method: "modified",
-                content: state.method == "modified" 
-                    ? [...sortByModifiedTime(state.content, !state.reverse)]
-                    : [...sortByModifiedTime(state.content, false)],
+                visibleContent: state.method == "modified" 
+                    ? [...sortByModifiedTime(state.visibleContent, !state.reverse)]
+                    : [...sortByModifiedTime(state.visibleContent, false)],
                 reverse: state.method == "modified"
                     ? !state.reverse
                     : false,
@@ -23,9 +24,9 @@ export default function currentDirectory (state = {}, action) {
             return {
                 ...state,
                 method: "name",
-                content: state.method == "name"
-                    ? [...sortByName(state.content, !state.reverse)]
-                    : [...sortByName(state.content, false)],
+                visibleContent: state.method == "name"
+                    ? [...sortByName(state.visibleContent, !state.reverse)]
+                    : [...sortByName(state.visibleContent, false)],
                 reverse: state.method == "name"
                     ? !state.reverse
                     : false,
@@ -34,9 +35,9 @@ export default function currentDirectory (state = {}, action) {
             return {
                 ...state,
                 method: "size",
-                content: state.method == "size"
-                    ? [...sortBySize(state.content, !state.reverse)]
-                    : [...sortBySize(state.content, false)],
+                visibleContent: state.method == "size"
+                    ? [...sortBySize(state.visibleContent, !state.reverse)]
+                    : [...sortBySize(state.visibleContent, false)],
                 reverse: state.method == "size"
                     ? !state.reverse
                     : false,
@@ -45,10 +46,15 @@ export default function currentDirectory (state = {}, action) {
             return {
                 ...state,
                 keyword: action.keyword,
+                visibleContent: filterByKeywords(state.content, action.keyword),
             }
         default:
             return state
     }
+}
+
+let defaultState = {
+
 }
 
 // example object

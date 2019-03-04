@@ -113,3 +113,31 @@ export function sortBySize(content, reverse=false) {
 
    return [...directories, ...files]
 }
+
+export function filterByKeywords(content, keywords) {
+   let directories = []
+   let files = []
+
+   if(keywords.length == 0 || keywords.split().length == 0) return content 
+
+   
+   for (let item of content) {
+      const { stat } = item
+      if (stat.isDir) directories.push(item)
+      else files.push(item)
+   }
+
+   directories = directories.filter((directory) => (nameContainsKeywords(directory.displayName, keywords)))
+   files = files.filter((file) => (nameContainsKeywords(file.displayName, keywords)))
+   
+   return [...directories, ...files]
+}
+
+function nameContainsKeywords(fileName, keywords) {
+   const words = keywords.split()
+   let wordsInFileName = false;
+   for(let word of words) {
+      wordsInFileName = wordsInFileName || fileName.toLowerCase().includes(word.toLowerCase())
+   }
+   return wordsInFileName
+}
