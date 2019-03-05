@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Moment from "react-moment"
 import { bytesToSize } from "../utils/utils"
 import { FileWrapper, FileName, FileIcon, FileSize, FileModifiedDate } from "./File"
+import LongTouchComponent from './LongTouchComponent'
 import { handleOpenPopup } from '../actions/optionPopup'
 import prettyFileIcons from '../pretty-file-icons'
 import { stripSlashes } from '../utils/utils'
@@ -60,27 +61,32 @@ class FileComponent extends React.Component {
         displayName = stripSlashes(displayName);
 
         return (
-            <FileWrapper
-                className="block-copy"
-                href={"./" + displayName}
-                onClick={this.handleClick}
-                onContextMenu={this.handleRightClick}>
-                <FileIcon 
-                    fileIcon={fileIcon}
-                />
-                <FileName>
-                    {displayName}
-                </FileName>
-                <FileSize>
-                    {bytesToSize(stat.size)}
-                </FileSize>
-                <FileModifiedDate>
-                    <Moment
-                        format="YYYY-MM-DD HH:mm">
-                        {stat.mtime}
-                    </Moment>
-                </FileModifiedDate>
-            </FileWrapper>
+            <LongTouchComponent
+                onTouchStart={() => {console.log("Touch started")}}
+                onLongPress={this.handleRightClick}>
+                <FileWrapper
+                    className="block-copy"
+                    href={"./" + displayName}
+                    onClick={this.handleClick}
+                    onContextMenu={this.handleRightClick}>
+                    <FileIcon 
+                        fileIcon={fileIcon}
+                    />
+                    <FileName>
+                        {displayName}
+                    </FileName>
+                    <FileSize>
+                        {bytesToSize(stat.size)}
+                    </FileSize>
+                    <FileModifiedDate>
+                        <Moment
+                            format="YYYY-MM-DD HH:mm">
+                            {stat.mtime}
+                        </Moment>
+                    </FileModifiedDate>
+                </FileWrapper>
+            </LongTouchComponent>
+
         )
     }
 }
