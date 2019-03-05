@@ -10,7 +10,6 @@ class PopupComponent extends React.Component {
     }
 
     closePopup = (evt) => {
-        console.log("clostPopup", evt)
         evt.preventDefault()
         const { dispatch } = this.props
         dispatch(closePopup())
@@ -26,16 +25,21 @@ class PopupComponent extends React.Component {
         const { dispatch } = this.props
         dispatch(copyToClipboard())
 
-        this.closePopup()
+        dispatch(closePopup());
     }
 
     copyFileName = () => {
         const { dispatch } = this.props
         dispatch(copyFileNameToClipboard())
-
-        this.closePopup()
+        
+        dispatch(closePopup())        
     }
     
+    blockScroll = (evt) => {
+        evt.preventDefault()
+        evt.stopPropagation()
+    }
+
     render() {
         const { clientX, clientY, open } = this.props
         const { visible } = this.state
@@ -43,6 +47,7 @@ class PopupComponent extends React.Component {
             <Fragment>
                 <Popup
                     className="block-copy"
+                    onScroll={this.blockScroll}
                     open={open}
                     onContextMenu={this.closePopup}
                     visible={visible}
@@ -50,7 +55,7 @@ class PopupComponent extends React.Component {
                     clientY={clientY}>
                     <PopupItem
                         onClick={this.copyLink}>
-                        Copy
+                        Copy Link
                     </PopupItem>
                     <PopupItem
                         onClick={this.copyFileName}>
@@ -59,6 +64,7 @@ class PopupComponent extends React.Component {
                     <PopupItem>Delete</PopupItem>
                 </Popup>
                 <PopupBackground 
+                    onScroll={this.blockScroll}
                     open={open}
                     visible={visible}
                     onClick={this.closePopup}
