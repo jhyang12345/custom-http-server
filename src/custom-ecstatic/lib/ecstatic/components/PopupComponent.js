@@ -9,7 +9,9 @@ class PopupComponent extends React.Component {
         visible: false,
     }
 
-    closePopup = () => {
+    closePopup = (evt) => {
+        console.log("clostPopup", evt)
+        evt.preventDefault()
         const { dispatch } = this.props
         dispatch(closePopup())
     }
@@ -42,6 +44,7 @@ class PopupComponent extends React.Component {
                 <Popup
                     className="block-copy"
                     open={open}
+                    onContextMenu={this.closePopup}
                     visible={visible}
                     clientX={clientX}
                     clientY={clientY}>
@@ -59,6 +62,7 @@ class PopupComponent extends React.Component {
                     open={open}
                     visible={visible}
                     onClick={this.closePopup}
+                    onContextMenu={this.closePopup}
                 />
             </Fragment>
             
