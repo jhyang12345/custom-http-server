@@ -25,6 +25,7 @@ class FileComponent extends React.Component {
 
     handleRightClick = (evt) => {
         evt.preventDefault()
+        console.log("handleRightClick called!")
         const { dispatch, file } = this.props
         let {
             displayName,
@@ -61,32 +62,28 @@ class FileComponent extends React.Component {
         displayName = stripSlashes(displayName);
 
         return (
-            <LongTouchComponent
-                onTouchStart={() => {console.log("Touch started")}}
-                onLongPress={this.handleRightClick}>
-                <FileWrapper
-                    className="block-copy"
-                    href={"./" + displayName}
-                    onClick={this.handleClick}
-                    onContextMenu={this.handleRightClick}>
-                    <FileIcon 
-                        fileIcon={fileIcon}
-                    />
-                    <FileName>
-                        {displayName}
-                    </FileName>
-                    <FileSize>
-                        {bytesToSize(stat.size)}
-                    </FileSize>
-                    <FileModifiedDate>
-                        <Moment
-                            format="YYYY-MM-DD HH:mm">
-                            {stat.mtime}
-                        </Moment>
-                    </FileModifiedDate>
-                </FileWrapper>
-            </LongTouchComponent>
 
+            <FileWrapper
+                className="block-copy"
+                href={"./" + displayName}
+                onClick={this.handleClick}
+                onContextMenu={this.handleRightClick}>
+                <FileIcon 
+                    fileIcon={fileIcon}
+                />
+                <FileName>
+                    {displayName}
+                </FileName>
+                <FileSize>
+                    {bytesToSize(stat.size)}
+                </FileSize>
+                <FileModifiedDate>
+                    <Moment
+                        format="YYYY-MM-DD HH:mm">
+                        {stat.mtime}
+                    </Moment>
+                </FileModifiedDate>
+            </FileWrapper>
         )
     }
 }

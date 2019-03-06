@@ -11,23 +11,23 @@ class LongTouchComponent extends React.Component {
         time: 500
     }
 
-    startTimeout = () => {
-        this.timeout = setTimeout(this.longPressed, this.props.time)
+    startTimeout = (e) => {
+        this.timeout = setTimeout(this.longPressed.bind(this, e), this.props.time)
     }
 
     cancelTimeout = () => {
         clearTimeout(this.timeout)
     }
 
-    longPressed = () => {
+    longPressed (e) {
+        console.log("LongPRessed", e)
         if (this.props.onLongPress && this.moved === false) {
-            this.props.onLongPress()
+            this.props.onLongPress(e)
         }
     }
 
     onTouchStart = e => {
-        console.log(e)
-        this.startTimeout()
+        this.startTimeout(e)
         this.moved = false
         if (typeof this.props.onTouchStart === 'function') {
             this.props.onTouchStart(e)
@@ -55,13 +55,11 @@ class LongTouchComponent extends React.Component {
         const { children, disabled } = this.props
         const { touch } = this.state
 
-        console.log(this.props)
         if (!touch || disabled) {
             return children
         }
 
-        const props = {
-            onContextMenu: e => e.preventDefault(),
+        const props = {            
             onTouchStart: this.onTouchStart,
             onTouchEnd: this.onTouchEnd,
             onTouchMove: this.onMove,
