@@ -13,14 +13,17 @@ class HeaderItemComponent extends React.Component {
     }
     
     render() {
-        const { title } = this.props
-
+        const { title, currentDirectory } = this.props
         return (
             <HeaderItem
                 {...this.props}
                 onClick={this.handleClick}>
                 {title}
-                <i className="fas fa-caret-down"></i>
+                {
+                    currentDirectory.reverse
+                    ? <i className="fas fa-caret-up"></i>
+                    : <i className="fas fa-caret-down"></i>
+                }  
             </HeaderItem>
         )
     }
@@ -38,7 +41,7 @@ const HeaderItem = styled.div`
     text-align: ${props => props.alignRight === true ? "right" : "left"};
     ${'' /* font-weight: ${props => props.sortMethod === props.type ? "bold" : "normal"} */}
 
-    & .fa-caret-down {
+    & .fas {
         margin-left: 6px;
     }
 `

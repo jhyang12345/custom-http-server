@@ -6,6 +6,7 @@ import FilesContainerComponent from "./FilesContainerComponent"
 import LeftSideBarComponent from "./LeftSideBarComponent"
 import PopupComponent from './PopupComponent'
 import { Normalize } from 'styled-normalize'
+import FloatingButtonComponent from "./FloatingButtonComponent";
 
 class App extends Component {
     
@@ -29,6 +30,7 @@ class App extends Component {
                 /> */}
                 <FilesContainerComponent />
                 <PopupComponent/>
+                <FloatingButtonComponent/>
             </Fragment>
         )
     }
