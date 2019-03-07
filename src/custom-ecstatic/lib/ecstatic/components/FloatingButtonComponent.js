@@ -6,7 +6,7 @@ class FloatingButtonComponent extends React.Component {
     render() {
         return (
             <FloatingButton>
-                <i className="fas fa-th-large"></i>
+                <i className="fas fa-th"></i>
             </FloatingButton>
         )
     }
@@ -24,6 +24,11 @@ const FloatingButton = styled.div`
     z-index: 5;
     text-align: center;
     line-height: 40px;
+    box-shadow: 0px 5px 8px -3px #BBB;
+
+    &:hover {
+        cursor: pointer;
+    }
 
     & > .fas {
         vertical-align: middle;

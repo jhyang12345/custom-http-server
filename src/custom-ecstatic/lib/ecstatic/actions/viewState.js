@@ -4,6 +4,8 @@ export const FADE_IN_VIEW = 'FADE_IN_VIEW'
 export const FADE_OUT_VIEW = 'FADE_OUT_VIEW'
 export const VIEW_TRANSITION = 'VIEW_TRANSITION'
 export const NORMAL_STATE = 'NORMAL_STATE'
+export const GRID_MODE = 'GRID_MODE'
+export const LIST_MODE = 'LIST_MODE'
 
 export function hideView(viewName) {
     return {
@@ -30,5 +32,17 @@ export function fadeOutView(viewName) {
     return {
         type: FADE_OUT_VIEW,
         viewName,
+    }
+}
+
+export function changeGridMode() {
+    return {
+        type: GRID_MODE,
+    }
+}
+
+export function changeListMode() {
+    return {
+        type: LIST_MODE,
     }
 }
