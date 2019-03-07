@@ -6,6 +6,7 @@ export const VIEW_TRANSITION = 'VIEW_TRANSITION'
 export const NORMAL_STATE = 'NORMAL_STATE'
 export const GRID_MODE = 'GRID_MODE'
 export const LIST_MODE = 'LIST_MODE'
+export const ALTER_FOLDER_VIEW_MODE = "ALTER_FOLDER_VIEW_MODE";
 
 export function hideView(viewName) {
     return {
@@ -44,5 +45,11 @@ export function changeGridMode() {
 export function changeListMode() {
     return {
         type: LIST_MODE,
+    }
+}
+
+export function alterFolderViewMode() {
+    return {
+        type: ALTER_FOLDER_VIEW_MODE,
     }
 }
