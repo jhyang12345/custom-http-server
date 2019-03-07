@@ -57,6 +57,8 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
     font-family: 'Roboto', sans-serif;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -83,7 +85,7 @@ div,span {
             user-select: none; 
 }
 
-`
+`;
 
 function mapStateToProps({ currentDirectory }) {
     return {
