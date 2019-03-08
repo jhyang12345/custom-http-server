@@ -14,12 +14,14 @@ export function stripSlashes(value) {
 
 // sort reverse for now newest top
 export function sortByModifiedTime(content, reverse=false) {
+   const upDirectory = []
    const directories = []
    const files = []
 
    for (let item of content) {
       const { stat } = item
-      if (stat.isDir) directories.push(item)
+      if (item.displayName.startsWith("..")) upDirectory.push(item)
+      else if (stat.isDir) directories.push(item)
       else files.push(item)
    }
 
@@ -31,18 +33,20 @@ export function sortByModifiedTime(content, reverse=false) {
       files.sort((b, a) => (new Date(b.stat.mtime) - new Date(a.stat.mtime)))
    }
 
-   return [...directories, ...files]
+   return [...upDirectory, ...directories, ...files];
 }
 
 // sort by name
 export function sortByName(content, reverse=false) {
-   const directories = []
-   const files = []
+   const upDirectory = [];
+   const directories = [];
+   const files = [];
 
    for (let item of content) {
-      const { stat } = item
-      if (stat.isDir) directories.push(item)
-      else files.push(item)
+     const { stat } = item;
+     if (item.displayName.startsWith("..")) upDirectory.push(item);
+     else if (stat.isDir) directories.push(item);
+     else files.push(item);
    }
 
    if (!reverse) {
@@ -71,17 +75,19 @@ export function sortByName(content, reverse=false) {
       })
    }
 
-   return [...directories, ...files]
+   return [...upDirectory, ...directories, ...files];
 }
 
 export function sortBySize(content, reverse=false) {
-   const directories = []
-   const files = []
+   const upDirectory = [];
+   const directories = [];
+   const files = [];
 
    for (let item of content) {
-      const { stat } = item
-      if (stat.isDir) directories.push(item)
-      else files.push(item)
+     const { stat } = item;
+     if (item.displayName.startsWith("..")) upDirectory.push(item);
+     else if (stat.isDir) directories.push(item);
+     else files.push(item);
    }
 
    if (reverse) {
@@ -111,7 +117,7 @@ export function sortBySize(content, reverse=false) {
    }
 
 
-   return [...directories, ...files]
+   return [...upDirectory, ...directories, ...files]
 }
 
 export function filterByKeywords(content, keywords) {
