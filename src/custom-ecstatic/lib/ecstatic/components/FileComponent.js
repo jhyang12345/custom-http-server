@@ -44,7 +44,7 @@ class FileComponent extends React.Component {
     }
 
     render() {
-        const { file } = this.props
+        const { file, displayMode } = this.props
         let {
             stat,
             displayName,
@@ -114,4 +114,9 @@ class FileComponent extends React.Component {
 //      ctime: 2019-02-16T07:20:27.923Z,
 //      birthtime: 2019-02-15T13:17:20.686Z } }
 
-export default connect()(FileComponent)
+function mapStateToProps({ viewState }) {
+    return {
+        displayMode: viewState.displayMode
+    }
+}
+export default connect(mapStateToProps)(FileComponent);
