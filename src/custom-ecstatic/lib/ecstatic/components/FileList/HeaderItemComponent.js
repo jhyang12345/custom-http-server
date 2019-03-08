@@ -16,6 +16,7 @@ class HeaderItemComponent extends React.Component {
         const { title, currentDirectory } = this.props
         return (
             <HeaderItem
+                className="block-copy"
                 {...this.props}
                 onClick={this.handleClick}>
                 {title}
