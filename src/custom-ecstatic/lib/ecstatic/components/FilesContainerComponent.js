@@ -45,6 +45,7 @@ class FilesContainerComponent extends React.Component {
     }
 
     render() {
+        const { displayMode } = this.props
         const { pathName, visibleContent } = this.props.currentDirectory
         const { width } = this.state
 
@@ -57,15 +58,16 @@ class FilesContainerComponent extends React.Component {
                     width={width + "px"}    
                     />
                 <FilesContainer
-                    width={width + "px"}>
-                    <FlipMove>
+                    width={width + "px"}
+                    displayMode={displayMode}>
+                    {/* <FlipMove
+                        > */}
                         {directoryContent.map((file, i) => (
                             <FileComponent key={file.key}
                                 file={file}
                             />
                         ))}
-                    </FlipMove>
-
+                    {/* </FlipMove> */}
                 </FilesContainer>
             </Fragment>
         )
@@ -83,9 +85,10 @@ function compareList(prevList, afterList) {
     return true
 }
 
-function mapStateToProps({currentDirectory}) {
+function mapStateToProps({currentDirectory, viewState}) {
     return {
         currentDirectory,
+        displayMode: viewState.displayMode,
     }
 }
 

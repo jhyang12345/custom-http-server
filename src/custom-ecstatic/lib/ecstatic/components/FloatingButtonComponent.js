@@ -12,9 +12,11 @@ class FloatingButtonComponent extends React.Component {
 
     constructor(props) {
         super(props)
+    }
 
+    componentDidMount() {
         this.setState(() => ({
-            displayMode: props.displayMode,
+            displayMode: this.props.displayMode,
         }))
     }
 

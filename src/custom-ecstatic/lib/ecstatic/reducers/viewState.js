@@ -28,5 +28,5 @@ export default function viewState(state = defaultState, action) {
 
 // TODO: need to define interchangebable views
 let defaultState = {
-    displayMode: LIST_MODE,
+    displayMode: GRID_MODE,
 }

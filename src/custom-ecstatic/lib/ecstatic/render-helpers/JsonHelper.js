@@ -70,7 +70,7 @@ class JsonHelper {
                 ...this.object,
                 method: "name",
                 reverse: false,
-                visibleContent: this.object.content,
+                visibleContent: this.object.content,                
             },
         }
 

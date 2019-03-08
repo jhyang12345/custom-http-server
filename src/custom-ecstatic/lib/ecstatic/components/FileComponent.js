@@ -4,10 +4,12 @@ import { connect } from 'react-redux'
 import Moment from "react-moment"
 import { bytesToSize } from "../utils/utils"
 import { FileWrapper, FileName, FileIcon, FileSize, FileModifiedDate } from "./File"
+import { GridFileWrapper, GridFileName } from "./GridFile"
 import LongTouchComponent from './LongTouchComponent'
 import { handleOpenPopup } from '../actions/optionPopup'
 import prettyFileIcons from '../pretty-file-icons'
 import { stripSlashes } from '../utils/utils'
+import { LIST_MODE } from '../actions/viewState'
 
 class FileComponent extends React.Component {
     
@@ -62,8 +64,9 @@ class FileComponent extends React.Component {
         displayName = stripSlashes(displayName);
 
         return (
-
-            <FileWrapper
+            displayMode === LIST_MODE
+            ?         
+            (<FileWrapper
                 className="block-copy"
                 href={"./" + displayName}
                 onClick={this.handleClick}
@@ -83,7 +86,23 @@ class FileComponent extends React.Component {
                         {stat.mtime}
                     </Moment>
                 </FileModifiedDate>
-            </FileWrapper>
+            </FileWrapper>)
+            : 
+            (
+                <GridFileWrapper
+                    className="block-copy"
+                    href={"./" + displayName}
+                    onClick={this.handleClick}
+                    onContextMenu={this.handleRightClick}>
+                    {/* <FileIcon
+                        fileIcon={fileIcon}
+                    />
+                    <GridFileName>
+                        {displayName}
+                    </GridFileName> */}
+                </GridFileWrapper>
+            )
+        
         )
     }
 }

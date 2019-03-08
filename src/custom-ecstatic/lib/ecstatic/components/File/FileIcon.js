@@ -64,6 +64,7 @@ class FileIcon extends React.Component {
 const FileIconComponent = styled.div`
     width: 60px;
     padding: 12px;
+    display: inline-block;
     & img {
         display: inline-block;
         max-width: 100%;
