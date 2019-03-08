@@ -27,7 +27,6 @@ class SearchButtonComponent extends React.Component {
                 revealedIcon: prevProps.revealed,
             }))
         }
-
     }
 
     transitionEndCallback = () => {
