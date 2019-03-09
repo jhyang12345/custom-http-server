@@ -17,4 +17,8 @@ export const GridFileName = styled.div`
     line-height: 30px;
     vertical-align: middle;
     color: #333;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0px 8px;
 `
