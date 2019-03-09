@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components'
-import { getIcon } from '../../pretty-file-icons'
-import fs from 'fs'
 import path from 'path'
-import FileIconImage from './FileIconImage'
+import { connect } from 'react-redux'
+import { GRID_MODE } from '../../actions/viewState';
 
 class FileIcon extends React.Component {
 
@@ -47,15 +46,27 @@ class FileIcon extends React.Component {
 
     render() {
         const imgSource = this.state.img
+        const { displayMode } = this.props
 
         return (
-            <FileIconComponent>
-                {
-                    this.state.loaded === true
-                    ? <FileIconImage imgSource={imgSource} />
-                    : null
-                }
-            </FileIconComponent>
+            (
+                displayMode === GRID_MODE
+                ? <GridFileIconComponent>
+                        {
+                            this.state.loaded === true
+                                ? <FileIconImage imgSource={imgSource} />
+                                : null
+                        }
+                  </GridFileIconComponent>
+                : <FileIconComponent>
+                        {
+                            this.state.loaded === true
+                                ? <FileIconImage imgSource={imgSource} />
+                                : null
+                        }
+                    </FileIconComponent>
+            )
+
         )
     }
 }
@@ -79,4 +90,46 @@ const FileIconComponent = styled.div`
         font-size: 30px;
     }
 `
-export default FileIcon
+
+const GridFileIconComponent = styled.div`
+    width: 100%;
+    height: 150px;
+    line-height: 150px;
+    background-color: #FAFAFA;
+    text-align: middle;
+    & img {
+        display: inline-block;
+        vertical-align: middle;
+        width: 90px;
+        height: 90px;
+    }
+
+    & i {
+        
+        color: #88cdf8;
+        text-align: center;
+        line-height: 50px;
+        font-size: 50px;
+    }
+`
+
+class FileIconImage extends React.Component {
+    render() {
+        const { imgSource } = this.props
+
+        return (
+            (
+                imgSource !== null
+                    ? <img src={imgSource} />
+                    : <i className="fas fa-folder"></i>
+            )
+        )
+    }
+}
+
+function mapStateToProps({ viewState }) {
+    return {
+        displayMode: viewState.displayMode
+    }
+}
+export default connect(mapStateToProps)(FileIcon)
