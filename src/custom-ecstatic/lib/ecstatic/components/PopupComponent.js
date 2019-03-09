@@ -1,7 +1,7 @@
 import React, {Fragment} from "react"
 import { connect } from "react-redux"
 import styled from "styled-components"
-import { closePopup, copyToClipboard, copyFileNameToClipboard } from '../actions/optionPopup'
+import { closePopup, copyToClipboard, copyFileNameToClipboard, openInNewTab } from '../actions/optionPopup'
 
 class PopupComponent extends React.Component {
 
@@ -35,6 +35,13 @@ class PopupComponent extends React.Component {
         
         dispatch(closePopup())        
     }
+
+    openNewTab = () => {
+        const { dispatch } = this.props
+
+        dispatch(openInNewTab())
+        dispatch(closePopup())
+    }
     
     blockScroll = (evt) => {
         evt.preventDefault()
@@ -61,6 +68,10 @@ class PopupComponent extends React.Component {
                     <PopupItem
                         onClick={this.copyFileName}>
                         Copy File Name
+                    </PopupItem>
+                    <PopupItem
+                        onClick={this.openNewTab}>
+                        Open in new tab
                     </PopupItem>
                     <PopupItem>Delete</PopupItem>
                 </Popup>

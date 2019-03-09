@@ -37,7 +37,7 @@ class FileComponent extends React.Component {
         const curPath = window.location.href
 
         const popupInfo = {
-            url: path.join(curPath, displayName),
+            url: curPath + stripSlashes(displayName),
             clientX: clientX,
             clientY: clientY,
             fileName: stripSlashes(displayName),

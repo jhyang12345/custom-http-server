@@ -1,4 +1,4 @@
-import { OPEN_POPUP, CLOSE_POPUP, SET_POPUP_INFO, COPY_TO_CLIPBOARD, COPY_FILE_NAME_TO_CLIPBOARD } from '../actions/optionPopup'
+import { OPEN_POPUP, CLOSE_POPUP, SET_POPUP_INFO, COPY_TO_CLIPBOARD, COPY_FILE_NAME_TO_CLIPBOARD, OPEN_IN_NEW_TAB } from '../actions/optionPopup'
 import copy from 'copy-to-clipboard'
 
 let defaultState = {
@@ -36,6 +36,12 @@ export default function optionPopup (state=defaultState, action) {
             copy(state.fileName)
             return {
                 ...state,
+            }
+        }
+        case OPEN_IN_NEW_TAB : {
+            window.open(state.url, '_blank');
+            return {
+                ...state
             }
         }
         default:
