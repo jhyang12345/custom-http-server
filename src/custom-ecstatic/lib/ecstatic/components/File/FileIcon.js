@@ -96,6 +96,7 @@ const GridFileIconComponent = styled.div`
     height: 150px;
     line-height: 150px;
     background-color: #FAFAFA;
+    border-radius: 8px;
     text-align: middle;
     & img {
         display: inline-block;
@@ -105,11 +106,11 @@ const GridFileIconComponent = styled.div`
     }
 
     & i {
-        
         color: #88cdf8;
         text-align: center;
-        line-height: 50px;
-        font-size: 50px;
+        line-height: 65px;
+        font-size: 65px;
+        vertical-align: middle;
     }
 `
 

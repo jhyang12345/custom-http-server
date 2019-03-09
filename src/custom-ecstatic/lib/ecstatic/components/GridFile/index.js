@@ -8,6 +8,8 @@ export const GridFileWrapper = styled.a`
     text-align: center;
     margin: 10px;
     text-decoration: none;
+
+    box-shadow: 0px 0px 10px -5px rgba(51,51,51,1);
 `
 
 export const GridFileName = styled.div`
