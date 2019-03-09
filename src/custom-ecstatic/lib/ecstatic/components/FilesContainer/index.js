@@ -3,7 +3,9 @@ import { GRID_MODE } from '../../actions/viewState';
 
 export const FilesContainer = styled.div`
     width: ${props => props.width};
-    display: ${props => props.displayMode === GRID_MODE ? 'inline-grid' : 'block'};
+    display: ${props => props.displayMode === GRID_MODE ? 'grid' : 'block'};
+    grid-template-columns: repeat(auto-fill, 160px);
+    justify-content: center;
     margin-left: auto;
     margin-right: auto;
     padding-top: 130px;

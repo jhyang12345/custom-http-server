@@ -94,12 +94,12 @@ class FileComponent extends React.Component {
                     href={"./" + displayName}
                     onClick={this.handleClick}
                     onContextMenu={this.handleRightClick}>
-                    {/* <FileIcon
+                    <FileIcon
                         fileIcon={fileIcon}
                     />
                     <GridFileName>
                         {displayName}
-                    </GridFileName> */}
+                    </GridFileName>
                 </GridFileWrapper>
             )
         
