@@ -84,8 +84,9 @@ const animation = props => (
 
 const SearchButton = styled.span`
     display: inline-block;
-    height: 100%;
-    line-height: 60px;
+    height: 30px;
+    line-height: 14px;
+    vertical-align: middle;
     padding: 8px;
     position: relative;
 
@@ -94,8 +95,7 @@ const SearchButton = styled.span`
     
     & > .fas {
         font-size: 0.6em;
-        color: #999;
-        vertical-align: middle;
+        color: #999;        
     }
 `
 

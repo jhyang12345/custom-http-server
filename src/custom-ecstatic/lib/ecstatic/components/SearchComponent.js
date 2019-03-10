@@ -33,14 +33,14 @@ class SearchComponent extends React.Component {
     }
 }
 
-const SearchBox = styled.span`
+const SearchBox = styled.div`
     position: absolute;
     height: 100%;
     line-height: 58px;
     right: 0px;
     top: 0px;
     padding-right: 12px;
-    display: inline-box;
+    display: inline-block;
     margin-left: auto;
     overflow: hidden;  
 `
