@@ -147,3 +147,7 @@ function nameContainsKeywords(fileName, keywords) {
    }
    return wordsInFileName
 }
+
+export function filterOutParentDirectory(content) {
+   return content.filter((item) => !item.displayName.includes(".."))
+}

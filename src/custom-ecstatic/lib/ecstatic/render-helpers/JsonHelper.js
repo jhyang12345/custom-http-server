@@ -11,6 +11,7 @@ import middleware from '../middleware'
 import { renderToString } from 'react-dom/server'
 import App from "../components/App"
 import { ServerStyleSheet } from 'styled-components'
+import { filterOutParentDirectory } from '../utils/utils'
 
 const supportedIcons = styles.icons;
 const css = styles.css;
@@ -68,9 +69,10 @@ class JsonHelper {
         let initialState = {
             currentDirectory: {
                 ...this.object,
+                content: filterOutParentDirectory(this.object.content),
                 method: "name",
                 reverse: false,
-                visibleContent: this.object.content,                
+                visibleContent: filterOutParentDirectory(this.object.content),
             },
         }
 
