@@ -4,6 +4,7 @@ export const SET_POPUP_INFO = 'SET_POPUP_INFO'
 export const COPY_TO_CLIPBOARD = 'COPY_TO_CLIPBOARD'
 export const COPY_FILE_NAME_TO_CLIPBOARD = 'COPY_FILE_NAME_TO_CLIPBOARD'
 export const OPEN_IN_NEW_TAB = 'OPEN_IN_NEW_TAB'
+export const OPEN_DETAIL_POPUP = 'OPEN_DETAIL_POPUP'
 
 export function openPopup() {
     return {
@@ -39,6 +40,12 @@ export function copyFileNameToClipboard() {
 export function openInNewTab() {
     return {
         type: OPEN_IN_NEW_TAB,
+    }
+}
+
+export function openDetailPopup() {
+    return {
+        type: OPEN_DETAIL_POPUP,
     }
 }
 

@@ -1,8 +1,9 @@
-import { OPEN_POPUP, CLOSE_POPUP, SET_POPUP_INFO, COPY_TO_CLIPBOARD, COPY_FILE_NAME_TO_CLIPBOARD, OPEN_IN_NEW_TAB } from '../actions/optionPopup'
+import { OPEN_POPUP, CLOSE_POPUP, SET_POPUP_INFO, COPY_TO_CLIPBOARD, COPY_FILE_NAME_TO_CLIPBOARD, OPEN_IN_NEW_TAB, OPEN_DETAIL_POPUP } from '../actions/optionPopup'
 import copy from 'copy-to-clipboard'
 
 let defaultState = {
     open: false,
+    detailOpen: false,
     url: "",
     clientX: 0,
     clientY: 0,
@@ -20,6 +21,7 @@ export default function optionPopup (state=defaultState, action) {
             return {
                 ...state,
                 open: false,
+                detailOpen: false,
             }
         case SET_POPUP_INFO :
             return {
@@ -42,6 +44,13 @@ export default function optionPopup (state=defaultState, action) {
             window.open(state.url, '_blank');
             return {
                 ...state
+            }
+        }
+        case OPEN_DETAIL_POPUP : {
+            return {
+                ...state,
+                open: true,
+                detailOpen: true,
             }
         }
         default:

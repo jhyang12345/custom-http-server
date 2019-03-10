@@ -1,7 +1,7 @@
 import React, {Fragment} from "react"
 import { connect } from "react-redux"
 import styled from "styled-components"
-import { closePopup, copyToClipboard, copyFileNameToClipboard, openInNewTab } from '../actions/optionPopup'
+import { closePopup, copyToClipboard, copyFileNameToClipboard, openInNewTab, openDetailPopup } from '../actions/optionPopup'
 
 class PopupComponent extends React.Component {
 
@@ -42,6 +42,12 @@ class PopupComponent extends React.Component {
         dispatch(openInNewTab())
         dispatch(closePopup())
     }
+
+    openDetails = () => {
+        const { dispatch } = this.props
+
+        dispatch(openDetailPopup())
+    }
     
     blockScroll = (evt) => {
         evt.preventDefault()
@@ -73,6 +79,10 @@ class PopupComponent extends React.Component {
                         onClick={this.openNewTab}>
                         Open in new tab
                     </PopupItem>
+                    <PopupItem
+                        onClick={this.openDetails}>
+                        Details
+                    </PopupItem>
                     <PopupItem>Delete</PopupItem>
                 </Popup>
                 <PopupBackground 
@@ -82,6 +92,9 @@ class PopupComponent extends React.Component {
                     onClick={this.closePopup}
                     onContextMenu={this.closePopup}
                 />
+                <DetailPopup>
+                    
+                </DetailPopup>
             </Fragment>
             
         )
@@ -121,6 +134,26 @@ const Popup = styled.div`
     }
 `
 
+const DetailPopup = styled.div`
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 400px;
+    background-color: #fbf7f3;
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px 1px #CCC;
+    display: ${props => props.open === true ? 'block' : 'none'};
+
+    opacity: ${props => props.visible === true ? 1 : 0};
+    transition: opacity 1s;
+
+    &:hover {
+        cursor: pointer;
+    }
+`
+
 const PopupItem = styled.div`
     color: #333;
     border-bottom: 1px solid #CCC;
@@ -133,10 +166,11 @@ const PopupItem = styled.div`
 `
 
 function mapStateToProps({optionPopup}) {
-    const { open, url, clientX, clientY } = optionPopup
+    const { open, url, detailOpen, clientX, clientY } = optionPopup
     return {
         open,
         url,
+        detailOpen,
         clientX,
         clientY,
     }

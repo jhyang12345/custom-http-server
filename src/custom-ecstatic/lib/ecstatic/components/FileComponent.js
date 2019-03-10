@@ -30,6 +30,7 @@ class FileComponent extends React.Component {
         console.log("handleRightClick called!")
         const { dispatch, file } = this.props
         let {
+            stat,
             displayName,
         } = file
         const { clientX, clientY } = evt
@@ -41,6 +42,8 @@ class FileComponent extends React.Component {
             clientX: clientX,
             clientY: clientY,
             fileName: stripSlashes(displayName),
+            fileSize: bytesToSize(stat.size),
+            modifiedTime: stat.mtime,
         }
         dispatch(handleOpenPopup(popupInfo))
     }
