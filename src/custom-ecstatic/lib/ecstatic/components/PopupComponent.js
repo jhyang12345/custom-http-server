@@ -55,46 +55,53 @@ class PopupComponent extends React.Component {
     }
 
     render() {
-        const { clientX, clientY, open } = this.props
+        const { clientX, clientY, open, detailOpen } = this.props
         const { visible } = this.state
+        console.log(detailOpen)
         return (
             <Fragment>
-                <Popup
-                    className="block-copy"
-                    onScroll={this.blockScroll}
-                    open={open}
-                    onContextMenu={this.closePopup}
-                    visible={visible}
-                    clientX={clientX}
-                    clientY={clientY}>
-                    <PopupItem
-                        onClick={this.copyLink}>
-                        Copy Link
-                    </PopupItem>
-                    <PopupItem
-                        onClick={this.copyFileName}>
-                        Copy File Name
-                    </PopupItem>
-                    <PopupItem
-                        onClick={this.openNewTab}>
-                        Open in new tab
-                    </PopupItem>
-                    <PopupItem
-                        onClick={this.openDetails}>
-                        Details
-                    </PopupItem>
-                    <PopupItem>Delete</PopupItem>
-                </Popup>
-                <PopupBackground 
+                {
+                    detailOpen === true
+                    ? 
+                    <DetailPopup
+                        open={open}
+                        visible={visible}>                        
+                    </DetailPopup>
+                    :  
+                    <Popup
+                        className="block-copy"
+                        onScroll={this.blockScroll}
+                        open={open}
+                        onContextMenu={this.closePopup}
+                        visible={visible}
+                        clientX={clientX}
+                        clientY={clientY}>
+                        <PopupItem
+                            onClick={this.copyLink}>
+                            Copy Link
+                        </PopupItem>
+                        <PopupItem
+                            onClick={this.copyFileName}>
+                            Copy File Name
+                        </PopupItem>
+                        <PopupItem
+                            onClick={this.openNewTab}>
+                            Open in new tab
+                        </PopupItem>
+                        <PopupItem
+                            onClick={this.openDetails}>
+                            Details
+                        </PopupItem>
+                        <PopupItem>Delete</PopupItem>
+                    </Popup>
+                }
+                <PopupBackground
                     onScroll={this.blockScroll}
                     open={open}
                     visible={visible}
                     onClick={this.closePopup}
                     onContextMenu={this.closePopup}
                 />
-                <DetailPopup>
-                    
-                </DetailPopup>
             </Fragment>
             
         )
@@ -141,6 +148,7 @@ const DetailPopup = styled.div`
     transform: translate(-50%, -50%);
     z-index: 10;
     width: 400px;
+    padding: 12px;
     background-color: #fbf7f3;
     border-radius: 4px;
     box-shadow: 1px 1px 3px 1px #CCC;
