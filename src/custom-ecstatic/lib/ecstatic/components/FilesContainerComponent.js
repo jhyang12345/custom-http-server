@@ -60,14 +60,13 @@ class FilesContainerComponent extends React.Component {
                 <FilesContainer
                     width={width + "px"}
                     displayMode={displayMode}>
-                    {/* <FlipMove
-                        > */}
+                    
                         {directoryContent.map((file, i) => (
                             <FileComponent key={file.key}
                                 file={file}
                             />
                         ))}
-                    {/* </FlipMove> */}
+                    
                 </FilesContainer>
             </Fragment>
         )
