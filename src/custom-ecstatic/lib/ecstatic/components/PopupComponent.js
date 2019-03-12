@@ -1,5 +1,6 @@
 import React, {Fragment} from "react"
 import { connect } from "react-redux"
+import Moment from 'react-moment'
 import styled from "styled-components"
 import { closePopup, copyToClipboard, copyFileNameToClipboard, openInNewTab, openDetailPopup } from '../actions/optionPopup'
 
@@ -77,6 +78,14 @@ class PopupComponent extends React.Component {
                 <DetailBlock>
                   <DetailTitle>File Size:</DetailTitle>
                   <DetailContent>{fileSize}</DetailContent>
+                </DetailBlock>
+                <DetailBlock>
+                  <DetailTitle>Modified Time:</DetailTitle>
+                  <DetailContent>
+                    <Moment format="YYYY-MM-DD HH:mm">
+                        {modifiedTime}
+                    </Moment>
+                  </DetailContent>
                 </DetailBlock>
               </DetailPopup>
             ) : (
@@ -170,19 +179,22 @@ const DetailPopup = styled.div`
 
 const DetailBlock = styled.div`
     padding: 4px 2px;
+    text-align: right;
 `
 
 const DetailTitle = styled.span`
     color: #777;
     font-size: 1.2em;
     margin-right: 4px;
+    float: left;
 `
 
 const DetailContent = styled.span`
     color: #333;
     font-size: 1.2em;
+    text-align: right;    
+    word-break: break-word;
 `
-
 
 
 const PopupItem = styled.div`
