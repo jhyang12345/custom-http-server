@@ -55,56 +55,62 @@ class PopupComponent extends React.Component {
     }
 
     render() {
-        const { clientX, clientY, open, detailOpen } = this.props
+        const {
+          clientX,
+          clientY,
+          open,
+          detailOpen,
+          fileName,
+          fileSize,
+          modifiedTime
+        } = this.props;
         const { visible } = this.state
         console.log(detailOpen)
         return (
-            <Fragment>
-                {
-                    detailOpen === true
-                    ? 
-                    <DetailPopup
-                        open={open}
-                        visible={visible}>                        
-                    </DetailPopup>
-                    :  
-                    <Popup
-                        className="block-copy"
-                        onScroll={this.blockScroll}
-                        open={open}
-                        onContextMenu={this.closePopup}
-                        visible={visible}
-                        clientX={clientX}
-                        clientY={clientY}>
-                        <PopupItem
-                            onClick={this.copyLink}>
-                            Copy Link
-                        </PopupItem>
-                        <PopupItem
-                            onClick={this.copyFileName}>
-                            Copy File Name
-                        </PopupItem>
-                        <PopupItem
-                            onClick={this.openNewTab}>
-                            Open in new tab
-                        </PopupItem>
-                        <PopupItem
-                            onClick={this.openDetails}>
-                            Details
-                        </PopupItem>
-                        <PopupItem>Delete</PopupItem>
-                    </Popup>
-                }
-                <PopupBackground
-                    onScroll={this.blockScroll}
-                    open={open}
-                    visible={visible}
-                    onClick={this.closePopup}
-                    onContextMenu={this.closePopup}
-                />
-            </Fragment>
-            
-        )
+          <Fragment>
+            {detailOpen === true ? (
+              <DetailPopup open={open} visible={visible}>
+                <DetailBlock>
+                  <DetailTitle>File Name:</DetailTitle>
+                  <DetailContent>{fileName}</DetailContent>
+                </DetailBlock>
+                <DetailBlock>
+                  <DetailTitle>File Size:</DetailTitle>
+                  <DetailContent>{fileSize}</DetailContent>
+                </DetailBlock>
+              </DetailPopup>
+            ) : (
+              <Popup
+                className="block-copy"
+                onScroll={this.blockScroll}
+                open={open}
+                onContextMenu={this.closePopup}
+                visible={visible}
+                clientX={clientX}
+                clientY={clientY}
+              >
+                <PopupItem onClick={this.copyLink}>Copy Link</PopupItem>
+                <PopupItem onClick={this.copyFileName}>
+                  Copy File Name
+                </PopupItem>
+                <PopupItem onClick={this.openNewTab}>
+                  Open in new tab
+                </PopupItem>
+                <PopupItem onClick={this.openDetails}>
+                  Details
+                </PopupItem>
+                <PopupItem>Delete</PopupItem>
+              </Popup>
+            )}
+            <PopupBackground
+              onScroll={this.blockScroll}
+              open={open}
+              visible={visible}
+              onClick={this.closePopup}
+              onContextMenu={this.closePopup}
+            />
+          </Fragment>
+        );
     }
 }
 
@@ -162,6 +168,23 @@ const DetailPopup = styled.div`
     }
 `
 
+const DetailBlock = styled.div`
+    padding: 4px 2px;
+`
+
+const DetailTitle = styled.span`
+    color: #777;
+    font-size: 1.2em;
+    margin-right: 4px;
+`
+
+const DetailContent = styled.span`
+    color: #333;
+    font-size: 1.2em;
+`
+
+
+
 const PopupItem = styled.div`
     color: #333;
     border-bottom: 1px solid #CCC;
@@ -174,13 +197,26 @@ const PopupItem = styled.div`
 `
 
 function mapStateToProps({optionPopup}) {
-    const { open, url, detailOpen, clientX, clientY } = optionPopup
+    const {
+      open,
+      url,
+      detailOpen,
+      clientX,
+      clientY,
+      fileName,
+      fileSize,
+      modifiedTime
+    } = optionPopup;
+    
     return {
         open,
         url,
         detailOpen,
         clientX,
         clientY,
+        fileName,
+        fileSize,
+        modifiedTime,
     }
 }
 
