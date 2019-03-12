@@ -4,7 +4,7 @@ import FlipMove from 'react-flip-move'
 
 export const FilesContainer = styled(FlipMove)`
     width: ${props => props.width};
-    display: ${props => props.displayMode === GRID_MODE ? 'grid' : 'block'};
+    display: ${props => props.layoutMode === GRID_MODE ? 'grid' : 'block'};
     grid-template-columns: repeat(auto-fill, 160px);
     justify-content: center;
     margin-left: auto;

@@ -1,6 +1,6 @@
 import React, {Fragment} from "react"
 import styled from 'styled-components'
-import { HeaderItemComponent, SubDirectoryComponent } from './FileList'
+import { HeaderItemComponent, SubDirectoryComponent, SubDirectoryHolderComponent } from './FileList'
 import SearchComponent from './SearchComponent'
 import { stripSlashes } from '../utils/utils'
 import { createSortByModifiedTimeAction, createSortByNameAction, createSortBySizeAction } from '../actions/currentDirectory'
@@ -15,12 +15,14 @@ class FileListHeaderComponent extends React.Component {
                     {...this.props}>
                     <div className="directory-header">
                         Serving 
-                        <SubDirectoryComponent
-                            pathName={"root"}
-                            isRoot={true}
-                            actualPath="/" 
-                        />
-                        {getRenderedPathName(pathName)}
+                        {/* <SubDirectoryHolderComponent> */}
+                            <SubDirectoryComponent
+                                pathName={"root"}
+                                isRoot={true}
+                                actualPath="/"
+                            />
+                            {getRenderedPathName(pathName)}
+                        {/* </SubDirectoryHolderComponent> */}
                         <SearchComponent/>
                     </div>
                     <div className="inner-container">
