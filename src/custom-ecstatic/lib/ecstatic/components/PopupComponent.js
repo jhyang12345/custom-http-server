@@ -17,10 +17,18 @@ class PopupComponent extends React.Component {
         dispatch(closePopup())
     }
 
-    componentDidMount() {
-        this.setState(() => ({
-            visible: true,
-        }))
+    componentDidUpdate(prevProps) {
+        if (prevProps.open != this.props.open && this.props.open === true) {
+            setTimeout(() => {
+                this.setState(() => ({
+                    visible: true,
+                }))
+            }, 100)
+        } else if (prevProps.open != this.props.open && this.props.open === false) {
+            this.setState(() => ({
+                visible: false,
+            }))
+        }
     }
 
     copyLink = () => {
@@ -117,6 +125,9 @@ class PopupComponent extends React.Component {
               visible={visible}
               onClick={this.closePopup}
               onContextMenu={this.closePopup}
+            //   onTouchMove={this.blockScroll}
+            //   onTouchStart={this.blockScroll}
+            //   onTouchEnd={this.blockScroll}
             />
           </Fragment>
         );
@@ -134,7 +145,7 @@ const PopupBackground = styled.div`
     display: ${props => props.open === true ? 'block' : 'none'};
 
     opacity: ${props => props.visible === true ? 0.3 : 0};
-    transition: opacity 1s;
+    transition: opacity .3s;
 `
 
 const Popup = styled.div`
@@ -149,7 +160,7 @@ const Popup = styled.div`
     display: ${props => props.open === true ? 'block' : 'none'};
 
     opacity: ${props => props.visible === true ? 1 : 0};
-    transition: opacity 1s;
+    transition: opacity .3s;
 
     &:hover {
         cursor: pointer;
@@ -170,7 +181,7 @@ const DetailPopup = styled.div`
     display: ${props => props.open === true ? 'block' : 'none'};
 
     opacity: ${props => props.visible === true ? 1 : 0};
-    transition: opacity 1s;
+    transition: opacity .3s;
 
     &:hover {
         cursor: pointer;
