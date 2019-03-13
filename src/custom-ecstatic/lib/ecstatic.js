@@ -96,6 +96,9 @@ module.exports = function createMiddleware(_dir, _options) {
   const weakEtags = opts.weakEtags;
   const handleOptionsMethod = opts.handleOptionsMethod;
 
+  // Requesting directory as json
+  let requestJsonFlag = false
+
   opts.root = dir;
   if (defaultExt && /^\./.test(defaultExt)) {
     defaultExt = defaultExt.replace(/^\./, '');
@@ -210,6 +213,9 @@ module.exports = function createMiddleware(_dir, _options) {
 
     
     console.log("File here", file)
+    if(file.startsWith("/requestJson/")) {
+      requestJsonFlag = true
+    }
 
     gzipped = `${file}.gz`;
 
@@ -345,6 +351,7 @@ module.exports = function createMiddleware(_dir, _options) {
 
     function statFile() {
       fs.stat(file, (err, stat) => {
+        console.log("File in statFile", file)        
         if (err && (err.code === 'ENOENT' || err.code === 'ENOTDIR')) {
           if (req.statusCode === 404) {
             // This means we're already trying ./404.html and can not find it.
@@ -397,7 +404,8 @@ module.exports = function createMiddleware(_dir, _options) {
               // Testing without showDir
               if (opts.showDir) {
                 // Adding showDir as middleware
-                showDir(opts, stat)(req, res);
+                console.log("opts, stat", opts, stat)
+                showDir(opts, requestJsonFlag)(req, res);
                 return;
               }
 
@@ -407,7 +415,8 @@ module.exports = function createMiddleware(_dir, _options) {
           }
 
           if (opts.showDir) {
-            showDir(opts, stat)(req, res);
+            console.log("opts, stat", opts, stat)
+            showDir(opts, requestJsonFlag)(req, res);            
           }
         } else {
           // serve if not a directory?.?
