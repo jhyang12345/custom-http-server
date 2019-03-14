@@ -7,12 +7,13 @@ import LeftSideBarComponent from "./LeftSideBarComponent"
 import PopupComponent from './PopupComponent'
 import { Normalize } from 'styled-normalize'
 import FloatingButtonComponent from "./FloatingButtonComponent";
+import { fetchManager } from '../utils/utils'
 
 class App extends Component {
     
     // TODO: Make request for current directory information here
     componentDidMount() {
-        
+        fetchManager({url: "/public", method: "GET", callback: () => {}})
     }
 
     render() {

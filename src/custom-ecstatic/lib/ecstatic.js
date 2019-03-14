@@ -210,11 +210,12 @@ module.exports = function createMiddleware(_dir, _options) {
         )
       );
     }
-
     
     console.log("File here", file)
+    console.log("Request", req.url, req.headers);
     if(file.startsWith("/requestJson/")) {
       requestJsonFlag = true
+      
     }
 
     gzipped = `${file}.gz`;
@@ -404,7 +405,6 @@ module.exports = function createMiddleware(_dir, _options) {
               // Testing without showDir
               if (opts.showDir) {
                 // Adding showDir as middleware
-                console.log("opts, stat", opts, stat)
                 showDir(opts, requestJsonFlag)(req, res);
                 return;
               }
@@ -415,7 +415,6 @@ module.exports = function createMiddleware(_dir, _options) {
           }
 
           if (opts.showDir) {
-            console.log("opts, stat", opts, stat)
             showDir(opts, requestJsonFlag)(req, res);            
           }
         } else {

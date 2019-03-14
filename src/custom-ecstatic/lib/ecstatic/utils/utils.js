@@ -151,3 +151,19 @@ function nameContainsKeywords(fileName, keywords) {
 export function filterOutParentDirectory(content) {
    return content.filter((item) => !item.displayName.includes(".."))
 }
+
+export function fetchManager({ url, method, body, callback }) {
+  // TODO: response status 를 자연스럽게 넘기기
+  fetch(url, {
+    method,
+    body,
+    headers: { "Content-type": "application/json" },
+    credentials: "same-origin"
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(result => {
+      callback(result.status, result);
+    });
+}
