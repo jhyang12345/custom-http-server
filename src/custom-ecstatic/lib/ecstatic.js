@@ -198,8 +198,6 @@ module.exports = function createMiddleware(_dir, _options) {
       return;
     }
 
-    console.log("File here", staticFileName(pathname));
-
     if (pathname !== staticFileName(pathname)) {
       file = staticFileName(pathname)
     } else {
@@ -211,13 +209,10 @@ module.exports = function createMiddleware(_dir, _options) {
       );
     }
     
-    console.log("File here", file)
-    console.log("Request", req.url, req.headers);
-    if(file.startsWith("/requestJson/")) {
+    // console.log(req.headers)
+    if(req.headers["request-type"] == "api") {
       requestJsonFlag = true
-      
     }
-
     gzipped = `${file}.gz`;
 
     if (serverHeader !== false) {
@@ -351,8 +346,7 @@ module.exports = function createMiddleware(_dir, _options) {
 
 
     function statFile() {
-      fs.stat(file, (err, stat) => {
-        console.log("File in statFile", file)        
+      fs.stat(file, (err, stat) => {     
         if (err && (err.code === 'ENOENT' || err.code === 'ENOTDIR')) {
           if (req.statusCode === 404) {
             // This means we're already trying ./404.html and can not find it.

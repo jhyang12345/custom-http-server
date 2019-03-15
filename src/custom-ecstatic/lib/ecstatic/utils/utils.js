@@ -157,7 +157,7 @@ export function fetchManager({ url, method, body, callback }) {
   fetch(url, {
     method,
     body,
-    headers: { "Content-type": "application/json" },
+    headers: { "Content-type": "application/json", "Request-type": "api" },
     credentials: "same-origin"
   })
     .then(response => {

@@ -18,6 +18,7 @@ const css = styles.css;
 
 class JsonHelper {
   constructor(parsed) {
+    console.log("JsonRequest Made!")
     this.parsed = parsed;
     this.pathname = decodeURIComponent(parsed.pathname);
     this.humanReadable = true;
@@ -76,7 +77,7 @@ class JsonHelper {
       }
     };
 
-    this.html = JSON.stringify(this.object)
+    this.html = JSON.stringify(initialState)
   }
 }
 

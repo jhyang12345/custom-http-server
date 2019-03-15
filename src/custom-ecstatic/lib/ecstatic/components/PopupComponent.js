@@ -74,7 +74,6 @@ class PopupComponent extends React.Component {
           modifiedTime
         } = this.props;
         const { visible } = this.state
-        console.log(detailOpen)
         return (
           <Fragment>
             {detailOpen === true ? (

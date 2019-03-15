@@ -78,7 +78,8 @@ module.exports = (opts, requestJsonFlag) => {
 
         function render(dirs, renderFiles, lolwuts) {
 
-          let renderHelper = new ReactHelper(parsed);
+          console.log("Flag before render", requestJsonFlag)
+          let renderHelper = requestJsonFlag === true ? new JsonHelper(parsed) : new ReactHelper(parsed);
           // let renderHelper
           // if(parsed.path.startsWith("/requestJson/")) {
           //   renderHelper = new JsonHelper(parsed)
