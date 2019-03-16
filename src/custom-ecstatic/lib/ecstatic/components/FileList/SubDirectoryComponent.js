@@ -1,12 +1,16 @@
 import React from "react"
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
+import { handleFetchDirectory } from '../../actions/currentDirectory'
 
 class SubDirectoryComponent extends React.Component {
-    handleClick = () => {
-        const { actualPath } = this.props
+    handleClick = (evt) => {
+        evt.preventDefault()
+        const { actualPath, history, dispatch } = this.props
 
-        // TODO: handle link traveling in the future
-        window.location.href = actualPath
+        dispatch(handleFetchDirectory(actualPath))
+        history.push(actualPath)
     }
 
     render() {
@@ -40,4 +44,4 @@ const SubDirectory = styled.span`
     }
 `
 
-export default SubDirectoryComponent
+export default withRouter(connect()(SubDirectoryComponent))

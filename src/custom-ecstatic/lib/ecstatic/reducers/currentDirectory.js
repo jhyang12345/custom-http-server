@@ -1,4 +1,4 @@
-import { FETCH_DIRECTORY, SORT_BY_MODIFIED_TIME, SORT_BY_NAME, SORT_BY_SIZE, SET_SEARCH_KEYWORD } from '../actions/currentDirectory'
+import { FETCH_DIRECTORY, SORT_BY_MODIFIED_TIME, SORT_BY_NAME, SORT_AGAIN, SORT_BY_SIZE, SET_SEARCH_KEYWORD } from '../actions/currentDirectory'
 import { sortByModifiedTime, sortByName, sortBySize, filterByKeywords } from '../utils/utils'
 
 export default function currentDirectory (state = {}, action) {
@@ -42,6 +42,43 @@ export default function currentDirectory (state = {}, action) {
                     ? !state.reverse
                     : false,
             }
+        case SORT_AGAIN: {
+            switch (state.method) {
+                case "modified" :
+                    return {
+                        ...state,
+                        method: "modified",
+                        visibleContent: state.method == "modified"
+                            ? [...sortByModifiedTime(state.visibleContent, !state.reverse)]
+                            : [...sortByModifiedTime(state.visibleContent, false)],
+                    }
+                case "name" :
+                    return {
+                        ...state,
+                        method: "name",
+                        visibleContent: state.method == "name"
+                            ? [...sortByName(state.visibleContent, !state.reverse)]
+                            : [...sortByName(state.visibleContent, false)],
+                    }
+                case "size" :
+                    return {
+                        ...state,
+                        method: "size",
+                        visibleContent: state.method == "size"
+                            ? [...sortBySize(state.visibleContent, !state.reverse)]
+                            : [...sortBySize(state.visibleContent, false)],
+                    }
+                default :
+                    return {
+                        ...state,
+                        method: "name",
+                        visibleContent: state.method == "name"
+                            ? [...sortByName(state.visibleContent, !state.reverse)]
+                            : [...sortByName(state.visibleContent, false)],
+                    }
+            }
+        }
+            
         case SET_SEARCH_KEYWORD: 
             return {
                 ...state,

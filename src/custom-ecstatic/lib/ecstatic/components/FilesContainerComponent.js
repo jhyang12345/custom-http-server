@@ -56,11 +56,10 @@ class FilesContainerComponent extends React.Component {
                 <FileListHeaderComponent 
                     pathName={pathName}
                     width={width + "px"}    
-                    />
+                    />                    
                 <FilesContainer
                     width={width + "px"}
                     layoutmode={displayMode}>
-                    
                         {directoryContent.map((file, i) => (
                             <FileComponent key={file.key}
                                 file={file}

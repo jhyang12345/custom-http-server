@@ -2,6 +2,7 @@ export const FETCH_DIRECTORY = 'FETCH_DIRECTORY'
 export const SORT_BY_MODIFIED_TIME = 'SORT_BY_MODIFIED_TIME'
 export const SORT_BY_SIZE = 'SORT_BY_SIZE'
 export const SORT_BY_NAME = 'SORT_BY_NAME'
+export const SORT_AGAIN = 'SORT_AGAIN'
 export const SET_SEARCH_KEYWORD = "SET_SEARCH_KEYWORD";
 import { fetchDirectory } from '../utils/utils'
 
@@ -13,12 +14,11 @@ export function setDirectory(currentDirectory) {
 }
 
 export function handleFetchDirectory(directory) {
-    console.log("HandleFetchDirectory", directory)
     return (dispatch) => {
         return fetchDirectory(directory)
             .then((currentDirectory) => {
-                console.log("Current", currentDirectory)
                 dispatch(setDirectory(currentDirectory.currentDirectory))
+                dispatch(createSortAgainAction())
             })
     }
 }
@@ -38,6 +38,12 @@ export function createSortByNameAction() {
 export function createSortBySizeAction() {
     return {
         type: SORT_BY_SIZE,
+    }
+}
+
+export function createSortAgainAction() {
+    return {
+        type: SORT_AGAIN,
     }
 }
 

@@ -1,6 +1,7 @@
 import path from 'path'
 import React from "react"
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import Moment from "react-moment"
 import { bytesToSize } from "../utils/utils"
 import { FileWrapper, FileName, FileIcon, FileSize, FileModifiedDate } from "./File"
@@ -15,23 +16,26 @@ import { handleFetchDirectory } from '../actions/currentDirectory';
 class FileComponent extends React.Component {
     
     handleClick = (evt) => {
-        evt.preventDefault()
-        const { file, dispatch } = this.props
-        const {
+        const { file, dispatch, history } = this.props
+        let {
+            stat,
             displayName,
         } = file
-        
+
+        const isDir = stat.isDir
         const curPath = window.location.pathname
-        
+        if(isDir) evt.preventDefault()
+
         // TODO : solve issue with react router?.?
         // window.location.href = path.join(curPath, displayName)
 
         dispatch(handleFetchDirectory(displayName))
+        const newPath = path.join(window.location.pathname, displayName)
+        history.push(newPath)
     }
 
     handleRightClick = (evt) => {
         evt.preventDefault()
-        console.log("handleRightClick called!")
         const { dispatch, file } = this.props
         let {
             stat,
@@ -145,4 +149,4 @@ function mapStateToProps({ viewState }) {
         displayMode: viewState.displayMode
     }
 }
-export default connect(mapStateToProps)(FileComponent);
+export default withRouter(connect(mapStateToProps)(FileComponent))

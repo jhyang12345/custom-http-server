@@ -161,11 +161,9 @@ export function fetchManager({ url, method, body, callback }) {
     credentials: "same-origin"
   })
     .then(response => {
-      console.log(response)
       return response.json();
     })
     .then(result => {
-       console.log(result)
       callback(result.status, result);
     });
 }

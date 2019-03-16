@@ -2,9 +2,9 @@ const styles = require('../show-dir/styles');
 const he = require('he');
 const permsToString = require('../show-dir/perms-to-string');
 const sizeToString = require('../show-dir/size-to-string');
-
 import React from 'react'
 import { Provider } from 'react-redux'
+import { StaticRouter } from "react-router-dom"
 import { createStore } from 'redux'
 import reducer from '../reducers'
 import middleware from '../middleware'
@@ -79,9 +79,11 @@ class ReactHelper {
         const store = createStore(reducer, initialState, middleware)
 
         const reactString = renderToString(
-            <Provider store={store}>
-                <App/>
-            </Provider>
+            <StaticRouter>
+                <Provider store={store}>
+                    <App />
+                </Provider>
+            </StaticRouter>
         )
 
         const sheet = new ServerStyleSheet(); // <-- creating out stylesheet

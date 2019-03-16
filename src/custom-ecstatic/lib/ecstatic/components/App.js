@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react"
 import { connect } from 'react-redux'
+import { Route } from 'react-router-dom'
 import FileComponent from "./FileComponent"
 import { createGlobalStyle } from 'styled-components'
 import FilesContainerComponent from "./FilesContainerComponent"
@@ -13,7 +14,7 @@ class App extends Component {
     
     // TODO: Make request for current directory information here
     componentDidMount() {
-        fetchManager({url: "/node_modules", method: "GET", callback: () => {}})
+        
     }
 
     render() {
@@ -23,15 +24,15 @@ class App extends Component {
 
         return (
             <Fragment
-                >
+            >
                 <Normalize />
                 <AppContainer />
                 {/* Will not be used to show current directory */}
                 {/* <LeftSideBarComponent 
-                /> */}
-                <FilesContainerComponent />
-                <PopupComponent/>
-                <FloatingButtonComponent/>
+            /> */}
+                <Route path="/" component={FilesContainerComponent} />
+                <PopupComponent />
+                <FloatingButtonComponent />
             </Fragment>
         )
     }

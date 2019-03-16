@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { GRID_MODE } from '../../actions/viewState';
 import FlipMove from 'react-flip-move'
 
-export const FilesContainer = styled(FlipMove)`
+export const FilesContainer = styled.div`
     width: ${props => props.width};
     display: ${props => props.layoutmode === GRID_MODE ? 'grid' : 'block'};
     grid-template-columns: repeat(auto-fill, 160px);

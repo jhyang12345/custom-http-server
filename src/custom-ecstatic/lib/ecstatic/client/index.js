@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import App from '../components/App'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
@@ -13,9 +14,11 @@ let initialState = window.__INITIAL__DATA__
 const store = createStore(reducer, initialState, middleware)
 
 ReactDom.hydrate(
-    <Provider store={store}>
-        <App/>
-    </Provider>
+    <Router>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </Router>
     ,
     document.getElementById('root')
 )
