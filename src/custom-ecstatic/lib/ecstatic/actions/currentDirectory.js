@@ -3,11 +3,23 @@ export const SORT_BY_MODIFIED_TIME = 'SORT_BY_MODIFIED_TIME'
 export const SORT_BY_SIZE = 'SORT_BY_SIZE'
 export const SORT_BY_NAME = 'SORT_BY_NAME'
 export const SET_SEARCH_KEYWORD = "SET_SEARCH_KEYWORD";
+import { fetchDirectory } from '../utils/utils'
 
-export function fetchDirectory(currentDirectory) {
+export function setDirectory(currentDirectory) {
     return {
         type: FETCH_DIRECTORY,
         currentDirectory
+    }
+}
+
+export function handleFetchDirectory(directory) {
+    console.log("HandleFetchDirectory", directory)
+    return (dispatch) => {
+        return fetchDirectory(directory)
+            .then((currentDirectory) => {
+                console.log("Current", currentDirectory)
+                dispatch(setDirectory(currentDirectory.currentDirectory))
+            })
     }
 }
 

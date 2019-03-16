@@ -10,11 +10,13 @@ import { handleOpenPopup } from '../actions/optionPopup'
 import prettyFileIcons from '../pretty-file-icons'
 import { stripSlashes } from '../utils/utils'
 import { LIST_MODE } from '../actions/viewState'
+import { handleFetchDirectory } from '../actions/currentDirectory';
 
 class FileComponent extends React.Component {
     
-    handleClick = () => {
-        const { file } = this.props
+    handleClick = (evt) => {
+        evt.preventDefault()
+        const { file, dispatch } = this.props
         const {
             displayName,
         } = file
@@ -22,7 +24,9 @@ class FileComponent extends React.Component {
         const curPath = window.location.pathname
         
         // TODO : solve issue with react router?.?
-        window.location.href = path.join(curPath, displayName)
+        // window.location.href = path.join(curPath, displayName)
+
+        dispatch(handleFetchDirectory(displayName))
     }
 
     handleRightClick = (evt) => {

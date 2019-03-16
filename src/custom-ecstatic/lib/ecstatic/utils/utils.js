@@ -169,3 +169,14 @@ export function fetchManager({ url, method, body, callback }) {
       callback(result.status, result);
     });
 }
+
+export function fetchDirectory(directory) {
+   return fetch(directory, {
+      method: "GET",
+      headers: { "Content-type": "application/json", "Request-type": "api" },
+      credentials: "same-origin",
+   })
+   .then(response => {
+      return response.json()
+   })
+}
