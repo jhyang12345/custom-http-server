@@ -8,10 +8,11 @@ const etag = require('../etag');
 const url = require('url');
 const status = require('../status-handlers');
 const RenderHelper = require("../render-helpers/RenderHelper")
-const JsonHelper = require("../render-helpers/ReactHelper")
+const JsonHelper = require("../render-helpers/JsonHelper")
 const ReactHelper = require("../render-helpers/ReactHelper")
 
-module.exports = (opts, requestJsonFlag) => {
+module.exports = (opts) => {
+  console.log("\nshowDir called!\n")
   // opts are parsed by opts.js, defaults already applied
   const cache = opts.cache;
   const root = path.resolve(opts.root);
@@ -24,7 +25,7 @@ module.exports = (opts, requestJsonFlag) => {
 
   // node express app middleware format
   // req for request and res to response
-  return function middleware(req, res, next) {
+  return function middleware(req, res, requestJsonFlag) {
     // Figure out the path for the file from the given url
     const parsed = url.parse(req.url);
     const pathname = decodeURIComponent(parsed.pathname);
@@ -43,7 +44,7 @@ module.exports = (opts, requestJsonFlag) => {
 
     
 
-    fs.stat(dir, (statErr, stat) => {
+    fs.stat(dir, requestJsonFlag, (statErr, stat) => {
       if (statErr) {
         if (handleError) {
           status[500](res, next, { error: statErr });
@@ -52,6 +53,8 @@ module.exports = (opts, requestJsonFlag) => {
         }
         return;
       }
+
+      console.log("\nrequestJsonFlag", requestJsonFlag, "\n")
 
       // files are the listing of dir
       fs.readdir(dir, (readErr, _files) => {
@@ -78,9 +81,10 @@ module.exports = (opts, requestJsonFlag) => {
 
         function render(dirs, renderFiles, lolwuts) {
 
-          console.log("Flag before render", requestJsonFlag)
-          let renderHelper = requestJsonFlag === true ? new JsonHelper(parsed) : new ReactHelper(parsed);
-          // let renderHelper
+          // console.log("Flag before render", requestJsonFlag)
+          // let renderHelper = requestJsonFlag === true ? new JsonHelper(parsed) : new ReactHelper(parsed);
+
+          let renderHelper = new ReactHelper(parsed)
           // if(parsed.path.startsWith("/requestJson/")) {
           //   renderHelper = new JsonHelper(parsed)
           // } else {

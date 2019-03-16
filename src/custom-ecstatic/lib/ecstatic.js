@@ -97,7 +97,6 @@ module.exports = function createMiddleware(_dir, _options) {
   const handleOptionsMethod = opts.handleOptionsMethod;
 
   // Requesting directory as json
-  let requestJsonFlag = false
 
   opts.root = dir;
   if (defaultExt && /^\./.test(defaultExt)) {
@@ -208,11 +207,7 @@ module.exports = function createMiddleware(_dir, _options) {
         )
       );
     }
-    
-    // console.log(req.headers)
-    if(req.headers["request-type"] == "api") {
-      requestJsonFlag = true
-    }
+  
     gzipped = `${file}.gz`;
 
     if (serverHeader !== false) {
@@ -385,6 +380,13 @@ module.exports = function createMiddleware(_dir, _options) {
           }
 
           if (autoIndex) {
+            console.log("\nAuto indexing?\n")
+            let requestJsonFlag = false
+            // console.log(req.headers)
+            if (req.headers["request-type"] == "api") {
+              requestJsonFlag = false
+              console.log("Request Json...")
+            }
             middleware({
               url: urlJoin(
                 encodeURIComponent(pathname),
@@ -399,7 +401,7 @@ module.exports = function createMiddleware(_dir, _options) {
               // Testing without showDir
               if (opts.showDir) {
                 // Adding showDir as middleware
-                showDir(opts, requestJsonFlag)(req, res);
+                showDir(opts)(req, res, requestJsonFlag);
                 return;
               }
 
@@ -408,8 +410,8 @@ module.exports = function createMiddleware(_dir, _options) {
             return;
           }
 
-          if (opts.showDir) {
-            showDir(opts, requestJsonFlag)(req, res);            
+          if (opts.showDir) {            
+            showDir(opts)(req, res, requestJsonFlag);            
           }
         } else {
           // serve if not a directory?.?

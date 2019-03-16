@@ -20,7 +20,6 @@ class LongTouchComponent extends React.Component {
     }
 
     longPressed (e) {
-        console.log("LongPRessed", e)
         if (this.props.onLongPress && this.moved === false) {
             this.props.onLongPress(e)
         }
