@@ -380,11 +380,12 @@ module.exports = function createMiddleware(_dir, _options) {
           }
 
           if (autoIndex) {
+            
             console.log("\nAuto indexing?\n")
             let requestJsonFlag = false
             // console.log(req.headers)
             if (req.headers["request-type"] == "api") {
-              requestJsonFlag = false
+              requestJsonFlag = true
               console.log("Request Json...")
             }
             middleware({
@@ -394,12 +395,14 @@ module.exports = function createMiddleware(_dir, _options) {
               ),
               headers: req.headers,
             }, res, (autoIndexError) => {
+              console.log("autoindexError", autoIndexError)
               if (autoIndexError) {
                 status[500](res, next, { error: autoIndexError });
                 return;
               }
               // Testing without showDir
               if (opts.showDir) {
+                console.log("\nAuto indexing inner\n")
                 // Adding showDir as middleware
                 showDir(opts)(req, res, requestJsonFlag);
                 return;
@@ -407,10 +410,16 @@ module.exports = function createMiddleware(_dir, _options) {
 
               status[403](res, next);
             });
+            // if(requestJsonFlag === true) {
+            //   console.log("requestJsonFlag working")
+            //   showDir(opts)(req, res, requestJsonFlag);
+            // }
+            console.log("middleware called")
             return;
           }
 
           if (opts.showDir) {            
+            console.log("Sending outside")
             showDir(opts)(req, res, requestJsonFlag);            
           }
         } else {

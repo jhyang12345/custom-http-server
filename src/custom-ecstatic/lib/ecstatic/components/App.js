@@ -13,7 +13,7 @@ class App extends Component {
     
     // TODO: Make request for current directory information here
     componentDidMount() {
-        fetchManager({url: "/public", method: "GET", callback: () => {}})
+        fetchManager({url: "/node_modules", method: "GET", callback: () => {}})
     }
 
     render() {

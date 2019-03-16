@@ -80,11 +80,10 @@ module.exports = (opts) => {
         res.setHeader('cache-control', cache);
 
         function render(dirs, renderFiles, lolwuts) {
-
-          // console.log("Flag before render", requestJsonFlag)
-          // let renderHelper = requestJsonFlag === true ? new JsonHelper(parsed) : new ReactHelper(parsed);
-
-          let renderHelper = new ReactHelper(parsed)
+          
+          let renderHelper = requestJsonFlag === true ? new JsonHelper(parsed) : new ReactHelper(parsed);
+          console.log("Flag before render", requestJsonFlag)
+          // let renderHelper = new ReactHelper(parsed)
           // if(parsed.path.startsWith("/requestJson/")) {
           //   renderHelper = new JsonHelper(parsed)
           // } else {

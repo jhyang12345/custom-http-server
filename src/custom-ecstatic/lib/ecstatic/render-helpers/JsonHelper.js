@@ -77,6 +77,7 @@ class JsonHelper {
       }
     };
 
+    // console.log(initialState)
     this.html = JSON.stringify(initialState)
   }
 }
