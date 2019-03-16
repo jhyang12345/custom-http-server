@@ -12,7 +12,6 @@ const JsonHelper = require("../render-helpers/JsonHelper")
 const ReactHelper = require("../render-helpers/ReactHelper")
 
 module.exports = (opts) => {
-  console.log("\nshowDir called!\n")
   // opts are parsed by opts.js, defaults already applied
   const cache = opts.cache;
   const root = path.resolve(opts.root);
@@ -29,8 +28,6 @@ module.exports = (opts) => {
     // Figure out the path for the file from the given url
     const parsed = url.parse(req.url);
     const pathname = decodeURIComponent(parsed.pathname);
-
-    console.log("JsonFlag", requestJsonFlag)
 
     const dir = path.normalize(
       path.join(
@@ -53,8 +50,6 @@ module.exports = (opts) => {
         }
         return;
       }
-
-      console.log("\nrequestJsonFlag", requestJsonFlag, "\n")
 
       // files are the listing of dir
       fs.readdir(dir, (readErr, _files) => {
@@ -82,13 +77,6 @@ module.exports = (opts) => {
         function render(dirs, renderFiles, lolwuts) {
           
           let renderHelper = requestJsonFlag === true ? new JsonHelper(parsed) : new ReactHelper(parsed);
-          console.log("Flag before render", requestJsonFlag)
-          // let renderHelper = new ReactHelper(parsed)
-          // if(parsed.path.startsWith("/requestJson/")) {
-          //   renderHelper = new JsonHelper(parsed)
-          // } else {
-          //   renderHelper = new ReactHelper(parsed);
-          // }
           
           const failed = false;
           const writeRow = renderHelper.writeRow.bind(renderHelper)

@@ -68,14 +68,6 @@ export default function currentDirectory (state = {}, action) {
                             ? [...sortBySize(state.visibleContent, !state.reverse)]
                             : [...sortBySize(state.visibleContent, false)],
                     }
-                default :
-                    return {
-                        ...state,
-                        method: "name",
-                        visibleContent: state.method == "name"
-                            ? [...sortByName(state.visibleContent, !state.reverse)]
-                            : [...sortByName(state.visibleContent, false)],
-                    }
             }
         }
             

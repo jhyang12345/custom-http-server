@@ -71,8 +71,6 @@ class JsonHelper {
       currentDirectory: {
         ...this.object,
         content: filterOutParentDirectory(this.object.content),
-        method: "name",
-        reverse: false,
         visibleContent: filterOutParentDirectory(this.object.content)
       }
     };
