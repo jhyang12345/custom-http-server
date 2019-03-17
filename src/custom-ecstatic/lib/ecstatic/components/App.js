@@ -18,7 +18,7 @@ class App extends Component {
     }
 
     componentDidUpdate() {
-        console.log("componentDidUpdate")
+
     }
 
     render() {
@@ -36,7 +36,8 @@ class App extends Component {
                 {/* Will not be used to show current directory */}
                 {/* <LeftSideBarComponent 
             /> */}
-                <Route path="/" component={FilesContainerComponent} />
+                <Route path="/" exact component={FilesContainerComponent} />
+                <Route path="/:path" component={FilesContainerComponent} />
                 <PopupComponent />
                 <FloatingButtonComponent />
             </Fragment>

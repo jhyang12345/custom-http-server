@@ -5,6 +5,7 @@ import FileComponent from './FileComponent'
 import FileListHeaderComponent from './FileListHeaderComponent'
 import { sortByModifiedTime } from '../utils/utils'
 import FlipMove from 'react-flip-move'
+import { handleFetchDirectory } from '../actions/currentDirectory'
 
 const minWidthThreshold = 680
 
@@ -23,13 +24,23 @@ class FilesContainerComponent extends React.Component {
     }
 
     componentDidMount() {
+        const { dispatch, url } = this.props
         this.updateWindowDimensions()
-        window.addEventListener('resize', this.updateWindowDimensions)
-
+        window.addEventListener('resize', this.updateWindowDimensions)   
+        
+        
     }
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateWindowDimensions);
+    }
+
+    componentDidUpdate(prevProps) {
+        const { dispatch } = this.props
+        console.log(prevProps.location, this.props.location)
+        if(prevProps.location.pathname != this.props.location.pathname) {
+            dispatch(handleFetchDirectory(this.props.location.pathname))
+        }
     }
 
     // update width to exclude side bars
@@ -40,18 +51,12 @@ class FilesContainerComponent extends React.Component {
         this.setState({ width: newWidth, height: window.innerHeight });
     }
 
-    handleClick = () => {
-
-    }
-
     render() {
         const { displayMode } = this.props
         const { pathName, visibleContent } = this.props.currentDirectory
         const { width } = this.state
 
-        const directoryContent = visibleContent;
-
-        console.log("FilsContainerComponent rendered!")
+        const directoryContent = visibleContent;        
 
         return (
             <Fragment>

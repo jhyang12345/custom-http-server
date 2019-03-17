@@ -33,8 +33,9 @@ class FileComponent extends React.Component {
           window.location.pathname,
           displayName
         );
-        dispatch(handleFetchDirectory(newPath))
+        
         history.push(newPath)
+        dispatch(handleFetchDirectory(newPath))
     }
 
     handleRightClick = (evt) => {

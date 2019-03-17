@@ -2,15 +2,15 @@ import React from "react"
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
-import { handleFetchDirectory } from '../../actions/currentDirectory'
+import { handleFetchDirectory } from "../../actions/currentDirectory";
 
 class SubDirectoryComponent extends React.Component {
     handleClick = (evt) => {
         evt.preventDefault()
         const { actualPath, history, dispatch } = this.props
 
-        history.push(actualPath);
-        dispatch(handleFetchDirectory(actualPath))        
+        history.push(actualPath);     
+        dispatch(handleFetchDirectory(actualPath))
     }
 
     render() {

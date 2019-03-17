@@ -41,7 +41,7 @@ module.exports = (opts) => {
 
     
 
-    fs.stat(dir, requestJsonFlag, (statErr, stat) => {
+    fs.stat(dir, (statErr, stat) => {
       if (statErr) {
         if (handleError) {
           status[500](res, next, { error: statErr });
