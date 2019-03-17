@@ -9,8 +9,8 @@ class SubDirectoryComponent extends React.Component {
         evt.preventDefault()
         const { actualPath, history, dispatch } = this.props
 
-        dispatch(handleFetchDirectory(actualPath))
-        history.push(actualPath)
+        history.push(actualPath);
+        dispatch(handleFetchDirectory(actualPath))        
     }
 
     render() {

@@ -29,8 +29,11 @@ class FileComponent extends React.Component {
         // TODO : solve issue with react router?.?
         // window.location.href = path.join(curPath, displayName)
 
-        dispatch(handleFetchDirectory(displayName))
-        const newPath = path.join(window.location.pathname, displayName)
+        const newPath = path.join(
+          window.location.pathname,
+          displayName
+        );
+        dispatch(handleFetchDirectory(newPath))
         history.push(newPath)
     }
 
