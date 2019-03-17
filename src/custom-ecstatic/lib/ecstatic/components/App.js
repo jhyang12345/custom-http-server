@@ -17,10 +17,16 @@ class App extends Component {
         
     }
 
+    componentDidUpdate() {
+        console.log("componentDidUpdate")
+    }
+
     render() {
         const { currentDirectory } = this.props
 
         const { pathName, content } = currentDirectory
+
+        console.log("App rendered?")
 
         return (
             <Fragment

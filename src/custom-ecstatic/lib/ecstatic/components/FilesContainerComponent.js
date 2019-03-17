@@ -51,6 +51,8 @@ class FilesContainerComponent extends React.Component {
 
         const directoryContent = visibleContent;
 
+        console.log("FilsContainerComponent rendered!")
+
         return (
             <Fragment>
                 <FileListHeaderComponent 

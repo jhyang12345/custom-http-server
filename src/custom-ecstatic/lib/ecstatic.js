@@ -399,7 +399,7 @@ module.exports = function createMiddleware(_dir, _options) {
               // Testing without showDir
               if (opts.showDir) {
                 // Adding showDir as middleware
-                showDir(opts)(req, res, requestJsonFlag);
+                showDir(opts)(req, res, next, requestJsonFlag);
                 return;
               }
 
@@ -409,7 +409,7 @@ module.exports = function createMiddleware(_dir, _options) {
           }
 
           if (opts.showDir) {            
-            showDir(opts)(req, res, requestJsonFlag);            
+            showDir(opts)(req, res, next, requestJsonFlag);            
           }
         } else {
           // serve if not a directory?.?
