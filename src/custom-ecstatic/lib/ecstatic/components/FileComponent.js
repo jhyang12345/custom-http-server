@@ -1,7 +1,7 @@
 import path from 'path'
 import React from "react"
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect} from 'react-router-dom'
 import Moment from "react-moment"
 import { bytesToSize } from "../utils/utils"
 import { FileWrapper, FileName, FileIcon, FileSize, FileModifiedDate } from "./File"
@@ -24,7 +24,11 @@ class FileComponent extends React.Component {
 
         const isDir = stat.isDir
         const curPath = window.location.pathname
-        if(isDir) evt.preventDefault()
+
+        // Don't push path if it is a file
+        if(!isDir) return
+
+        evt.preventDefault()
 
         // TODO : solve issue with react router?.?
         // window.location.href = path.join(curPath, displayName)
@@ -78,32 +82,33 @@ class FileComponent extends React.Component {
         }
         displayName = stripSlashes(displayName);
 
-        return (
-            displayMode === LIST_MODE
-            ?         
-            (<FileWrapper
-                className="block-copy"
-                href={"./" + displayName}
-                onClick={this.handleClick}
-                onContextMenu={this.handleRightClick}>
-                <FileIcon 
-                    fileIcon={fileIcon}
-                />
-                <FileName>
-                    {displayName}
-                </FileName>
-                <FileSize>
-                    {bytesToSize(stat.size)}
-                </FileSize>
-                <FileModifiedDate>
-                    <Moment
-                        format="YYYY-MM-DD HH:mm">
-                        {stat.mtime}
-                    </Moment>
-                </FileModifiedDate>
-            </FileWrapper>)
-            : 
-            (
+        return (    
+            // <Redirect>
+                displayMode === LIST_MODE
+                ?
+              (<FileWrapper
+                    className="block-copy"
+                    href={"./" + displayName}
+                    onClick={this.handleClick}
+                    onContextMenu={this.handleRightClick}>
+                    <FileIcon
+                        fileIcon={fileIcon}
+                    />
+                    <FileName>
+                        {displayName}
+                    </FileName>
+                    <FileSize>
+                        {bytesToSize(stat.size)}
+                    </FileSize>
+                    <FileModifiedDate>
+                        <Moment
+                            format="YYYY-MM-DD HH:mm">
+                            {stat.mtime}
+                        </Moment>
+                    </FileModifiedDate>
+                </FileWrapper>)
+                :
+                (
                 <GridFileWrapper
                     className="block-copy"
                     href={"./" + displayName}
@@ -117,7 +122,7 @@ class FileComponent extends React.Component {
                     </GridFileName>
                 </GridFileWrapper>
             )
-        
+            // </Redirect>                            
         )
     }
 }
