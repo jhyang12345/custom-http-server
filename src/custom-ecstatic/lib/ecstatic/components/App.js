@@ -36,8 +36,8 @@ class App extends Component {
                 {/* Will not be used to show current directory */}
                 {/* <LeftSideBarComponent 
             /> */}
-                <Route path="/" exact component={FilesContainerComponent} />
-                <Route path="/:path" component={FilesContainerComponent} />
+                {/* <Route path="/" exact component={FilesContainerComponent} /> */}
+                <Route path="" component={FilesContainerComponent} />
                 <PopupComponent />
                 <FloatingButtonComponent />
             </Fragment>

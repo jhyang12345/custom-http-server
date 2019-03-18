@@ -1,5 +1,6 @@
 import React, {Fragment} from "react"
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { FilesContainer } from './FilesContainer'
 import FileComponent from './FileComponent'
 import FileListHeaderComponent from './FileListHeaderComponent'
@@ -27,8 +28,6 @@ class FilesContainerComponent extends React.Component {
         const { dispatch, url } = this.props
         this.updateWindowDimensions()
         window.addEventListener('resize', this.updateWindowDimensions)   
-        
-        
     }
 
     componentWillUnmount() {
@@ -36,8 +35,7 @@ class FilesContainerComponent extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { dispatch } = this.props
-        console.log(prevProps.location, this.props.location)
+        const { dispatch } = this.props        
         if(prevProps.location.pathname != this.props.location.pathname) {
             dispatch(handleFetchDirectory(this.props.location.pathname))
         }
@@ -52,6 +50,7 @@ class FilesContainerComponent extends React.Component {
     }
 
     render() {
+        console.log("Rerendering filecontainercomponent")
         const { displayMode } = this.props
         const { pathName, visibleContent } = this.props.currentDirectory
         const { width } = this.state
@@ -97,4 +96,4 @@ function mapStateToProps({currentDirectory, viewState}) {
     }
 }
 
-export default connect(mapStateToProps)(FilesContainerComponent)
+export default withRouter(connect(mapStateToProps)(FilesContainerComponent))
