@@ -9,8 +9,8 @@ import LoadingBar from "react-redux-loading";
 
 class FileListHeaderComponent extends React.Component {
     render() {
-        const { pathName } = this.props
-        
+        const { pathName , loadingBar} = this.props
+        console.log("LoadingBar", LoadingBar, loadingBar)
         return (
             <Fragment>
                 <FileListHeader
@@ -116,4 +116,10 @@ const FileListHeader = styled.div`
     }
 `
 
-export default connect()(FileListHeaderComponent)
+function mapStateToProps({ loadingBar }) {
+    return {
+        loadingBar
+    }
+}
+
+export default connect(mapStateToProps)(FileListHeaderComponent);
