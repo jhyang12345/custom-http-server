@@ -5,6 +5,7 @@ export const SORT_BY_NAME = 'SORT_BY_NAME'
 export const SORT_AGAIN = 'SORT_AGAIN'
 export const SET_SEARCH_KEYWORD = "SET_SEARCH_KEYWORD";
 import { fetchDirectory } from '../utils/utils'
+import { showLoading, hideLoading } from 'react-redux-loading'
 
 export function setDirectory(currentDirectory) {
     return {
@@ -15,11 +16,13 @@ export function setDirectory(currentDirectory) {
 
 export function handleFetchDirectory(directory) {
     return (dispatch) => {
+        dispatch(showLoading())
         return fetchDirectory(directory)
-            .then((currentDirectory) => {
-                dispatch(setDirectory(currentDirectory.currentDirectory))
-                dispatch(createSortAgainAction())
-            })
+          .then(currentDirectory => {
+            dispatch(setDirectory(currentDirectory.currentDirectory));
+            dispatch(createSortAgainAction());
+          })
+          .then(() => dispatch(hideLoading()));
     }
 }
 

@@ -1,9 +1,11 @@
-import React, {Fragment} from "react"
+import React, { Fragment } from "react"
+import { connect } from "react-redux";
 import styled from 'styled-components'
 import { HeaderItemComponent, SubDirectoryComponent, SubDirectoryHolderComponent } from './FileList'
 import SearchComponent from './SearchComponent'
 import { stripSlashes } from '../utils/utils'
 import { createSortByModifiedTimeAction, createSortByNameAction, createSortBySizeAction } from '../actions/currentDirectory'
+import LoadingBar from "react-redux-loading";
 
 class FileListHeaderComponent extends React.Component {
     render() {
@@ -13,6 +15,7 @@ class FileListHeaderComponent extends React.Component {
             <Fragment>
                 <FileListHeader
                     {...this.props}>
+                    <LoadingBar />
                     <div className="directory-header">
                         Serving 
                         {/* <SubDirectoryHolderComponent> */}
@@ -113,4 +116,4 @@ const FileListHeader = styled.div`
     }
 `
 
-export default FileListHeaderComponent
+export default connect()(FileListHeaderComponent)

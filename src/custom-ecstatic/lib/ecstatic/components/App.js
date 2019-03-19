@@ -7,7 +7,8 @@ import FilesContainerComponent from "./FilesContainerComponent"
 import LeftSideBarComponent from "./LeftSideBarComponent"
 import PopupComponent from './PopupComponent'
 import { Normalize } from 'styled-normalize'
-import FloatingButtonComponent from "./FloatingButtonComponent";
+import FloatingButtonComponent from "./FloatingButtonComponent"
+import LoadingBar from "react-redux-loading";
 import { fetchManager } from '../utils/utils'
 
 class App extends Component {
@@ -29,19 +30,18 @@ class App extends Component {
         console.log("App rendered?")
 
         return (
-            <Fragment
-            >
-                <Normalize />
-                <AppContainer />
-                {/* Will not be used to show current directory */}
-                {/* <LeftSideBarComponent 
+          <Fragment>
+            <Normalize />
+            <AppContainer />
+            {/* Will not be used to show current directory */}
+            {/* <LeftSideBarComponent 
             /> */}
-                {/* <Route path="/" exact component={FilesContainerComponent} /> */}
-                <Route path="" component={FilesContainerComponent} />
-                <PopupComponent />
-                <FloatingButtonComponent />
-            </Fragment>
-        )
+            {/* <Route path="/" exact component={FilesContainerComponent} /> */}
+            <Route path="" component={FilesContainerComponent} />
+            <PopupComponent />
+            <FloatingButtonComponent />
+          </Fragment>
+        );
     }
 }
 

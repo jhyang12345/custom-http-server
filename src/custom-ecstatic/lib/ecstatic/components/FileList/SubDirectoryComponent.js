@@ -10,7 +10,7 @@ class SubDirectoryComponent extends React.Component {
         const { actualPath, history, dispatch } = this.props
 
         history.push(actualPath);     
-        dispatch(handleFetchDirectory(actualPath))
+        // dispatch(handleFetchDirectory(actualPath))
     }
 
     render() {
