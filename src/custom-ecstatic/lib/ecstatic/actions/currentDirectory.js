@@ -20,7 +20,6 @@ export function handleFetchDirectory(directory) {
         // dispatch(showLoading())
         return fetchDirectory(directory)
         .then(result => {
-            dispatch(setSearchKeyword(""))
             return result
         })     
           .then(result => {

@@ -42,6 +42,11 @@ class FilesContainerComponent extends React.Component {
                 visibleContent: prevProps.visibleContent,
                 animate: true
             }))
+        } else if(prevProps.keyword != this.props.keyword) {
+            this.setState(() => ({
+                visibleContent: prevProps.visibleContent,
+                animate: true
+            }))
         }
     }
 
@@ -100,11 +105,12 @@ function compareList(prevList, afterList) {
 }
 
 function mapStateToProps({currentDirectory, viewState}) {
-    const { pathName } = currentDirectory
+    const { pathName, keyword } = currentDirectory
     return {
         visibleContent: currentDirectory.visibleContent,
         pathName,
         displayMode: viewState.displayMode,
+        keyword,
     }
 }
 

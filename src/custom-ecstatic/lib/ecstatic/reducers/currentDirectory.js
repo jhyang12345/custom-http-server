@@ -69,24 +69,26 @@ export default function currentDirectory (state = {}, action) {
                 case "modified" :
                     return {
                         ...action.currentDirectory,
+                        keyword: "",
                         method: "modified",
                         visibleContent: [...sortByModifiedTime(action.currentDirectory.content, state.reverse)]
                     }
                 case "name" :
                     return {
                         ...action.currentDirectory,
+                        keyword: "",
                         method: "name",
                         visibleContent: [...sortByName(action.currentDirectory.content, state.reverse)]                            
                     }
                 case "size" :
                     return {
                         ...action.currentDirectory,
+                        keyword: "",
                         method: "size",
                         visibleContent: [...sortBySize(action.currentDirectory.content, state.reverse)]
                     }
             }
-        }
-            
+        }            
         case SET_SEARCH_KEYWORD: 
             return {
                 ...state,
