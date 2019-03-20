@@ -3,6 +3,7 @@ export const SORT_BY_MODIFIED_TIME = 'SORT_BY_MODIFIED_TIME'
 export const SORT_BY_SIZE = 'SORT_BY_SIZE'
 export const SORT_BY_NAME = 'SORT_BY_NAME'
 export const SORT_AGAIN = 'SORT_AGAIN'
+export const SORT_AGAIN_WITH_NEW = 'SORT_AGAIN_WITH_NEW'
 export const SET_SEARCH_KEYWORD = "SET_SEARCH_KEYWORD";
 import { fetchDirectory } from '../utils/utils'
 import { showLoading, hideLoading } from 'react-redux-loading'
@@ -18,9 +19,10 @@ export function handleFetchDirectory(directory) {
     return (dispatch) => {
         dispatch(showLoading())
         return fetchDirectory(directory)
-          .then(currentDirectory => {
-            dispatch(setDirectory(currentDirectory.currentDirectory));
-            dispatch(createSortAgainAction());
+          .then(result => {
+            dispatch(
+              createSortAgainWithNewAction(result.currentDirectory)
+            );
           })
           .then(() => dispatch(hideLoading()));
     }
@@ -47,6 +49,13 @@ export function createSortBySizeAction() {
 export function createSortAgainAction() {
     return {
         type: SORT_AGAIN,
+    }
+}
+
+export function createSortAgainWithNewAction(currentDirectory) {
+    return {
+        type: SORT_AGAIN_WITH_NEW,
+        currentDirectory
     }
 }
 

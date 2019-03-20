@@ -1,4 +1,4 @@
-import { FETCH_DIRECTORY, SORT_BY_MODIFIED_TIME, SORT_BY_NAME, SORT_AGAIN, SORT_BY_SIZE, SET_SEARCH_KEYWORD } from '../actions/currentDirectory'
+import { FETCH_DIRECTORY, SORT_BY_MODIFIED_TIME, SORT_BY_NAME, SORT_AGAIN, SORT_BY_SIZE, SET_SEARCH_KEYWORD, SORT_AGAIN_WITH_NEW } from '../actions/currentDirectory'
 import { sortByModifiedTime, sortByName, sortBySize, filterByKeywords } from '../utils/utils'
 
 export default function currentDirectory (state = {}, action) {
@@ -67,6 +67,34 @@ export default function currentDirectory (state = {}, action) {
                         visibleContent: state.method == "size"
                             ? [...sortBySize(state.visibleContent, !state.reverse)]
                             : [...sortBySize(state.visibleContent, false)],
+                    }
+            }
+        }
+        case SORT_AGAIN_WITH_NEW: {
+            switch (state.method) {
+                case "modified" :
+                    return {
+                        ...action.currentDirectory,
+                        method: "modified",
+                        visibleContent: state.method == "modified"
+                            ? [...sortByModifiedTime(action.currentDirectory.content, !state.reverse)]
+                            : [...sortByModifiedTime(action.currentDirectory.content, false)],
+                    }
+                case "name" :
+                    return {
+                        ...action.currentDirectory,
+                        method: "name",
+                        visibleContent: state.method == "name"
+                            ? [...sortByName(action.currentDirectory.content, !state.reverse)]
+                            : [...sortByName(action.currentDirectory.content, false)],
+                    }
+                case "size" :
+                    return {
+                        ...action.currentDirectory,
+                        method: "size",
+                        visibleContent: state.method == "size"
+                            ? [...sortBySize(action.currentDirectory.content, !state.reverse)]
+                            : [...sortBySize(action.currentDirectory.content, false)],
                     }
             }
         }

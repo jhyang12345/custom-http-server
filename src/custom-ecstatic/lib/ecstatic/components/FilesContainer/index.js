@@ -12,6 +12,9 @@ export const FilesContainer = styled.div`
     padding-top: 130px;
     position: relative;
 
+    opacity: ${props => props.animate === true ? 0 : 1};
+    transition: opacity 0.25s ease-out;
+
     &:after {
         content: "";
         flex: auto;

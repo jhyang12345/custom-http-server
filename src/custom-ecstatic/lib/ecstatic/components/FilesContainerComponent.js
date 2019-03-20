@@ -18,14 +18,13 @@ class FilesContainerComponent extends React.Component {
             width: minWidthThreshold,
             height: 0,
             animate: false,
-            content: this.props.currentDirectory.content,
+            visibleContent: this.props.currentDirectory.visibleContent,
         };
 
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
     componentDidMount() {
-        const { dispatch, url } = this.props
         this.updateWindowDimensions()
         window.addEventListener('resize', this.updateWindowDimensions)   
     }
@@ -38,6 +37,11 @@ class FilesContainerComponent extends React.Component {
         const { dispatch } = this.props        
         if(prevProps.location.pathname != this.props.location.pathname) {
             dispatch(handleFetchDirectory(this.props.location.pathname))
+        } else if(prevProps.currentDirectory.visibleContent != this.props.currentDirectory.visibleContent) {
+            this.setState(() => ({
+                visibleContent: prevProps.currentDirectory.visibleContent,
+                animate: true
+            }))
         }
     }
 
@@ -49,13 +53,17 @@ class FilesContainerComponent extends React.Component {
         this.setState({ width: newWidth, height: window.innerHeight });
     }
 
-    render() {
-        console.log("Rerendering filecontainercomponent")
-        const { displayMode } = this.props
-        const { pathName, visibleContent } = this.props.currentDirectory
-        const { width } = this.state
+    transitionEndCallback = () => {
+        this.setState(() => ({
+            visibleContent: this.props.currentDirectory.visibleContent,
+            animate: false,
+        }))
+    }
 
-        const directoryContent = visibleContent;        
+    render() {
+        const { displayMode } = this.props
+        const { pathName } = this.props.currentDirectory
+        const { width, visibleContent, animate } = this.state
 
         return (
             <Fragment>
@@ -65,8 +73,11 @@ class FilesContainerComponent extends React.Component {
                     />                    
                 <FilesContainer
                     width={width + "px"}
-                    layoutmode={displayMode}>
-                        {directoryContent.map((file, i) => (
+                    layoutmode={displayMode}
+                    onTransitionEnd={this.transitionEndCallback}
+                    animate={animate}
+                    >
+                        {visibleContent.map((file, i) => (
                             <FileComponent key={file.key}
                                 file={file}
                             />
