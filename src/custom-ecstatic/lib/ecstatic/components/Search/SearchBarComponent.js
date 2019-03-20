@@ -5,17 +5,9 @@ import { setSearchKeyword } from "../../actions/currentDirectory";
 
 class SearchBarComponent extends React.Component {
 
-    state = {
-        searchText: "",
-    }
-
     handleChange = (evt) => {
         const { dispatch } = this.props
         const searchText = evt.target.value
-        this.setState(() => ({
-          searchText,  
-        }))
-
         dispatch(setSearchKeyword(searchText))
     }
 
@@ -27,12 +19,11 @@ class SearchBarComponent extends React.Component {
     }
 
     render() {
-        const { searchText } = this.state
-        const { revealed } = this.props
+        const { revealed, keyword } = this.props
         return (
             <SearchBar 
                 onChange={this.handleChange}
-                value={searchText}
+                value={keyword}
                 revealed={revealed}
                 onTransitionEnd={this.handleTransitionEnd}
             />
@@ -68,4 +59,10 @@ const SearchBar = styled.input.attrs({
 
 `
 
-export default connect()(SearchBarComponent)
+function mapStateToProps({ currentDirectory }) {
+    return {
+        keyword: currentDirectory.keyword,
+    }
+}
+
+export default connect(mapStateToProps)(SearchBarComponent)

@@ -17,14 +17,20 @@ export function setDirectory(currentDirectory) {
 
 export function handleFetchDirectory(directory) {
     return (dispatch) => {
-        dispatch(showLoading())
+        // dispatch(showLoading())
         return fetchDirectory(directory)
+        .then(result => {
+            dispatch(setSearchKeyword(""))
+            return result
+        })     
           .then(result => {
             dispatch(
               createSortAgainWithNewAction(result.currentDirectory)
             );
+            // empty keyword
+  
           })
-          .then(() => dispatch(hideLoading()));
+        //   .then(() => dispatch(hideLoading()));
     }
 }
 

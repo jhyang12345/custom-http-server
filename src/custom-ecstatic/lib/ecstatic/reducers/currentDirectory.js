@@ -48,25 +48,19 @@ export default function currentDirectory (state = {}, action) {
                     return {
                         ...state,
                         method: "modified",
-                        visibleContent: state.method == "modified"
-                            ? [...sortByModifiedTime(state.visibleContent, !state.reverse)]
-                            : [...sortByModifiedTime(state.visibleContent, false)],
+                        visibleContent: [...sortByModifiedTime(state.visibleContent, state.reverse)]
                     }
                 case "name" :
                     return {
                         ...state,
                         method: "name",
-                        visibleContent: state.method == "name"
-                            ? [...sortByName(state.visibleContent, !state.reverse)]
-                            : [...sortByName(state.visibleContent, false)],
+                        visibleContent: [...sortByName(state.visibleContent, state.reverse)]                            
                     }
                 case "size" :
                     return {
                         ...state,
                         method: "size",
-                        visibleContent: state.method == "size"
-                            ? [...sortBySize(state.visibleContent, !state.reverse)]
-                            : [...sortBySize(state.visibleContent, false)],
+                        visibleContent: [...sortBySize(state.visibleContent, state.reverse)]
                     }
             }
         }
@@ -76,25 +70,19 @@ export default function currentDirectory (state = {}, action) {
                     return {
                         ...action.currentDirectory,
                         method: "modified",
-                        visibleContent: state.method == "modified"
-                            ? [...sortByModifiedTime(action.currentDirectory.content, !state.reverse)]
-                            : [...sortByModifiedTime(action.currentDirectory.content, false)],
+                        visibleContent: [...sortByModifiedTime(action.currentDirectory.content, state.reverse)]
                     }
                 case "name" :
                     return {
                         ...action.currentDirectory,
                         method: "name",
-                        visibleContent: state.method == "name"
-                            ? [...sortByName(action.currentDirectory.content, !state.reverse)]
-                            : [...sortByName(action.currentDirectory.content, false)],
+                        visibleContent: [...sortByName(action.currentDirectory.content, state.reverse)]                            
                     }
                 case "size" :
                     return {
                         ...action.currentDirectory,
                         method: "size",
-                        visibleContent: state.method == "size"
-                            ? [...sortBySize(action.currentDirectory.content, !state.reverse)]
-                            : [...sortBySize(action.currentDirectory.content, false)],
+                        visibleContent: [...sortBySize(action.currentDirectory.content, state.reverse)]
                     }
             }
         }

@@ -18,7 +18,7 @@ class FilesContainerComponent extends React.Component {
             width: minWidthThreshold,
             height: 0,
             animate: false,
-            visibleContent: this.props.currentDirectory.visibleContent,
+            visibleContent: this.props.visibleContent,
         };
 
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -37,9 +37,9 @@ class FilesContainerComponent extends React.Component {
         const { dispatch } = this.props        
         if(prevProps.location.pathname != this.props.location.pathname) {
             dispatch(handleFetchDirectory(this.props.location.pathname))
-        } else if(prevProps.currentDirectory.visibleContent != this.props.currentDirectory.visibleContent) {
+        } else if(prevProps.visibleContent != this.props.visibleContent) {
             this.setState(() => ({
-                visibleContent: prevProps.currentDirectory.visibleContent,
+                visibleContent: prevProps.visibleContent,
                 animate: true
             }))
         }
@@ -55,14 +55,13 @@ class FilesContainerComponent extends React.Component {
 
     transitionEndCallback = () => {
         this.setState(() => ({
-            visibleContent: this.props.currentDirectory.visibleContent,
+            visibleContent: this.props.visibleContent,
             animate: false,
         }))
     }
 
     render() {
-        const { displayMode } = this.props
-        const { pathName } = this.props.currentDirectory
+        const { displayMode, pathName } = this.props
         const { width, visibleContent, animate } = this.state
 
         return (
@@ -101,8 +100,10 @@ function compareList(prevList, afterList) {
 }
 
 function mapStateToProps({currentDirectory, viewState}) {
+    const { pathName } = currentDirectory
     return {
-        currentDirectory,
+        visibleContent: currentDirectory.visibleContent,
+        pathName,
         displayMode: viewState.displayMode,
     }
 }
