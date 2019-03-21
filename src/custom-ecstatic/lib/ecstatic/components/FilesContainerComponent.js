@@ -84,6 +84,7 @@ class FilesContainerComponent extends React.Component {
                         {visibleContent.map((file, i) => (
                             <FileComponent key={file.key}
                                 file={file}
+                                animate={true}
                             />
                         ))}
                     

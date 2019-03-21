@@ -20,7 +20,17 @@ class FileComponent extends React.Component {
     }
 
     componentDidUpdate = (prevProps) => {
-        
+        if(this.props.animate != this.state.animate) {
+            this.setState(() => ({
+                animate: true,
+            }))
+        }
+    }
+
+    transitionEnd = () => {
+        this.setState(() => ({
+            animate: false,
+        }))
     }
     
     handleClick = (evt) => {
@@ -97,6 +107,7 @@ class FileComponent extends React.Component {
               (<FileWrapper
                     className="block-copy"
                     href={"./" + displayName}
+                    onTransitionEnd={this.transitionEnd}
                     onClick={this.handleClick}
                     onContextMenu={this.handleRightClick}>
                     <FileIcon
@@ -120,6 +131,7 @@ class FileComponent extends React.Component {
                 <GridFileWrapper
                     className="block-copy"
                     href={"./" + displayName}
+                    onTransitionEnd={this.transitionEnd}
                     onClick={this.handleClick}
                     onContextMenu={this.handleRightClick}>
                     <FileIcon
