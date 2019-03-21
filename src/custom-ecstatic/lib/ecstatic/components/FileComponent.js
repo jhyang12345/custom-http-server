@@ -14,6 +14,14 @@ import { LIST_MODE } from '../actions/viewState'
 import { handleFetchDirectory } from '../actions/currentDirectory';
 
 class FileComponent extends React.Component {
+
+    state = {
+        animate: false,
+    }
+
+    componentDidUpdate = (prevProps) => {
+        
+    }
     
     handleClick = (evt) => {
         const { file, dispatch, history } = this.props
