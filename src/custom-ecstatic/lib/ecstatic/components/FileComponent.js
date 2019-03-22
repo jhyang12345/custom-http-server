@@ -83,12 +83,15 @@ class FileComponent extends React.Component {
     }
 
     render() {
-        const { file, displayMode } = this.props
+        const { animate } = this.state
+        const { file, displayMode, index } = this.props
         let {
             stat,
             displayName,
             ext,
         } = file
+
+        const transitionTime = index * 0.5
 
         const isDir = stat.isDir
         let fileIcon;
@@ -99,6 +102,7 @@ class FileComponent extends React.Component {
             fileIcon = prettyFileIcons.getIcon(displayName, 'svg')
         }
         displayName = stripSlashes(displayName);
+        console.log(transitionTime + 's')
 
         return (    
             // <Redirect>
@@ -109,7 +113,9 @@ class FileComponent extends React.Component {
                     href={"./" + displayName}
                     onTransitionEnd={this.transitionEnd}
                     onClick={this.handleClick}
-                    onContextMenu={this.handleRightClick}>
+                    onContextMenu={this.handleRightClick}
+                    animate={animate}
+                    index={index}>
                     <FileIcon
                         fileIcon={fileIcon}
                     />
@@ -133,7 +139,9 @@ class FileComponent extends React.Component {
                     href={"./" + displayName}
                     onTransitionEnd={this.transitionEnd}
                     onClick={this.handleClick}
-                    onContextMenu={this.handleRightClick}>
+                    onContextMenu={this.handleRightClick}
+                    animate={animate}
+                    index={index}>
                     <FileIcon
                         fileIcon={fileIcon}
                     />
