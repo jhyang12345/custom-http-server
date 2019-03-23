@@ -10,9 +10,9 @@ export const FileWrapper = styled.a`
     border-bottom: 1px solid #CCC;
     height: 60px;
     width: 100%;
-    opacity: ${props => props.animate === true ? 0 : 1};
+    ${'' /* opacity: ${props => props.animate === true ? 0 : 1};
     transition: opacity 0.3s ease-out;
-    transition-delay: ${props => props.transitionTime + 's'};
+    transition-delay: ${props => props.transitionTime + 's'}; */}
     &:hover {
         cursor: pointer;
     }

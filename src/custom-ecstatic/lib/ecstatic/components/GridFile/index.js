@@ -8,9 +8,9 @@ export const GridFileWrapper = styled.a`
     text-align: center;
     margin: 10px;
     text-decoration: none;
-    opacity: ${props => (props.animate === true ? 0 : 1)};
+    ${'' /* opacity: ${props => (props.animate === true ? 0 : 1)};
     transition: opacity 0.3s ease-out;
-    transition-delay: ${props => props.transitionTime + 's'};
+    transition-delay: ${props => props.transitionTime + 's'}; */}
     box-shadow: 0px 0px 10px -5px rgba(51,51,51,1);
 `;
 

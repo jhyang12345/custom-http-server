@@ -145,6 +145,8 @@ const PopupBackground = styled.div`
 
     opacity: ${props => props.visible === true ? 0.3 : 0};
     transition: opacity .3s;
+    overflow: auto;
+    overscroll-behavior: contain;
 `
 
 const Popup = styled.div`

@@ -6,6 +6,7 @@ import SearchComponent from './SearchComponent'
 import { stripSlashes } from '../utils/utils'
 import { createSortByModifiedTimeAction, createSortByNameAction, createSortBySizeAction } from '../actions/currentDirectory'
 import LoadingBar from "react-redux-loading";
+import OptionsButtonComponent from "./OptionsButtonComponent";
 
 class FileListHeaderComponent extends React.Component {
     render() {
@@ -25,6 +26,7 @@ class FileListHeaderComponent extends React.Component {
                             {getRenderedPathName(pathName)}
                         {/* </SubDirectoryHolderComponent> */}
                         <SearchComponent/>
+                        <OptionsButtonComponent/>
                     </div>
                     <div className="inner-container">
                         <HeaderItemComponent

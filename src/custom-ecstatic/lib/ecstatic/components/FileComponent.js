@@ -114,7 +114,7 @@ class FileComponent extends React.Component {
                     onTransitionEnd={this.transitionEnd}
                     onClick={this.handleClick}
                     onContextMenu={this.handleRightClick}
-                    animate={animate}
+                    visible={true}
                     index={index}>
                     <FileIcon
                         fileIcon={fileIcon}
@@ -140,7 +140,7 @@ class FileComponent extends React.Component {
                     onTransitionEnd={this.transitionEnd}
                     onClick={this.handleClick}
                     onContextMenu={this.handleRightClick}
-                    animate={animate}
+                    visible={true}
                     index={index}>
                     <FileIcon
                         fileIcon={fileIcon}

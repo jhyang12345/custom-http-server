@@ -8,7 +8,7 @@ import LeftSideBarComponent from "./LeftSideBarComponent"
 import PopupComponent from './PopupComponent'
 import { Normalize } from 'styled-normalize'
 import FloatingButtonComponent from "./FloatingButtonComponent"
-import LoadingBar from "react-redux-loading";
+import LoadingBar from "react-redux-loading"
 import { fetchManager } from '../utils/utils'
 
 class App extends Component {

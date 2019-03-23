@@ -7,7 +7,7 @@ import { setSearchKeyword } from '../actions/currentDirectory'
 class SearchComponent extends React.Component {
 
     state = {
-        barRevealed: true,
+        barRevealed: false,
     }
 
     handleFocus = () => {
@@ -37,7 +37,7 @@ const SearchBox = styled.div`
     position: absolute;
     height: 100%;
     line-height: 58px;
-    right: 0px;
+    right: 20px;
     top: 0px;
     padding-right: 12px;
     display: inline-block;
