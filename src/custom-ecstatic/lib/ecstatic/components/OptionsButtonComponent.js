@@ -4,8 +4,16 @@ import styled from 'styled-components'
 
 class OptionsButtonComponent extends React.Component {
 
+    state = {
+        showingOptions: false,
+    }
+
     optionClickHandler = () => {
-        console.log("option Clicked")
+        this.setState((curState) => ({
+            showingOptions : !curState.showingOptions,
+        }))
+
+        console.log(this.state)
     }
 
     render() {
@@ -32,6 +40,22 @@ const FloatingRemote = styled.span`
         vertical-align: middle;
         color: #999;  
     }
+`
+
+const InvisibleBackground = styled.div`
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 5;
+    background-color: #333;
+    display: ${props => props.open === true ? 'block' : 'none'};
+
+    opacity: 0;
+    transition: opacity .3s;
+    overflow: auto;
+    overscroll-behavior: contain;
 `
 
 export default connect()(OptionsButtonComponent);
