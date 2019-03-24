@@ -39,7 +39,7 @@ const SearchBox = styled.div`
     line-height: 58px;
     right: 20px;
     top: 0px;
-    padding-right: 12px;
+    padding-right: 4px;
     display: inline-block;
     margin-left: auto;
     overflow: hidden;  

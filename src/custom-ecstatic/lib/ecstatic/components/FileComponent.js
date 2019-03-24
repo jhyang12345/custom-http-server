@@ -102,8 +102,6 @@ class FileComponent extends React.Component {
             fileIcon = prettyFileIcons.getIcon(displayName, 'svg')
         }
         displayName = stripSlashes(displayName);
-        console.log(transitionTime + 's')
-
         return (    
             // <Redirect>
                 displayMode === LIST_MODE
