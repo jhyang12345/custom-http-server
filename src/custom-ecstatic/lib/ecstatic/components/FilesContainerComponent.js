@@ -8,7 +8,7 @@ import { sortByModifiedTime } from '../utils/utils'
 import FlipMove from 'react-flip-move'
 import { handleFetchDirectory } from '../actions/currentDirectory'
 
-const minWidthThreshold = 680
+const minWidthThreshold = 720
 
 class FilesContainerComponent extends React.Component {
 
@@ -52,9 +52,9 @@ class FilesContainerComponent extends React.Component {
 
     // update width to exclude side bars
     updateWindowDimensions() {
-        let newWidth = (window.innerWidth) - 240 * 2;
-        if (newWidth < minWidthThreshold) newWidth += 240
-        if (newWidth < minWidthThreshold) newWidth += 240
+        let newWidth = (window.innerWidth) - 180 * 2;
+        if (newWidth < minWidthThreshold) newWidth += 180
+        if (newWidth < minWidthThreshold) newWidth += 180
         this.setState({ width: newWidth, height: window.innerHeight });
     }
 
