@@ -1,12 +1,11 @@
 import React, { Fragment } from "react"
 import { connect } from "react-redux";
 import styled from 'styled-components'
-import { HeaderItemComponent, SubDirectoryComponent, SubDirectoryHolderComponent } from './FileList'
+import { HeaderItemComponent, SubDirectoryComponent, SubDirectoryHolderComponent, OptionsButtonComponent } from './FileList'
 import SearchComponent from './SearchComponent'
 import { stripSlashes } from '../utils/utils'
 import { createSortByModifiedTimeAction, createSortByNameAction, createSortBySizeAction } from '../actions/currentDirectory'
 import LoadingBar from "react-redux-loading";
-import OptionsButtonComponent from "./OptionsButtonComponent";
 
 class FileListHeaderComponent extends React.Component {
     render() {

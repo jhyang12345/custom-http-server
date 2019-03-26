@@ -1,4 +1,4 @@
-import React from "react"
+import React, {Fragment} from "react"
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
@@ -17,6 +17,7 @@ class OptionsButtonComponent extends React.Component {
     }
 
     render() {
+        const { showingOptions } = this.state
         return (
             <FloatingRemote
                 onClick={this.optionClickHandler}>
@@ -52,7 +53,7 @@ const InvisibleBackground = styled.div`
     background-color: #333;
     display: ${props => props.open === true ? 'block' : 'none'};
 
-    opacity: 0;
+    opacity: 0.3;
     transition: opacity .3s;
     overflow: auto;
     overscroll-behavior: contain;

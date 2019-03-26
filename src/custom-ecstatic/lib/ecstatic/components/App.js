@@ -10,6 +10,7 @@ import { Normalize } from 'styled-normalize'
 import FloatingButtonComponent from "./FloatingButtonComponent"
 import LoadingBar from "react-redux-loading"
 import { fetchManager } from '../utils/utils'
+import OptionsComponent from './OptionsComponent'
 
 class App extends Component {
     
@@ -39,6 +40,7 @@ class App extends Component {
             {/* <Route path="/" exact component={FilesContainerComponent} /> */}
             <Route path="" component={FilesContainerComponent} />
             <PopupComponent />
+            <OptionsComponent />
             <FloatingButtonComponent />
           </Fragment>
         );
