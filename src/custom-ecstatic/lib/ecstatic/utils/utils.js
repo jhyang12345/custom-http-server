@@ -120,6 +120,19 @@ export function sortBySize(content, reverse=false) {
    return [...upDirectory, ...directories, ...files]
 }
 
+function separateContentByDirectory(content) {
+   let directories = []
+   let files = []
+
+   for (let item of content) {
+      const { stat } = item
+      if (stat.isDir) directories.push(item)
+      else files.push(item)
+   }
+
+   return [directories, files]
+}
+
 export function filterByKeywords(content, keywords) {
    let directories = []
    let files = []
