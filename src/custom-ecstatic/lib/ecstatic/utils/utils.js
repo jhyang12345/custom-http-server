@@ -15,15 +15,7 @@ export function stripSlashes(value) {
 // sort reverse for now newest top
 export function sortByModifiedTime(content, reverse=false) {
    const upDirectory = []
-   const directories = []
-   const files = []
-
-   for (let item of content) {
-      const { stat } = item
-      if (item.displayName.startsWith("..")) upDirectory.push(item)
-      else if (stat.isDir) directories.push(item)
-      else files.push(item)
-   }
+   const [directories, files] = separateContentByDirectory(content);
 
    if (!reverse) {
       directories.sort((a, b) => (new Date(b.stat.mtime) - new Date(a.stat.mtime)))
@@ -39,15 +31,7 @@ export function sortByModifiedTime(content, reverse=false) {
 // sort by name
 export function sortByName(content, reverse=false) {
    const upDirectory = [];
-   const directories = [];
-   const files = [];
-
-   for (let item of content) {
-     const { stat } = item;
-     if (item.displayName.startsWith("..")) upDirectory.push(item);
-     else if (stat.isDir) directories.push(item);
-     else files.push(item);
-   }
+   const [directories, files] = separateContentByDirectory(content)
 
    if (!reverse) {
       directories.sort((a, b) => {
@@ -80,8 +64,7 @@ export function sortByName(content, reverse=false) {
 
 export function sortBySize(content, reverse=false) {
    const upDirectory = [];
-   const directories = [];
-   const files = [];
+   const [directories, files] = separateContentByDirectory(content);
 
    for (let item of content) {
      const { stat } = item;
@@ -134,8 +117,7 @@ function separateContentByDirectory(content) {
 }
 
 export function filterByKeywords(content, keywords) {
-   let directories = []
-   let files = []
+   const [directories, files] = separateContentByDirectory(content);
 
    if(keywords.length == 0 || keywords.split().length == 0) return content 
 
