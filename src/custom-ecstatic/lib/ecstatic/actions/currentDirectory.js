@@ -5,7 +5,7 @@ export const SORT_BY_NAME = 'SORT_BY_NAME'
 export const SORT_AGAIN = 'SORT_AGAIN'
 export const SORT_AGAIN_WITH_NEW = 'SORT_AGAIN_WITH_NEW'
 export const SET_SEARCH_KEYWORD = "SET_SEARCH_KEYWORD";
-import { fetchDirectory } from '../utils/utils'
+import { fetchDirectory } from '../utils'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
 export function setDirectory(currentDirectory) {

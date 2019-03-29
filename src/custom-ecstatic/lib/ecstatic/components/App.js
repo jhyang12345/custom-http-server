@@ -9,7 +9,7 @@ import PopupComponent from './PopupComponent'
 import { Normalize } from 'styled-normalize'
 import FloatingButtonComponent from "./FloatingButtonComponent"
 import LoadingBar from "react-redux-loading"
-import { fetchManager } from '../utils/utils'
+import { fetchManager } from '../utils'
 import OptionsComponent from './OptionsComponent'
 
 class App extends Component {

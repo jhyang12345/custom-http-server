@@ -3,13 +3,13 @@ import React from "react"
 import { connect } from 'react-redux'
 import { withRouter, Redirect} from 'react-router-dom'
 import Moment from "react-moment"
-import { bytesToSize } from "../utils/utils"
+import { bytesToSize } from "../utils"
 import { FileWrapper, FileName, FileIcon, FileSize, FileModifiedDate } from "./File"
 import { GridFileWrapper, GridFileName } from "./GridFile"
 import LongTouchComponent from './LongTouchComponent'
 import { handleOpenPopup } from '../actions/optionPopup'
 import prettyFileIcons from '../pretty-file-icons'
-import { stripSlashes } from '../utils/utils'
+import { stripSlashes } from '../utils'
 import { LIST_MODE } from '../actions/viewState'
 import { handleFetchDirectory } from '../actions/currentDirectory';
 

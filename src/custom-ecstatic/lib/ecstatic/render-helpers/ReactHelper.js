@@ -11,7 +11,7 @@ import middleware from '../middleware'
 import { renderToString } from 'react-dom/server'
 import App from "../components/App"
 import { ServerStyleSheet } from 'styled-components'
-import { filterOutParentDirectory } from '../utils/utils'
+import { filterOutParentDirectory } from '../utils'
 
 const supportedIcons = styles.icons;
 const css = styles.css;

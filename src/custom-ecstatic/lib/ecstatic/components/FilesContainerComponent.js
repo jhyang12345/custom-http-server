@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { FilesContainer } from './FilesContainer'
 import FileComponent from './FileComponent'
 import FileListHeaderComponent from './FileListHeaderComponent'
-import { sortByModifiedTime } from '../utils/utils'
+import { sortByModifiedTime } from '../utils'
 import FlipMove from 'react-flip-move'
 import { handleFetchDirectory } from '../actions/currentDirectory'
 
