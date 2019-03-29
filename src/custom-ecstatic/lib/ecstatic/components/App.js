@@ -24,12 +24,6 @@ class App extends Component {
     }
 
     render() {
-        const { currentDirectory } = this.props
-
-        const { pathName, content } = currentDirectory
-
-        console.log("App rendered?")
-
         return (
           <Fragment>
             <Normalize />

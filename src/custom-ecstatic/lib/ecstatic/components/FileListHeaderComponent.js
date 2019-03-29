@@ -47,7 +47,6 @@ class FileListHeaderComponent extends React.Component {
                             title="Modified Time"
                             type="modified"
                             action={createSortByModifiedTimeAction()}
-
                             alignRight={true}
                         />
                     </div>

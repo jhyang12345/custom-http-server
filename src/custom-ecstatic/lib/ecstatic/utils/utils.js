@@ -111,7 +111,7 @@ function separateContentByDirectory(content) {
 }
 
 export function filterByKeywords(content, keywords) {
-   const {directories, files} = separateContentByDirectory(content);
+   let {directories, files} = separateContentByDirectory(content);
 
    if(keywords.length == 0 || keywords.split().length == 0) return content 
 
