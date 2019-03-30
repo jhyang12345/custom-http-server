@@ -5,6 +5,11 @@ import { setSearchKeyword } from "../../actions/currentDirectory";
 
 class SearchBarComponent extends React.Component {
 
+    constructor(props) {
+        super(props)
+        this.searchBarRef = React.createRef()
+    }
+
     handleChange = (evt) => {
         const { dispatch } = this.props
         const searchText = evt.target.value
@@ -15,6 +20,9 @@ class SearchBarComponent extends React.Component {
         const { dispatch, revealed } = this.props
         if (!revealed) {
             dispatch(setSearchKeyword(""));
+        } else if(revealed) {
+            // focus on revealed
+            this.searchBarRef.current.focus()
         }
     }
 
@@ -22,6 +30,7 @@ class SearchBarComponent extends React.Component {
         const { revealed, keyword } = this.props
         return (
             <SearchBar 
+                ref={this.searchBarRef}
                 onChange={this.handleChange}
                 value={keyword}
                 revealed={revealed}
