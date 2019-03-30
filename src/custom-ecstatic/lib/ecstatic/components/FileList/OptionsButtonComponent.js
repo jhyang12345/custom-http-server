@@ -1,6 +1,7 @@
 import React, {Fragment} from "react"
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { openOptionsPopup } from "../../actions/optionPopup";
 
 class OptionsButtonComponent extends React.Component {
 
@@ -9,11 +10,8 @@ class OptionsButtonComponent extends React.Component {
     }
 
     optionClickHandler = () => {
-        this.setState((curState) => ({
-            showingOptions : !curState.showingOptions,
-        }))
-
-        console.log(this.state)
+        const { dispatch } = this.props
+        dispatch(openOptionsPopup())
     }
 
     render() {

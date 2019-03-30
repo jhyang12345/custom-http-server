@@ -1,5 +1,7 @@
 export const OPEN_POPUP = 'OPEN_POPUP'
 export const CLOSE_POPUP = 'CLOSE_POPUP'
+export const OPEN_OPTIONS_POPUP = "OPEN_OPTIONS_POPUP"
+export const CLOSE_OPTIONS_POPUP = "CLOSE_OPTIONS_POPUP"
 export const SET_POPUP_INFO = 'SET_POPUP_INFO'
 export const COPY_TO_CLIPBOARD = 'COPY_TO_CLIPBOARD'
 export const COPY_FILE_NAME_TO_CLIPBOARD = 'COPY_FILE_NAME_TO_CLIPBOARD'
@@ -15,6 +17,18 @@ export function openPopup() {
 export function closePopup() {
     return {
         type: CLOSE_POPUP,
+    }
+}
+
+export function openOptionsPopup() {
+    return {
+        type: OPEN_OPTIONS_POPUP,
+    }
+}
+
+export function closeOptionsPopup() {
+    return {
+        type: CLOSE_OPTIONS_POPUP,
     }
 }
 

@@ -12,7 +12,6 @@ class PopupComponent extends React.Component {
 
     closePopup = (evt) => {
         evt.preventDefault()
-        console.log("Popup closed!", evt)
         const { dispatch } = this.props
         dispatch(closePopup())
     }

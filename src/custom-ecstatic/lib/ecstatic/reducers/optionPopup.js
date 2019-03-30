@@ -1,9 +1,10 @@
-import { OPEN_POPUP, CLOSE_POPUP, SET_POPUP_INFO, COPY_TO_CLIPBOARD, COPY_FILE_NAME_TO_CLIPBOARD, OPEN_IN_NEW_TAB, OPEN_DETAIL_POPUP } from '../actions/optionPopup'
+import { OPEN_POPUP, CLOSE_POPUP, SET_POPUP_INFO, COPY_TO_CLIPBOARD, COPY_FILE_NAME_TO_CLIPBOARD, OPEN_IN_NEW_TAB, OPEN_DETAIL_POPUP, OPEN_OPTIONS_POPUP, CLOSE_OPTIONS_POPUP } from '../actions/optionPopup'
 import copy from 'copy-to-clipboard'
 
 let defaultState = {
     open: false,
     detailOpen: false,
+    optionsOpen: false,
     url: "",
     clientX: 0,
     clientY: 0,
@@ -22,6 +23,16 @@ export default function optionPopup (state=defaultState, action) {
                 ...state,
                 open: false,
                 detailOpen: false,
+            }
+        case OPEN_OPTIONS_POPUP :
+            return {
+                ...state,
+                optionsOpen: true,
+            }
+        case CLOSE_OPTIONS_POPUP :
+            return {
+                ...state,
+                optionsOpen: false,
             }
         case SET_POPUP_INFO :
             return {
