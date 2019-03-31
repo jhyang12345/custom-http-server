@@ -208,7 +208,7 @@ const DetailContent = styled.span`
 `
 
 
-const PopupItem = styled.div`
+export const PopupItem = styled.div`
     color: #333;
     border-bottom: 1px solid #CCC;
     padding: 8px 12px;

@@ -10,9 +10,9 @@ class OptionsButtonComponent extends React.Component {
     }
 
     optionClickHandler = (evt) => {
+        evt.preventDefault()
         const { dispatch } = this.props
         const { clientX, clientY } = evt
-        console.log(evt)
         dispatch(openOptionsPopup({clientX, clientY}))
     }
 

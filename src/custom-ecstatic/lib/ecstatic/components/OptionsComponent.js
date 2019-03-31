@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
-import { PopupBackground } from './PopupComponent'
+import { PopupBackground, PopupItem } from './PopupComponent'
 import { closeOptionsPopup } from '../actions/optionPopup'
 import styled from 'styled-components'
 
@@ -10,6 +10,11 @@ class OptionsComponent extends React.Component {
         evt.preventDefault()
         const { dispatch } = this.props
         dispatch(closeOptionsPopup())
+    }
+
+    refreshCallback = (evt) => {
+        evt.preventDefault()
+        
     }
 
     render() {
@@ -29,10 +34,23 @@ class OptionsComponent extends React.Component {
                             <Popup
                                 clientX={clientX}
                                 clientY={clientY}
-                            />
+                                visible={optionsOpen}
+                                open={optionsOpen}
+                            >
+                                <PopupItem>
+                                    Refresh
+                                </PopupItem>
+                                <PopupItem>
+                                    Scroll to Top
+                                </PopupItem>
+                                <PopupItem>
+                                    Scroll to Bottom
+                                </PopupItem>
+                            </Popup>
                             <PopupBackground
                                 open={optionsOpen}
-                                visible={optionsOpen}
+                                display={optionsOpen}
+                                visible={false}
                                 onClick={this.closeOptions}
                             />
                         </Fragment>
@@ -46,8 +64,8 @@ class OptionsComponent extends React.Component {
 
 const Popup = styled.div`
     position: fixed;
-    left: ${props => props.clientX - 150 + 'px'};
-    top: ${props => props.clientY + 'px'};
+    left: ${props => props.clientX - 153 + 'px'};
+    top: ${props => props.clientY + 3 + 'px'};
     z-index: 10;
     width: 150px;
     background-color: #fbf7f3;
@@ -60,6 +78,7 @@ const Popup = styled.div`
 
 function mapStateToProps({ optionPopup }) {
   const { optionsOpen, clientX, clientY } = optionPopup;
+  console.log(optionPopup)
   return {
     optionsOpen,
     clientX,
