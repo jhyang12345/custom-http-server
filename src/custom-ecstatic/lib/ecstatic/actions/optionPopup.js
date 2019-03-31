@@ -20,9 +20,10 @@ export function closePopup() {
     }
 }
 
-export function openOptionsPopup() {
+export function openOptionsPopup(coords) {
     return {
         type: OPEN_OPTIONS_POPUP,
+        ...coords,
     }
 }
 

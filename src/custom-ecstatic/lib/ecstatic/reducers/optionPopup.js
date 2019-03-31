@@ -27,6 +27,7 @@ export default function optionPopup (state=defaultState, action) {
         case OPEN_OPTIONS_POPUP :
             return {
                 ...state,
+                ...action.coords,
                 optionsOpen: true,
             }
         case CLOSE_OPTIONS_POPUP :

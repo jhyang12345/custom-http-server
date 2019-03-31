@@ -9,9 +9,11 @@ class OptionsButtonComponent extends React.Component {
         showingOptions: false,
     }
 
-    optionClickHandler = () => {
+    optionClickHandler = (evt) => {
         const { dispatch } = this.props
-        dispatch(openOptionsPopup())
+        const { clientX, clientY } = evt
+        console.log(evt)
+        dispatch(openOptionsPopup({clientX, clientY}))
     }
 
     render() {
