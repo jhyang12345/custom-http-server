@@ -14,32 +14,15 @@ import { LIST_MODE } from '../actions/viewState'
 import { handleFetchDirectory } from '../actions/currentDirectory';
 
 class FileComponent extends React.Component {
-
-    state = {
-        
-    }
-
-    componentDidMount() {
-        
-    }
-
-    componentDidUpdate = (prevProps) => {
-
-    }
-
-    transitionEnd = () => {
-
-    }
     
     handleClick = (evt) => {
-        const { file, dispatch, history } = this.props
+        const { file, history } = this.props
         let {
             stat,
             displayName,
         } = file
 
         const isDir = stat.isDir
-        const curPath = window.location.pathname
 
         // Don't push path if it is a file
         if(!isDir) return
@@ -106,7 +89,6 @@ class FileComponent extends React.Component {
               (<FileWrapper
                     className="block-copy"
                     href={"./" + displayName}
-                    onTransitionEnd={this.transitionEnd}
                     onClick={this.handleClick}
                     onContextMenu={this.handleRightClick}
                     visible={true}
@@ -132,7 +114,6 @@ class FileComponent extends React.Component {
                 <GridFileWrapper
                     className="block-copy"
                     href={"./" + displayName}
-                    onTransitionEnd={this.transitionEnd}
                     onClick={this.handleClick}
                     onContextMenu={this.handleRightClick}
                     visible={true}

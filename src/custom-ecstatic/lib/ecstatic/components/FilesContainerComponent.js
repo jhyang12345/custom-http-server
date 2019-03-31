@@ -37,18 +37,12 @@ class FilesContainerComponent extends React.Component {
         const { dispatch } = this.props        
         if(prevProps.location.pathname != this.props.location.pathname) {
             dispatch(handleFetchDirectory(this.props.location.pathname))
-        } else if(prevProps.visibleContent != this.props.visibleContent) {
+        } else if(prevProps.visibleContent != this.props.visibleContent || prevProps.keyword != this.props.keyword) {
             this.setState(() => ({
                 visibleContent: prevProps.visibleContent,
                 visible: false
             }))
-            setTimeout(this.transitionEndCallback.bind(this), 250);
-        } else if(prevProps.keyword != this.props.keyword) {
-            this.setState(() => ({
-                visibleContent: prevProps.visibleContent,
-                visible: false
-            }))
-            setTimeout(this.transitionEndCallback.bind(this), 250)
+            setTimeout(this.transitionEndCallback.bind(this), 300);
         }
     }
 
