@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { PopupBackground, PopupItem } from './PopupComponent'
 import { closeOptionsPopup } from '../actions/optionPopup'
 import styled from 'styled-components'
+import { handleFetchDirectory } from "../actions/currentDirectory";
 
 class OptionsComponent extends React.Component {
 
@@ -14,7 +16,10 @@ class OptionsComponent extends React.Component {
 
     refreshCallback = (evt) => {
         evt.preventDefault()
+        const { dispatch } = this.props
+        dispatch(handleFetchDirectory(this.props.location.pathname));
         
+        this.closeOptions(evt)
     }
 
     render() {
@@ -24,7 +29,6 @@ class OptionsComponent extends React.Component {
             clientY
         } = this.props
 
-        console.log(clientX, clientY)
         return (
             <Fragment>
                 {
@@ -37,7 +41,8 @@ class OptionsComponent extends React.Component {
                                 visible={optionsOpen}
                                 open={optionsOpen}
                             >
-                                <PopupItem>
+                                <PopupItem
+                                    onClick={this.refreshCallback}>
                                     Refresh
                                 </PopupItem>
                                 <PopupItem>
@@ -74,11 +79,15 @@ const Popup = styled.div`
     display: ${props => props.open === true ? 'block' : 'none'};
 
     opacity: ${props => props.visible === true ? 1 : 0};
+
+    &:hover {
+        cursor: pointer;
+    }
 `
 
 function mapStateToProps({ optionPopup }) {
   const { optionsOpen, clientX, clientY } = optionPopup;
-  console.log(optionPopup)
+  
   return {
     optionsOpen,
     clientX,
@@ -86,4 +95,4 @@ function mapStateToProps({ optionPopup }) {
   };
 }
 
-export default connect(mapStateToProps)(OptionsComponent);
+export default withRouter(connect(mapStateToProps)(OptionsComponent))
