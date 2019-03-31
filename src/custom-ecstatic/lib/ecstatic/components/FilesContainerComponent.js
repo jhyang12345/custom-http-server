@@ -17,7 +17,7 @@ class FilesContainerComponent extends React.Component {
         this.state = {
             width: minWidthThreshold,
             height: 0,
-            animate: false,
+            visible: true,
             visibleContent: this.props.visibleContent,
         };
 
@@ -40,13 +40,15 @@ class FilesContainerComponent extends React.Component {
         } else if(prevProps.visibleContent != this.props.visibleContent) {
             this.setState(() => ({
                 visibleContent: prevProps.visibleContent,
-                animate: true
+                visible: false
             }))
+            setTimeout(this.transitionEndCallback.bind(this), 250);
         } else if(prevProps.keyword != this.props.keyword) {
             this.setState(() => ({
                 visibleContent: prevProps.visibleContent,
-                animate: true
+                visible: false
             }))
+            setTimeout(this.transitionEndCallback.bind(this), 250)
         }
     }
 
@@ -61,13 +63,13 @@ class FilesContainerComponent extends React.Component {
     transitionEndCallback = () => {
         this.setState(() => ({
             visibleContent: this.props.visibleContent,
-            animate: false,
+            visible: true,
         }))
     }
 
     render() {
         const { displayMode, pathName } = this.props
-        const { width, visibleContent, animate } = this.state
+        const { width, visibleContent, visible } = this.state
 
         return (
             <Fragment>
@@ -78,8 +80,7 @@ class FilesContainerComponent extends React.Component {
                 <FilesContainer
                     width={width + "px"}
                     layoutmode={displayMode}
-                    onTransitionEnd={this.transitionEndCallback}
-                    animate={animate}
+                    visible={visible}
                     >
                         {visibleContent.map((file, i) => (
                             <FileComponent key={file.key}

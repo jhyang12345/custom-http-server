@@ -16,21 +16,19 @@ import { handleFetchDirectory } from '../actions/currentDirectory';
 class FileComponent extends React.Component {
 
     state = {
-        animate: false,
+        
+    }
+
+    componentDidMount() {
+        
     }
 
     componentDidUpdate = (prevProps) => {
-        if(this.props.animate != this.state.animate) {
-            this.setState(() => ({
-                animate: true,
-            }))
-        }
+
     }
 
     transitionEnd = () => {
-        this.setState(() => ({
-            animate: false,
-        }))
+
     }
     
     handleClick = (evt) => {
@@ -83,7 +81,6 @@ class FileComponent extends React.Component {
     }
 
     render() {
-        const { animate } = this.state
         const { file, displayMode, index } = this.props
         let {
             stat,

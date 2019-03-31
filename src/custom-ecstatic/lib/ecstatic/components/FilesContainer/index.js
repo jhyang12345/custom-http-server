@@ -12,7 +12,7 @@ export const FilesContainer = styled.div`
     padding-top: 130px;
     position: relative;
 
-    opacity: ${props => props.animate === true ? 0 : 1};
+    opacity: ${props => props.visible === true ? 1 : 0};
     transition: opacity 0.25s ease-out;
 
     &:after {

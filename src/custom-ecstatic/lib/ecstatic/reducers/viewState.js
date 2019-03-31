@@ -29,4 +29,5 @@ export default function viewState(state = defaultState, action) {
 // TODO: need to define interchangebable views
 let defaultState = {
     displayMode: GRID_MODE,
+    scrollTop: 0,
 }
