@@ -15,6 +15,22 @@ import { handleFetchDirectory } from '../actions/currentDirectory';
 
 class FileComponent extends React.Component {
     
+    state = {
+        displayMode: null,
+    }
+
+    componentDidUpdate(prevProps) {
+        // if(prevProps.displayMode != this.props.displayMode) {
+        //     setTimeout(this.transitionEndCallback, 300)
+        // }
+    }
+
+    transitionEndCallback = () => {        
+        // this.setState(() => ({
+        //     displayMode: this.props.displayMode,
+        // }))    
+    }
+
     handleClick = (evt) => {
         const { file, history } = this.props
         let {
@@ -64,7 +80,8 @@ class FileComponent extends React.Component {
     }
 
     render() {
-        const { file, displayMode, index } = this.props
+        const { file, index, displayMode } = this.props
+        console.log("displayMode", displayMode)
         let {
             stat,
             displayName,
@@ -95,6 +112,7 @@ class FileComponent extends React.Component {
                     index={index}>
                     <FileIcon
                         fileIcon={fileIcon}
+                        displayMode={displayMode}
                     />
                     <FileName>
                         {displayName}
@@ -120,6 +138,7 @@ class FileComponent extends React.Component {
                     index={index}>
                     <FileIcon
                         fileIcon={fileIcon}
+                        displayMode={displayMode}
                     />
                     <GridFileName>
                         {displayName}
@@ -159,7 +178,8 @@ class FileComponent extends React.Component {
 
 function mapStateToProps({ viewState }) {
     return {
-        displayMode: viewState.displayMode
+        // displayMode: viewState.displayMode
+        // receive displayMode as props
     }
 }
 export default withRouter(connect(mapStateToProps)(FileComponent))

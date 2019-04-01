@@ -128,9 +128,4 @@ class FileIconImage extends React.Component {
     }
 }
 
-function mapStateToProps({ viewState }) {
-    return {
-        displayMode: viewState.displayMode
-    }
-}
-export default connect(mapStateToProps)(FileIcon)
+export default connect()(FileIcon)

@@ -19,6 +19,7 @@ class FilesContainerComponent extends React.Component {
             height: 0,
             visible: true,
             visibleContent: this.props.visibleContent,
+            displayMode: this.props.displayMode,
         };
 
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -37,9 +38,10 @@ class FilesContainerComponent extends React.Component {
         const { dispatch } = this.props        
         if(prevProps.location.pathname != this.props.location.pathname) {
             dispatch(handleFetchDirectory(this.props.location.pathname))
-        } else if(prevProps.visibleContent != this.props.visibleContent || prevProps.keyword != this.props.keyword) {
+        } else if(prevProps.visibleContent != this.props.visibleContent || 
+            prevProps.keyword != this.props.keyword || 
+            prevProps.displayMode != this.props.displayMode) {
             this.setState(() => ({
-                visibleContent: prevProps.visibleContent,
                 visible: false
             }))
             setTimeout(this.transitionEndCallback.bind(this), 300);
@@ -58,11 +60,13 @@ class FilesContainerComponent extends React.Component {
         this.setState(() => ({
             visibleContent: this.props.visibleContent,
             visible: true,
+            displayMode: this.props.displayMode
         }))
     }
 
     render() {
-        const { displayMode, pathName } = this.props
+        const { pathName } = this.props
+        const { displayMode } = this.state
         const { width, visibleContent, visible } = this.state
 
         return (
@@ -79,8 +83,8 @@ class FilesContainerComponent extends React.Component {
                         {visibleContent.map((file, i) => (
                             <FileComponent key={file.key}
                                 file={file}
-                                animate={true}
                                 index={i}
+                                displayMode={displayMode}
                             />
                         ))}
                     
