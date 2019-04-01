@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { GRID_MODE } from '../../actions/viewState';
-import FlipMove from 'react-flip-move'
 
 export const FilesContainer = styled.div`
     width: ${props => props.width};
@@ -9,7 +8,7 @@ export const FilesContainer = styled.div`
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 130px;
+    padding-top: 115px;
     position: relative;
 
     opacity: ${props => props.visible === true ? 1 : 0};

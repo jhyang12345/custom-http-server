@@ -14,7 +14,7 @@ class SubDirectoryComponent extends React.Component {
     }
 
     render() {
-        const { pathName, isRoot } = this.props
+        const { pathName, isRoot, isParent } = this.props
         return (
             <SubDirectory
                 {...this.props}
@@ -35,7 +35,16 @@ const SubDirectory = styled.span`
     display: inline-block;
     height: 60px;
     padding: 0px 5px;
-    color: ${props => props.isRoot !== true ? "#777" : "#6495ED"};
+    color: ${props => {
+            if (props.isRoot === true) {
+                return "#6495ED"
+            } else if(props.isParent === true) {
+                return "#CACACA"
+            } else {
+                return "#777"
+            }
+        }
+    };
     margin-left: ${props => props.isRoot !== true ? "0px" : "4px"};
     & > .fa-chevron-right {
         font-size: 0.8em;

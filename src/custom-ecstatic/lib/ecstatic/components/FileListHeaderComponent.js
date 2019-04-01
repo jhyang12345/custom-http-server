@@ -60,9 +60,12 @@ function getRenderedPathName(pathN) {
     let pathName = stripSlashes(pathN)
     if (pathName.length === 0) return null
 
+    console.log(pathName)
+
     const dirs = pathName.split("/")
+
     let joinedPath = ""
-    return (
+    const dirComponents = 
         dirs.map((dir, i) => {
             joinedPath = joinedPath + "/" + dir
             return (
@@ -72,7 +75,19 @@ function getRenderedPathName(pathN) {
                 key={i}
             />
         )})
-    )
+
+    if(dirComponents.length >= 2) { // if length of dirs is longer than or equal to 2 
+        return [    
+            <SubDirectoryComponent
+                pathName={".."}
+                actualPath={".."}
+                isParent={true}
+                key={-1}
+                />
+            , dirComponents[dirComponents.length - 1]
+        ]
+    }
+    return dirComponents
 }
 
 const FileListHeader = styled.div`
@@ -106,6 +121,7 @@ const FileListHeader = styled.div`
         height: 60px;
         line-height: 60px;
         padding-left: 12px;
+        padding-right: 270px;
         margin-left: auto;
         margin-right: auto;
         width: ${props => props.width};

@@ -81,7 +81,6 @@ class FileComponent extends React.Component {
 
     render() {
         const { file, index, displayMode } = this.props
-        console.log("displayMode", displayMode)
         let {
             stat,
             displayName,
