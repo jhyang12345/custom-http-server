@@ -379,12 +379,12 @@ module.exports = function createMiddleware(_dir, _options) {
             return;
           }
 
-          if (autoIndex) {
-            
-            let requestJsonFlag = false            
-            if (req.headers["request-type"] == "api") {
-              requestJsonFlag = true
-            }
+          let requestJsonFlag = false
+          if (req.headers["request-type"] == "api") {
+            requestJsonFlag = true
+          }
+
+          if (autoIndex) {           
             middleware({
               url: urlJoin(
                 encodeURIComponent(pathname),
