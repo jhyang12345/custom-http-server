@@ -62,3 +62,10 @@ export function scrollToAction(scrollTop) {
         scrollTop
     }
 }
+
+export function scrollToTop() {
+    return {
+        type: SCROLL_TO,
+        scrollTop: 0,
+    }
+}

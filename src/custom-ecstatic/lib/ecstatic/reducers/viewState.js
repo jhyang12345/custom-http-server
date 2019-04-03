@@ -1,4 +1,4 @@
-import { HIDE_VIEW, SHOW_VIEW, FADE_IN_VIEW, FADE_OUT_VIEW, GRID_MODE, LIST_MODE, ALTER_FOLDER_VIEW_MODE } from '../actions/viewState'
+import { HIDE_VIEW, SHOW_VIEW, FADE_IN_VIEW, FADE_OUT_VIEW, GRID_MODE, LIST_MODE, ALTER_FOLDER_VIEW_MODE, SCROLL_TO } from '../actions/viewState'
 
 export default function viewState(state = defaultState, action) {
     switch(action.type) {
@@ -20,6 +20,11 @@ export default function viewState(state = defaultState, action) {
                     ? LIST_MODE
                     : GRID_MODE
                 )
+            }
+        case SCROLL_TO:
+            return {
+                ...state,
+                scrollTop: action.scrollTop,
             }
         default:
             return state
