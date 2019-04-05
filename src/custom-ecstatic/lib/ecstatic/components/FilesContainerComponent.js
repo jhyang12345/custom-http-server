@@ -19,13 +19,15 @@ class FilesContainerComponent extends React.Component {
             visibleContent: this.props.visibleContent,
             displayMode: this.props.displayMode,
         };
-
+        this.filesContainerRef = React.createRef()
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
     componentDidMount() {
         this.updateWindowDimensions()
         window.addEventListener('resize', this.updateWindowDimensions)   
+
+        document.addEventListener("scroll", this.scrollCallBack)
     }
 
     componentWillUnmount() {
@@ -62,6 +64,10 @@ class FilesContainerComponent extends React.Component {
         }))
     }
 
+    scrollCallBack = (evt) => {
+        console.log("Scrolling", this.filesContainerRef.current.scrollTop)
+    }
+
     render() {
         const { pathName } = this.props
         const { displayMode } = this.state
@@ -77,6 +83,7 @@ class FilesContainerComponent extends React.Component {
                     width={width + "px"}
                     layoutmode={displayMode}
                     visible={visible}
+                    ref={this.filesContainerRef}
                     >
                         {visibleContent.map((file, i) => (
                             <FileComponent key={file.key}

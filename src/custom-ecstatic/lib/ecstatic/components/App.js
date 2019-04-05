@@ -1,26 +1,37 @@
 import React, { Component, Fragment } from "react"
 import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
-import FileComponent from "./FileComponent"
 import { createGlobalStyle } from 'styled-components'
 import FilesContainerComponent from "./FilesContainerComponent"
-import LeftSideBarComponent from "./LeftSideBarComponent"
 import PopupComponent from './PopupComponent'
 import { Normalize } from 'styled-normalize'
 import FloatingButtonComponent from "./FloatingButtonComponent"
-import LoadingBar from "react-redux-loading"
-import { fetchManager } from '../utils'
 import OptionsComponent from './OptionsComponent'
 
 class App extends Component {
     
-    // TODO: Make request for current directory information here
-    componentDidMount() {
+    constructor(props) {
+        super(props)
+        this.filesContainerRef = React.createRef()
+    }
+
+    scrollCallBack = (evt) => {
+        console.log(this.filesContainerRef)
+        console.log(this.filesContainerRef.current.scrollTop)
         
     }
 
-    componentDidUpdate() {
+    // TODO: Make request for current directory information here
+    componentDidMount() {
+        document.addEventListener("scroll", this.scrollCallBack)
+    }
 
+    componentWillUnmount() {
+        document.removeEventListener("scroll", this.scrollCallBack)
+    }
+
+    componentDidUpdate() {
+        
     }
 
     render() {
@@ -32,7 +43,11 @@ class App extends Component {
             {/* <LeftSideBarComponent 
             /> */}
             {/* <Route path="/" exact component={FilesContainerComponent} /> */}
-            <Route path="" component={FilesContainerComponent} />
+            <Route
+              path=""
+              ref={this.filesContainerRef}
+              component={(props) => <FilesContainerComponent />}
+            />
             <PopupComponent />
             <OptionsComponent />
             <FloatingButtonComponent />
@@ -93,9 +108,13 @@ div,span {
 
 `;
 
-function mapStateToProps({ currentDirectory }) {
+function mapStateToProps({ currentDirectory, viewState }) {
+    const {
+        scrollTop
+    } = viewState
     return {
-        currentDirectory
+        currentDirectory,
+        scrollTop
     }
 }
 
