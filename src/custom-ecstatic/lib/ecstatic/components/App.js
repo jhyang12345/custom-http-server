@@ -7,29 +7,40 @@ import PopupComponent from './PopupComponent'
 import { Normalize } from 'styled-normalize'
 import FloatingButtonComponent from "./FloatingButtonComponent"
 import OptionsComponent from './OptionsComponent'
+import { scrollInAction } from '../actions/viewState'
 
 class App extends Component {
     
     constructor(props) {
         super(props)
-        this.filesContainerRef = React.createRef()
+        this.state = {
+            scrollTop: 0,
+        }
     }
 
     scrollCallBack = (evt) => {
-        
+        const { scrollTop } = evt.target
+        this.setState(() => ({
+            scrollTop
+        }))
     }
 
     // TODO: Make request for current directory information here
     componentDidMount() {
-        document.addEventListener("scroll", this.scrollCallBack)
+        
     }
 
     componentWillUnmount() {
-        document.removeEventListener("scroll", this.scrollCallBack)
+        
     }
 
-    componentDidUpdate() {
-        
+    componentDidUpdate(prevProps, prevState) {
+        const { dispatch } = this.props
+        if(this.props.scrollInActionFlag === true) {
+            console.log("Flagged")
+            dispatch(scrollInAction(false))
+
+        }
     }
 
     render() {
@@ -46,7 +57,9 @@ class App extends Component {
               render={(props) => 
                 <FilesContainerComponent 
                     {...props}
-                    ref={this.filesContainerRef} />}
+                    scrollTop={this.state.scrollTop}
+                    scrollCallBack={this.scrollCallBack}
+                    />}
             />
             <PopupComponent />
             <OptionsComponent />
@@ -114,11 +127,13 @@ div,span {
 
 function mapStateToProps({ currentDirectory, viewState }) {
     const {
-        scrollTop
+        scrollTop,
+        scrollInActionFlag,
     } = viewState
     return {
         currentDirectory,
-        scrollTop
+        scrollTop,
+        scrollInActionFlag,
     }
 }
 

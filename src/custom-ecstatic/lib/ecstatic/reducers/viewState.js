@@ -1,4 +1,4 @@
-import { HIDE_VIEW, SHOW_VIEW, FADE_IN_VIEW, FADE_OUT_VIEW, GRID_MODE, LIST_MODE, ALTER_FOLDER_VIEW_MODE, SCROLL_TO } from '../actions/viewState'
+import { HIDE_VIEW, SHOW_VIEW, FADE_IN_VIEW, FADE_OUT_VIEW, GRID_MODE, LIST_MODE, ALTER_FOLDER_VIEW_MODE, SCROLL_TO, SCROLL_IN_ACTION } from '../actions/viewState'
 
 export default function viewState(state = defaultState, action) {
     switch(action.type) {
@@ -21,6 +21,11 @@ export default function viewState(state = defaultState, action) {
                     : GRID_MODE
                 )
             }
+        case SCROLL_IN_ACTION:
+            return {
+                ...state,
+                scrollInActionFlag: action.flag,
+            }
         case SCROLL_TO:
             return {
                 ...state,
@@ -35,4 +40,5 @@ export default function viewState(state = defaultState, action) {
 let defaultState = {
     displayMode: GRID_MODE,
     scrollTop: 0,
+    scrollInActionFlag: false,
 }

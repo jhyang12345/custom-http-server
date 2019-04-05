@@ -27,7 +27,6 @@ class FilesContainerComponent extends React.Component {
         this.updateWindowDimensions()
         window.addEventListener('resize', this.updateWindowDimensions)   
         
-        this.filesContainerRef.current.addEventListener("scroll", this.scrollCallBack)
     }
 
     componentWillUnmount() {
@@ -46,6 +45,7 @@ class FilesContainerComponent extends React.Component {
             }))
             setTimeout(this.transitionEndCallback.bind(this), 300);
         }
+        this.filesContainerRef.current.scrollTop = this.props.scrollTop
     }
 
     // update width to exclude side bars
@@ -64,10 +64,6 @@ class FilesContainerComponent extends React.Component {
         }))
     }
 
-    scrollCallBack = (evt) => {        
-        console.log(evt.target.scrollTop)
-    }
-
     render() {
         const { pathName } = this.props
         const { displayMode } = this.state
@@ -83,6 +79,7 @@ class FilesContainerComponent extends React.Component {
                     width={width + "px"}
                     layoutmode={displayMode}
                     visible={visible}
+                    onScroll={this.props.scrollCallBack}
                     ref={this.filesContainerRef}
                     >
                         {visibleContent.map((file, i) => (

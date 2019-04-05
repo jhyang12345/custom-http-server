@@ -8,6 +8,7 @@ export const GRID_MODE = 'GRID_MODE'
 export const LIST_MODE = 'LIST_MODE'
 export const ALTER_FOLDER_VIEW_MODE = "ALTER_FOLDER_VIEW_MODE"
 export const SCROLL_TO = "SCROLL_TO"
+export const SCROLL_IN_ACTION = "SCROLL_IN_ACTION"
 
 
 export function hideView(viewName) {
@@ -67,5 +68,12 @@ export function scrollToTop() {
     return {
         type: SCROLL_TO,
         scrollTop: 0,
+    }
+}
+
+export function scrollInAction(flag) {
+    return {
+        type: SCROLL_IN_ACTION,
+        flag,
     }
 }

@@ -5,7 +5,7 @@ import { PopupBackground, PopupItem } from './PopupComponent'
 import { closeOptionsPopup } from '../actions/optionPopup'
 import styled from 'styled-components'
 import { handleFetchDirectory } from "../actions/currentDirectory";
-import { scrollToTop } from '../actions/viewState';
+import { scrollToTop, scrollInAction } from '../actions/viewState';
 
 class OptionsComponent extends React.Component {
 
@@ -26,7 +26,8 @@ class OptionsComponent extends React.Component {
     scrollToTopCallback = (evt) => {
         evt.preventDefault()
         const { dispatch } = this.props
-        dispatch(scrollToTop())        
+        dispatch(scrollToTop())       
+        dispatch(scrollInAction(true)) 
     }
 
     render() {
