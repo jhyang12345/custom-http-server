@@ -26,8 +26,8 @@ class FilesContainerComponent extends React.Component {
     componentDidMount() {
         this.updateWindowDimensions()
         window.addEventListener('resize', this.updateWindowDimensions)   
-
-        document.addEventListener("scroll", this.scrollCallBack)
+        
+        this.filesContainerRef.current.addEventListener("scroll", this.scrollCallBack)
     }
 
     componentWillUnmount() {
@@ -64,8 +64,8 @@ class FilesContainerComponent extends React.Component {
         }))
     }
 
-    scrollCallBack = (evt) => {
-        console.log("Scrolling", this.filesContainerRef.current.scrollTop)
+    scrollCallBack = (evt) => {        
+        console.log(evt.target.scrollTop)
     }
 
     render() {

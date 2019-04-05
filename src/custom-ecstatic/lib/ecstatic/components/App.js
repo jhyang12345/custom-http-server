@@ -16,8 +16,6 @@ class App extends Component {
     }
 
     scrollCallBack = (evt) => {
-        console.log(this.filesContainerRef)
-        console.log(this.filesContainerRef.current.scrollTop)
         
     }
 
@@ -44,9 +42,11 @@ class App extends Component {
             /> */}
             {/* <Route path="/" exact component={FilesContainerComponent} /> */}
             <Route
-              path=""
-              ref={this.filesContainerRef}
-              component={(props) => <FilesContainerComponent />}
+              path=""              
+              render={(props) => 
+                <FilesContainerComponent 
+                    {...props}
+                    ref={this.filesContainerRef} />}
             />
             <PopupComponent />
             <OptionsComponent />
@@ -84,13 +84,17 @@ time, mark, audio, video {
 html {
     width: 100%;
     height: 100%;
-    overflow-y: scroll;
 }
 
 body {
     background-color: "#DFDFDF";
     width: 100%;
     height: 100%;
+}
+
+#root {
+    height: 100%;
+    overflow: auto;
 }
 
 div,span {

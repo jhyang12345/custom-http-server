@@ -11,6 +11,9 @@ export const FilesContainer = styled.div`
     padding-top: 115px;
     position: relative;
 
+    height: 100%;
+    overflow: auto;
+
     opacity: ${props => props.visible === true ? 1 : 0};
     transition: opacity 0.25s ease-out;
 
