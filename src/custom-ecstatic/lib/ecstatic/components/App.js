@@ -7,7 +7,7 @@ import PopupComponent from './PopupComponent'
 import { Normalize } from 'styled-normalize'
 import FloatingButtonComponent from "./FloatingButtonComponent"
 import OptionsComponent from './OptionsComponent'
-import { scrollInAction } from '../actions/viewState'
+
 
 class App extends Component {
     
@@ -18,12 +18,6 @@ class App extends Component {
         }
     }
 
-    scrollCallBack = (evt) => {
-        const { scrollTop } = evt.target
-        this.setState(() => ({
-            scrollTop
-        }))
-    }
 
     // TODO: Make request for current directory information here
     componentDidMount() {
@@ -35,12 +29,7 @@ class App extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const { dispatch } = this.props
-        if(this.props.scrollInActionFlag === true) {
-            console.log("Flagged")
-            dispatch(scrollInAction(false))
 
-        }
     }
 
     render() {

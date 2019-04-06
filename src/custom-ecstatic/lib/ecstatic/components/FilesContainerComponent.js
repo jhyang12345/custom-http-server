@@ -5,6 +5,7 @@ import { FilesContainer } from './FilesContainer'
 import FileComponent from './FileComponent'
 import FileListHeaderComponent from './FileListHeaderComponent'
 import { handleFetchDirectory } from '../actions/currentDirectory'
+import { scrollInAction } from '../actions/viewState'
 
 const minWidthThreshold = 720
 
@@ -45,8 +46,17 @@ class FilesContainerComponent extends React.Component {
             }))
             setTimeout(this.transitionEndCallback.bind(this), 300);
         }
-        this.filesContainerRef.current.scrollTop = this.props.scrollTop
+        if(this.props.scrollInActionFlag === true) {
+            dispatch(scrollInAction(false))
+            this.filesContainerRef.current.scrollTo(            {
+                top: this.props.scrollTop,
+                left: 0,
+                behavior: 'smooth'
+            })
+        }
+        // this.filesContainerRef.current.scrollTop = this.state.scrollTop
     }
+
 
     // update width to exclude side bars
     updateWindowDimensions() {
@@ -79,7 +89,6 @@ class FilesContainerComponent extends React.Component {
                     width={width + "px"}
                     layoutmode={displayMode}
                     visible={visible}
-                    onScroll={this.props.scrollCallBack}
                     ref={this.filesContainerRef}
                     >
                         {visibleContent.map((file, i) => (
@@ -96,24 +105,19 @@ class FilesContainerComponent extends React.Component {
     }
 }
 
-// function to compare lists via key
-function compareList(prevList, afterList) {
-    if(prevList.length != afterList.length) return false
-    for(let i = 0; i < prevList.length; ++i) {
-        if(prevList[i].key != afterList[i].key) {
-            return false
-        }
-    }
-    return true
-}
-
 function mapStateToProps({currentDirectory, viewState}) {
     const { pathName, keyword } = currentDirectory
+    const {
+        scrollTop,
+        scrollInActionFlag,
+    } = viewState
     return {
         visibleContent: currentDirectory.visibleContent,
         pathName,
         displayMode: viewState.displayMode,
         keyword,
+        scrollTop,
+        scrollInActionFlag,
     }
 }
 

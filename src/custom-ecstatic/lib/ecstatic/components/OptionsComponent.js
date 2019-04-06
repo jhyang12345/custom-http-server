@@ -27,7 +27,9 @@ class OptionsComponent extends React.Component {
         evt.preventDefault()
         const { dispatch } = this.props
         dispatch(scrollToTop())       
-        dispatch(scrollInAction(true)) 
+        dispatch(scrollInAction(true))
+
+        this.closeOptions(evt)
     }
 
     render() {

@@ -5,14 +5,12 @@ export const FilesContainer = styled.div`
     width: ${props => props.width};
     display: ${props => props.layoutmode === GRID_MODE ? 'grid' : 'block'};
     grid-template-columns: repeat(auto-fill, 160px);
+    
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
     padding-top: 115px;
     position: relative;
-
-    height: 100%;
-    overflow: auto;
 
     opacity: ${props => props.visible === true ? 1 : 0};
     transition: opacity 0.25s ease-out;
