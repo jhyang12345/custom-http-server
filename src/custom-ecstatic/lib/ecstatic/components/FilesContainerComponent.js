@@ -48,11 +48,21 @@ class FilesContainerComponent extends React.Component {
         }
         if(this.props.scrollInActionFlag === true) {
             dispatch(scrollInAction(false))
-            this.filesContainerRef.current.scrollTo(            {
-                top: this.props.scrollTop,
-                left: 0,
-                behavior: 'smooth'
-            })
+            const { current } = this.filesContainerRef
+
+            if(this.props.scrollTop !== -1) {
+                current.parentElement.scrollTo({
+                    top: this.props.scrollTop,
+                    left: 0,
+                    behavior: 'smooth'
+                })
+            } else {                
+                current.parentElement.scrollTo({
+                    top: current.scrollHeight,
+                    left: 0,
+                    behavior: 'smooth'
+                })
+            }
         }
         // this.filesContainerRef.current.scrollTop = this.state.scrollTop
     }
