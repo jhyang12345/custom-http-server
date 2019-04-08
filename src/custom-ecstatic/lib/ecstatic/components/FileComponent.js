@@ -6,7 +6,6 @@ import Moment from "react-moment"
 import { bytesToSize } from "../utils"
 import { FileWrapper, FileName, FileIcon, FileSize, FileModifiedDate } from "./File"
 import { GridFileWrapper, GridFileName } from "./GridFile"
-import LongTouchComponent from './LongTouchComponent'
 import { handleOpenPopup } from '../actions/optionPopup'
 import prettyFileIcons from '../pretty-file-icons'
 import { stripSlashes } from '../utils'

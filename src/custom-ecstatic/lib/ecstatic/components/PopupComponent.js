@@ -18,15 +18,18 @@ class PopupComponent extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.open != this.props.open && this.props.open === true) {
+          if(this.props.open === true) {
             setTimeout(() => {
-                this.setState(() => ({
-                    visible: true,
-                }))
+              this.setState(() => ({
+                  visible: true,
+              }))
             }, 100)
-        } else if (prevProps.open != this.props.open && this.props.open === false) {
+          } else {
             this.setState(() => ({
-                visible: false,
+              visible: false,
             }))
+          }
+
         }
     }
 
