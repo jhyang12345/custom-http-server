@@ -58,6 +58,7 @@ class OptionsComponent extends React.Component {
                                 clientY={clientY}
                                 visible={optionsOpen}
                                 open={optionsOpen}
+                                className="block-copy"
                             >
                                 <PopupItem
                                     onClick={this.refreshCallback}>

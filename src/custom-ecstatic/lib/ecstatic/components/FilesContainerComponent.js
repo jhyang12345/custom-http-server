@@ -7,14 +7,14 @@ import FileListHeaderComponent from './FileListHeaderComponent'
 import { handleFetchDirectory } from '../actions/currentDirectory'
 import { scrollInAction } from '../actions/viewState'
 
-const minWidthThreshold = 720
+const maxWidth = 1080
 
 class FilesContainerComponent extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            width: minWidthThreshold,
+            width: maxWidth,
             height: 0,
             visible: true,
             visibleContent: this.props.visibleContent,
@@ -70,10 +70,12 @@ class FilesContainerComponent extends React.Component {
 
     // update width to exclude side bars
     updateWindowDimensions() {
-        let newWidth = (window.innerWidth) - 180 * 2;
-        if (newWidth < minWidthThreshold) newWidth += 180
-        if (newWidth < minWidthThreshold) newWidth += 180
-        this.setState({ width: newWidth, height: window.innerHeight });
+        if (window.innerWidth > maxWidth) {
+            this.setState({ width: maxWidth, height: window.innerHeight });
+        } else {
+            this.setState({ width: window.innerWidth, height: window.innerHeight });
+        }
+        
     }
 
     transitionEndCallback = () => {

@@ -37,10 +37,6 @@ class App extends Component {
           <Fragment>
             <Normalize />
             <AppContainer />
-            {/* Will not be used to show current directory */}
-            {/* <LeftSideBarComponent 
-            /> */}
-            {/* <Route path="/" exact component={FilesContainerComponent} /> */}
             <Route
               path=""              
               render={(props) => 
