@@ -7,7 +7,7 @@ import FileListHeaderComponent from './FileListHeaderComponent'
 import { handleFetchDirectory } from '../actions/currentDirectory'
 import { scrollInAction } from '../actions/viewState'
 
-const maxWidth = 1080
+const maxWidth = 1200
 
 class FilesContainerComponent extends React.Component {
 

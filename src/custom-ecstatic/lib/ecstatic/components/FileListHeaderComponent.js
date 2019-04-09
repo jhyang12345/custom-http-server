@@ -127,6 +127,7 @@ const FileListHeader = styled.div`
         width: ${props => props.width};
         font-size: 1.4em;
         box-sizing: border-box;
+        overflow: hidden;
     }
 `
 
