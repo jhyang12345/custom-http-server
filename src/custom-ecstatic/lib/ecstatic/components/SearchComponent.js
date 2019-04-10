@@ -20,7 +20,7 @@ class SearchComponent extends React.Component {
     render() {
         const { barRevealed } = this.state
         return (
-            <SearchBox>
+            <Search.SearchBox>
                 <Search.SearchBar 
                     revealed={barRevealed}
                 />
@@ -28,21 +28,9 @@ class SearchComponent extends React.Component {
                     revealed={barRevealed}
                     handleFocus={this.handleFocus}
                     />
-            </SearchBox>
+            </Search.SearchBox>
         )
     }
 }
-
-const SearchBox = styled.div`
-    position: absolute;
-    height: 100%;
-    line-height: 58px;
-    right: 20px;
-    top: 0px;
-    padding-right: 4px;
-    display: inline-block;
-    margin-left: auto;
-    overflow: hidden;  
-`
 
 export default connect()(SearchComponent)
