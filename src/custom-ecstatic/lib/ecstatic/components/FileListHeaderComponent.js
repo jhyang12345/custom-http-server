@@ -1,7 +1,7 @@
 import React, { Fragment } from "react"
 import { connect } from "react-redux";
 import styled from 'styled-components'
-import { HeaderItemComponent, SubDirectoryComponent, SubDirectoryHolderComponent, OptionsButtonComponent } from './FileList'
+import FileList from './FileList'
 import SearchComponent from './SearchComponent'
 import { stripSlashes } from '../utils'
 import { createSortByModifiedTimeAction, createSortByNameAction, createSortBySizeAction } from '../actions/currentDirectory'
@@ -17,7 +17,7 @@ class FileListHeaderComponent extends React.Component {
                     <div className="directory-header">
                         Serving 
                         {/* <SubDirectoryHolderComponent> */}
-                            <SubDirectoryComponent
+                            <FileList.SubDirectory
                                 pathName={"root"}
                                 isRoot={true}
                                 actualPath="/"
@@ -25,24 +25,24 @@ class FileListHeaderComponent extends React.Component {
                             {getRenderedPathName(pathName)}
                         {/* </SubDirectoryHolderComponent> */}
                         <SearchComponent/>
-                        <OptionsButtonComponent/>
+                        <FileList.OptionsButton/>
                     </div>
                     <div className="inner-container">
-                        <HeaderItemComponent
+                        <FileList.HeaderItem
                             flex={1}
                             title="Name"
                             type="name"
                             action={createSortByNameAction()}
 
                             />
-                        <HeaderItemComponent
+                        <FileList.HeaderItem
                             width={"80px"}
                             title="Size"
                             type="size"
                             action={createSortBySizeAction()}
 
                         />
-                        <HeaderItemComponent
+                        <FileList.HeaderItem
                             width={"160px"}
                             title="Modified Time"
                             type="modified"
@@ -69,7 +69,7 @@ function getRenderedPathName(pathN) {
         dirs.map((dir, i) => {
             joinedPath = joinedPath + "/" + dir
             return (
-            <SubDirectoryComponent
+            <FileList.SubDirectory
                 pathName={dir}
                 actualPath={joinedPath}
                 key={i}
@@ -78,7 +78,7 @@ function getRenderedPathName(pathN) {
 
     if(dirComponents.length >= 2) { // if length of dirs is longer than or equal to 2 
         return [    
-            <SubDirectoryComponent
+            <FileList.SubDirectory
                 pathName={".."}
                 actualPath={".."}
                 isParent={true}

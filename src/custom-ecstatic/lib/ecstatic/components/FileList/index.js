@@ -3,9 +3,11 @@ import SubDirectoryComponent from './SubDirectoryComponent'
 import SubDirectoryHolderComponent from './SubDirectoryHolderComponent'
 import OptionsButtonComponent from './OptionsButtonComponent'
 
-export {
-  HeaderItemComponent,
-  SubDirectoryComponent,
-  SubDirectoryHolderComponent,
-  OptionsButtonComponent
-};
+const FileList = {}
+
+FileList.HeaderItem = HeaderItemComponent
+FileList.SubDirectory = SubDirectoryComponent
+FileList.SubDirectoryHolder = SubDirectoryHolderComponent
+FileList.OptionsButton = OptionsButtonComponent
+
+export default FileList
