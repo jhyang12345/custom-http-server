@@ -1,7 +1,7 @@
 import React from "react"
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { SearchBarComponent, SearchButtonComponent } from './Search'
+import Search from './Search'
 import { setSearchKeyword } from '../actions/currentDirectory'
 
 class SearchComponent extends React.Component {
@@ -21,10 +21,10 @@ class SearchComponent extends React.Component {
         const { barRevealed } = this.state
         return (
             <SearchBox>
-                <SearchBarComponent 
+                <Search.SearchBar 
                     revealed={barRevealed}
                 />
-                <SearchButtonComponent
+                <Search.SearchButton
                     revealed={barRevealed}
                     handleFocus={this.handleFocus}
                     />
