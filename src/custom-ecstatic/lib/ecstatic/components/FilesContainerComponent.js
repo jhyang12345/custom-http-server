@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { FilesContainer } from './FilesContainer'
 import FileComponent from './FileComponent'
-import FileListHeaderComponent from './FileListHeaderComponent'
+import FileListHeaderComponent from './FileList/FileListHeaderComponent'
 import { handleFetchDirectory } from '../actions/currentDirectory'
 import { scrollInAction } from '../actions/viewState'
 

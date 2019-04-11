@@ -1,10 +1,10 @@
 import React, { Fragment } from "react"
 import { connect } from "react-redux";
 import styled from 'styled-components'
-import FileList from './FileList'
-import SearchComponent from './SearchComponent'
-import { stripSlashes } from '../utils'
-import { createSortByModifiedTimeAction, createSortByNameAction, createSortBySizeAction } from '../actions/currentDirectory'
+import FileList from '../FileList'
+import SearchComponent from '../SearchComponent'
+import { stripSlashes } from '../../utils'
+import { createSortByModifiedTimeAction, createSortByNameAction, createSortBySizeAction } from '../../actions/currentDirectory'
 import LoadingBar from "react-redux-loading";
 
 class FileListHeaderComponent extends React.Component {
