@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import FilesContainer from '../FilesContainer'
 import FileComponent from '../FileComponent'
-import FileListHeaderComponent from '../FileListHeaderComponent'
+import FileList from '../FileList'
 import { handleFetchDirectory } from '../../actions/currentDirectory'
 import { scrollInAction } from '../../actions/viewState'
 
@@ -93,7 +93,7 @@ class FilesContainerComponent extends React.Component {
 
         return (
             <Fragment>
-                <FileListHeaderComponent 
+                <FileList.Component 
                     pathName={pathName}
                     width={width + "px"}    
                     />                    
