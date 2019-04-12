@@ -2,12 +2,11 @@ import React, { Component, Fragment } from "react"
 import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
-import FilesContainerComponent from "./FilesContainerComponent"
+import FilesContainer from './FilesContainer'
 import PopupComponent from './PopupComponent'
 import { Normalize } from 'styled-normalize'
 import FloatingButtonComponent from "./FloatingButtonComponent"
 import OptionsComponent from './OptionsComponent'
-
 
 class App extends Component {
     
@@ -40,7 +39,7 @@ class App extends Component {
             <Route
               path=""              
               render={(props) => 
-                <FilesContainerComponent 
+                <FilesContainer.Component 
                     {...props}
                     scrollTop={this.state.scrollTop}
                     scrollCallBack={this.scrollCallBack}

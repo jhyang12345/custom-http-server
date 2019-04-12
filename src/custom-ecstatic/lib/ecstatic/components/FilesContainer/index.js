@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { GRID_MODE } from '../../actions/viewState';
+import FilesContainerComponent from './FilesContainerComponent'
 
-export const FilesContainer = styled.div`
+const FilesContainer = styled.div`
     width: ${props => props.width};
     display: ${props => props.layoutmode === GRID_MODE ? 'grid' : 'block'};
     grid-template-columns: repeat(auto-fill, 160px);
@@ -22,3 +23,7 @@ export const FilesContainer = styled.div`
         flex: ${props => props.displayMode === GRID_MODE ? "auto" : "none"};         */}
     }
 `
+
+FilesContainer.Component = FilesContainerComponent
+
+export default FilesContainer

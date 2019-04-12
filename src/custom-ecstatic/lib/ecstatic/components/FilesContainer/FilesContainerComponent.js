@@ -1,11 +1,11 @@
 import React, {Fragment} from "react"
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { FilesContainer } from './FilesContainer'
-import FileComponent from './FileComponent'
-import FileListHeaderComponent from './FileListHeaderComponent'
-import { handleFetchDirectory } from '../actions/currentDirectory'
-import { scrollInAction } from '../actions/viewState'
+import FilesContainer from '../FilesContainer'
+import FileComponent from '../FileComponent'
+import FileListHeaderComponent from '../FileListHeaderComponent'
+import { handleFetchDirectory } from '../../actions/currentDirectory'
+import { scrollInAction } from '../../actions/viewState'
 
 const maxWidth = 1200
 
