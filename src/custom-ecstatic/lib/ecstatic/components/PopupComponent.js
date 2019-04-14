@@ -6,8 +6,13 @@ import { closePopup, copyToClipboard, copyFileNameToClipboard, openInNewTab, ope
 
 class PopupComponent extends React.Component {
 
-    state = {
+    constructor(props) {
+      super(props)
+      this.state = {
         visible: false,
+        hidden: true,
+      }
+      this.popupRef = React.createRef()
     }
 
     closePopup = (evt) => {
@@ -16,7 +21,11 @@ class PopupComponent extends React.Component {
         dispatch(closePopup())
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidMount() {
+            
+    }
+
+    componentDidUpdate(prevProps, prevStates) {
         if (prevProps.open != this.props.open && this.props.open === true) {
           if(this.props.open === true) {
             setTimeout(() => {
@@ -24,13 +33,25 @@ class PopupComponent extends React.Component {
                   visible: true,
               }))
             }, 100)
-          } else {
+          }        
+          else {
             this.setState(() => ({
               visible: false,
+              hidden: true,
             }))
           }
-
-        }
+        } else if (prevProps.open != this.props.open && this.props.open === false && prevStates.hidden === false) {
+          this.setState(() => ({
+            hidden: true,
+            visible: false,
+          }))
+        } else if(this.props.open === true && prevStates.visible === false 
+          && prevStates.visible != this.state.visible) {    
+          const popupElem = this.popupRef.current    
+          this.setState(() => ({
+            hidden: false,
+          }))
+        } 
     }
 
     copyLink = () => {
@@ -75,7 +96,8 @@ class PopupComponent extends React.Component {
           fileSize,
           modifiedTime
         } = this.props;
-        const { visible } = this.state
+        const { visible, hidden } = this.state        
+
         return (
           <Fragment>
             {detailOpen === true ? (
@@ -104,8 +126,10 @@ class PopupComponent extends React.Component {
                 open={open}
                 onContextMenu={this.closePopup}
                 visible={visible}
+                hidden={hidden}
                 clientX={clientX}
                 clientY={clientY}
+                ref={this.popupRef}
               >
                 <PopupItem onClick={this.copyLink}>Copy Link</PopupItem>
                 <PopupItem onClick={this.copyFileName}>
@@ -163,6 +187,7 @@ const Popup = styled.div`
     display: ${props => props.open === true ? 'block' : 'none'};
 
     opacity: ${props => props.visible === true ? 1 : 0};
+    visibility: ${props => props.hidden === true ? 'hidden' : 'visible'};
     transition: opacity .3s;
 
     &:hover {
