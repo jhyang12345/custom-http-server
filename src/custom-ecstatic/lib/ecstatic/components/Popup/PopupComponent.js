@@ -3,15 +3,25 @@ import { connect } from 'react-redux'
 import PopupItem from './PopupItem'
 import Popup from './Popup'
 
-class PopupComponent extends React.Component {
+class PopupComponent extends React.Component {    
 
     constructor(props) {
         super(props)
         this.popupRef = React.createRef()
+        this.state = {
+            top: 0,
+            left: 0,
+        }
     }
 
     componentDidMount() {
-        console.log(this.popupRef.current.getBoundingClientRect())
+        
+    }
+
+    componentDidUpdate() {
+        if(this.props.visible === true && this.props.hidden == false) {
+            
+        }
     }
 
     render() {
