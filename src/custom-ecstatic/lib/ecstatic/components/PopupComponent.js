@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import Moment from 'react-moment'
 import styled from "styled-components"
 import { closePopup, copyToClipboard, copyFileNameToClipboard, openInNewTab, openDetailPopup } from '../actions/optionPopup'
+import Popup from './Popup'
 
 class PopupComponent extends React.Component {
 
@@ -45,12 +46,12 @@ class PopupComponent extends React.Component {
             hidden: true,
             visible: false,
           }))
-        } else if(this.props.open === true && prevStates.visible === false 
+        } else if(this.props.open === true && this.state.visible === true 
           && prevStates.visible != this.state.visible) {    
           const popupElem = this.popupRef.current    
           this.setState(() => ({
             hidden: false,
-          }))
+          }))          
         } 
     }
 
@@ -120,9 +121,8 @@ class PopupComponent extends React.Component {
                 </DetailBlock>
               </DetailPopup>
             ) : (
-              <Popup
+              <Popup.Component
                 className="block-copy"
-                onScroll={this.blockScroll}
                 open={open}
                 onContextMenu={this.closePopup}
                 visible={visible}
@@ -130,19 +130,11 @@ class PopupComponent extends React.Component {
                 clientX={clientX}
                 clientY={clientY}
                 ref={this.popupRef}
-              >
-                <PopupItem onClick={this.copyLink}>Copy Link</PopupItem>
-                <PopupItem onClick={this.copyFileName}>
-                  Copy File Name
-                </PopupItem>
-                <PopupItem onClick={this.openNewTab}>
-                  Open in new tab
-                </PopupItem>
-                <PopupItem onClick={this.openDetails}>
-                  Details
-                </PopupItem>
-                <PopupItem>Delete</PopupItem>
-              </Popup>
+                copyLink={this.copyLink}
+                copyFileName={this.copyFileName}
+                openNewTab={this.openNewTab}
+                openDetails={this.openDetails}
+              />
             )}
             <PopupBackground
               onScroll={this.blockScroll}
@@ -173,26 +165,6 @@ export const PopupBackground = styled.div`
     transition: opacity .3s;
     overflow: auto;
     overscroll-behavior: contain;
-`
-
-const Popup = styled.div`
-    position: fixed;
-    left: ${props => props.clientX + 'px'};
-    top: ${props => props.clientY + 'px'};
-    z-index: 10;
-    width: 150px;
-    background-color: #fbf7f3;
-    border-radius: 4px;
-    box-shadow: 1px 1px 3px 1px #CCC;
-    display: ${props => props.open === true ? 'block' : 'none'};
-
-    opacity: ${props => props.visible === true ? 1 : 0};
-    visibility: ${props => props.hidden === true ? 'hidden' : 'visible'};
-    transition: opacity .3s;
-
-    &:hover {
-        cursor: pointer;
-    }
 `
 
 const DetailPopup = styled.div`
@@ -233,18 +205,6 @@ const DetailContent = styled.span`
     font-size: 1.2em;
     text-align: right;    
     word-break: break-word;
-`
-
-
-export const PopupItem = styled.div`
-    color: #333;
-    border-bottom: 1px solid #CCC;
-    padding: 8px 12px;
-    color: #575757;
-
-    &:last-child {
-        border-bottom: none;
-    }
 `
 
 function mapStateToProps({optionPopup}) {
