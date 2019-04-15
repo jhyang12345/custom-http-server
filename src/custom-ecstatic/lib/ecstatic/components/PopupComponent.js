@@ -129,7 +129,6 @@ class PopupComponent extends React.Component {
                 hidden={hidden}
                 clientX={clientX}
                 clientY={clientY}
-                ref={this.popupRef}
                 copyLink={this.copyLink}
                 copyFileName={this.copyFileName}
                 openNewTab={this.openNewTab}
