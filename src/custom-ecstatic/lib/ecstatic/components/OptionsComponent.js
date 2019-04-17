@@ -1,12 +1,11 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { PopupBackground, PopupItem } from './PopupComponent'
+import Popup from './Popup'
 import { closeOptionsPopup } from '../actions/optionPopup'
 import styled from 'styled-components'
-import { handleFetchDirectory } from "../actions/currentDirectory";
-import { scrollToTop, scrollInAction, scrollToAction } from '../actions/viewState';
-
+import { handleFetchDirectory } from "../actions/currentDirectory"
+import { scrollToTop, scrollInAction, scrollToAction } from '../actions/viewState'
 class OptionsComponent extends React.Component {
 
     closeOptions = (evt) => {
@@ -53,27 +52,27 @@ class OptionsComponent extends React.Component {
                     optionsOpen === true
                     ? 
                         <Fragment>
-                            <Popup
+                            <OptionsPopup
                                 clientX={clientX}
                                 clientY={clientY}
                                 visible={optionsOpen}
                                 open={optionsOpen}
                                 className="block-copy"
                             >
-                                <PopupItem
+                                <Popup.Item
                                     onClick={this.refreshCallback}>
                                     Refresh
-                                </PopupItem>
-                                <PopupItem
+                                </Popup.Item>
+                                <Popup.Item
                                     onClick={this.scrollToTopCallback}>
                                     Scroll to Top
-                                </PopupItem>
-                                <PopupItem
+                                </Popup.Item>
+                                <Popup.Item
                                     onClick={this.scrollToBottomCallback}>
                                     Scroll to Bottom
-                                </PopupItem>
-                            </Popup>
-                            <PopupBackground
+                                </Popup.Item>
+                            </OptionsPopup>
+                            <Popup.Background
                                 open={optionsOpen}
                                 display={optionsOpen}
                                 visible={false}
@@ -88,7 +87,7 @@ class OptionsComponent extends React.Component {
     }
 }
 
-const Popup = styled.div`
+const OptionsPopup = styled.div`
     position: fixed;
     left: ${props => props.clientX - 153 + 'px'};
     top: ${props => props.clientY + 3 + 'px'};

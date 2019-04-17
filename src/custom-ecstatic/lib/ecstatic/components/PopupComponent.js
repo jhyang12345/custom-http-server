@@ -135,7 +135,7 @@ class PopupComponent extends React.Component {
                 openDetails={this.openDetails}
               />
             )}
-            <PopupBackground
+            <Popup.Background
               onScroll={this.blockScroll}
               open={open}
               visible={visible}
@@ -149,22 +149,6 @@ class PopupComponent extends React.Component {
         );
     }
 }
-
-export const PopupBackground = styled.div`
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    z-index: 5;
-    background-color: #333;
-    display: ${props => props.open === true ? 'block' : 'none'};
-
-    opacity: ${props => props.visible === true ? 0.3 : 0};
-    transition: opacity .3s;
-    overflow: auto;
-    overscroll-behavior: contain;
-`
 
 const DetailPopup = styled.div`
     position: fixed;
