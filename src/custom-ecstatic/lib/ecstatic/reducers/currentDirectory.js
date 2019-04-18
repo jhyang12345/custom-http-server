@@ -93,11 +93,25 @@ export default function currentDirectory (state = {}, action) {
             return {
                 ...state,
                 keyword: action.keyword,
-                visibleContent: filterByKeywords(state.content, action.keyword),
+                visibleContent: sortByCurrentState(filterByKeywords(state.content, action.keyword), state),
             }
         default:
             return state
     }
+}
+
+function sortByCurrentState(content, state) {
+    switch (state.method) {
+        case "modified" :
+            return [...sortByModifiedTime(content, state.reverse)]
+            
+        case "name" :
+            return [...sortByName(content, state.reverse)]                            
+            
+        case "size" :
+            return [...sortBySize(content, state.reverse)]        
+    }
+    return content
 }
 
 let defaultState = {
