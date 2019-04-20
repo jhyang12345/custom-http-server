@@ -43,51 +43,20 @@ export default function currentDirectory (state = {}, action) {
                     : false,
             }
         case SORT_AGAIN: {
-            switch (state.method) {
-                case "modified" :
-                    return {
-                        ...state,
-                        method: "modified",
-                        visibleContent: [...sortByModifiedTime(state.visibleContent, state.reverse)]
-                    }
-                case "name" :
-                    return {
-                        ...state,
-                        method: "name",
-                        visibleContent: [...sortByName(state.visibleContent, state.reverse)]                            
-                    }
-                case "size" :
-                    return {
-                        ...state,
-                        method: "size",
-                        visibleContent: [...sortBySize(state.visibleContent, state.reverse)]
-                    }
+            return {
+                ...action.currentDirectory,
+                method: state.method,
+                visibleContent: sortByCurrentState(action.currentDirectory.content, state)
             }
         }
         case SORT_AGAIN_WITH_NEW: {
-            switch (state.method) {
-                case "modified" :
-                    return {
-                        ...action.currentDirectory,
-                        keyword: "",
-                        method: "modified",
-                        visibleContent: [...sortByModifiedTime(action.currentDirectory.content, state.reverse)]
-                    }
-                case "name" :
-                    return {
-                        ...action.currentDirectory,
-                        keyword: "",
-                        method: "name",
-                        visibleContent: [...sortByName(action.currentDirectory.content, state.reverse)]                            
-                    }
-                case "size" :
-                    return {
-                        ...action.currentDirectory,
-                        keyword: "",
-                        method: "size",
-                        visibleContent: [...sortBySize(action.currentDirectory.content, state.reverse)]
-                    }
+            return {
+                ...action.currentDirectory,
+                keyword: "",
+                method: state.method,
+                visibleContent: sortByCurrentState(action.currentDirectory.content, state)
             }
+
         }            
         case SET_SEARCH_KEYWORD: 
             return {
