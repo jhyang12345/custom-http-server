@@ -44,16 +44,16 @@ export default function currentDirectory (state = {}, action) {
             }
         case SORT_AGAIN: {
             return {
+                ...state,
                 ...action.currentDirectory,
-                method: state.method,
                 visibleContent: sortByCurrentState(action.currentDirectory.content, state)
             }
         }
         case SORT_AGAIN_WITH_NEW: {
             return {
+                ...state,
                 ...action.currentDirectory,
                 keyword: "",
-                method: state.method,
                 visibleContent: sortByCurrentState(action.currentDirectory.content, state)
             }
 
