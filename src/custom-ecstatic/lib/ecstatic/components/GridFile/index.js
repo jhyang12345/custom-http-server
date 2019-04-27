@@ -24,3 +24,9 @@ export const GridFileName = styled.div`
     text-overflow: ellipsis;
     padding: 0px 8px;
 `
+const GridFile = {
+    Wrapper: GridFileWrapper,
+    Name: GridFileName
+}
+
+export default GridFile

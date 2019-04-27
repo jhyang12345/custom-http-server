@@ -106,6 +106,7 @@
     "react-redux-loading": "^1.0.1",
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
+    "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "style-loader": "^0.23.1",
     "styled-components": "^4.1.3",

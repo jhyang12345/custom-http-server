@@ -5,7 +5,7 @@ import { withRouter, Redirect} from 'react-router-dom'
 import Moment from "react-moment"
 import { bytesToSize } from "../utils"
 import { FileWrapper, FileName, FileIcon, FileSize, FileModifiedDate } from "./File"
-import { GridFileWrapper, GridFileName } from "./GridFile"
+import GridFile from "./GridFile"
 import { handleOpenPopup } from '../actions/optionPopup'
 import prettyFileIcons from '../pretty-file-icons'
 import { stripSlashes } from '../utils'
@@ -78,6 +78,12 @@ class FileComponent extends React.Component {
         dispatch(handleOpenPopup(popupInfo))
     }
 
+    fileNameLongClick = (evt) => {
+         evt.preventDefault()
+         evt.stopPropagation()
+         console.log("File name clicked!")
+    }
+
     render() {
         const { file, index, displayMode } = this.props
         let {
@@ -112,7 +118,9 @@ class FileComponent extends React.Component {
                         fileIcon={fileIcon}
                         displayMode={displayMode}
                     />
-                    <FileName>
+                    <FileName
+                        onContextMenu={this.fileNameLongClick}
+                    >
                         {displayName}
                     </FileName>
                     <FileSize>
@@ -127,7 +135,7 @@ class FileComponent extends React.Component {
                 </FileWrapper>)
                 :
                 (
-                <GridFileWrapper
+                <GridFile.Wrapper
                     className="block-copy"
                     href={"./" + displayName}
                     onClick={this.handleClick}
@@ -138,10 +146,12 @@ class FileComponent extends React.Component {
                         fileIcon={fileIcon}
                         displayMode={displayMode}
                     />
-                    <GridFileName>
+                    <GridFile.Name
+                        onContextMenu={this.fileNameLongClick}
+                        >
                         {displayName}
-                    </GridFileName>
-                </GridFileWrapper>
+                    </GridFile.Name>
+                </GridFile.Wrapper>
             )
             // </Redirect>                            
         )
