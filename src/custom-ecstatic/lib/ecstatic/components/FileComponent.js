@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter, Redirect} from 'react-router-dom'
 import Moment from "react-moment"
 import { bytesToSize } from "../utils"
-import { FileWrapper, FileName, FileIcon, FileSize, FileModifiedDate } from "./File"
+import { FileWrapper, FileName, FileEditName,  FileIcon, FileSize, FileModifiedDate } from "./File"
 import GridFile from "./GridFile"
 import { handleOpenPopup } from '../actions/optionPopup'
 import prettyFileIcons from '../pretty-file-icons'
@@ -16,6 +16,7 @@ class FileComponent extends React.Component {
     
     state = {
         displayMode: null,
+        editing: false,
     }
 
     componentDidUpdate(prevProps) {
@@ -82,6 +83,14 @@ class FileComponent extends React.Component {
          evt.preventDefault()
          evt.stopPropagation()
          console.log("File name clicked!")
+         this.setState(() => ({
+             editing: true,
+         }))
+    }
+
+    absorbEvent = (evt) => {
+        evt.preventDefault()
+        evt.stopPropagation()
     }
 
     render() {
@@ -91,6 +100,8 @@ class FileComponent extends React.Component {
             displayName,
             ext,
         } = file
+
+        const { editing } = this.state
 
         const transitionTime = index * 0.5
 
@@ -118,11 +129,18 @@ class FileComponent extends React.Component {
                         fileIcon={fileIcon}
                         displayMode={displayMode}
                     />
-                    <FileName
-                        onContextMenu={this.fileNameLongClick}
-                    >
-                        {displayName}
-                    </FileName>
+                    {
+                        editing === true
+                        ? <FileEditName
+                            onClick={this.absorbEvent}
+                            value={displayName}>
+                        </FileEditName>
+                        : <FileName
+                            onContextMenu={this.fileNameLongClick}
+                            >
+                            {displayName}
+                        </FileName>
+                    }
                     <FileSize>
                         {bytesToSize(stat.size)}
                     </FileSize>

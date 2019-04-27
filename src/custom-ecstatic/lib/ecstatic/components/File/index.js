@@ -23,10 +23,24 @@ export const FileName = styled.div`
     flex: 1;
     color: #555;
     line-height: 60px;
+    padding-left: 4px;
     padding-right: 12px;
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;
+`
+
+export const FileEditName = styled.input`
+    font-size: 1.2em;
+    flex: 1;
+    color: #555;
+    line-height: 60px;
+    padding-right: 12px;
+    margin: 6px 0px;
+    padding-left: 3px;
+    border-radius: 6px;
+    border: 1px solid #DDD;
+    outline: none;
 `
 
 export const FileSize = styled.div`
