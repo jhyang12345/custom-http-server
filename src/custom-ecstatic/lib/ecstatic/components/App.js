@@ -94,7 +94,7 @@ body {
     overflow: auto;
 }
 
-div,span {
+div,span,input {
     box-sizing: border-box;
 }
 

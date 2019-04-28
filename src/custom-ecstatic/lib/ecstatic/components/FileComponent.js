@@ -5,7 +5,7 @@ import { withRouter, Redirect} from 'react-router-dom'
 import Moment from "react-moment"
 import { bytesToSize } from "../utils"
 import { FileWrapper, FileName, FileEditName,  FileIcon, FileSize, FileModifiedDate } from "./File"
-import GridFile from "./GridFile"
+import GridFile, { GridFileEditName } from "./GridFile"
 import { handleOpenPopup } from '../actions/optionPopup'
 import prettyFileIcons from '../pretty-file-icons'
 import { stripSlashes } from '../utils'
@@ -164,11 +164,19 @@ class FileComponent extends React.Component {
                         fileIcon={fileIcon}
                         displayMode={displayMode}
                     />
-                    <GridFile.Name
-                        onContextMenu={this.fileNameLongClick}
-                        >
-                        {displayName}
-                    </GridFile.Name>
+                    {
+                        editing === true
+                        ? <GridFile.EditName
+                            onClick={this.absorbEvent}
+                            value={displayName}>
+                        </GridFile.EditName>
+                        : <GridFile.Name
+                            onContextMenu={this.fileNameLongClick}
+                            >
+                            {displayName}
+                        </GridFile.Name>
+                    }
+
                 </GridFile.Wrapper>
             )
             // </Redirect>                            
