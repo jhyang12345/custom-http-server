@@ -20,12 +20,32 @@ class FileComponent extends React.Component {
         this.state = {
             displayMode: null,
             editing: false,
+            width: 0,
         }
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         // if(prevProps.displayMode != this.props.displayMode) {
         //     setTimeout(this.transitionEndCallback, 300)
+        // }
+
+    }
+
+    shouldComponentUpdate(prevProps, prevState) {
+        return true
+    }
+
+    componentDidMount() {
+
+    }
+
+    setFileNameNode(nameNode) {
+        this.nameNode = nameNode
+        console.log(nameNode)
+        // if (nameNode !== null) {
+        //     this.setState(() => ({
+        //         width: nameNode.offsetWidth
+        //     }))
         // }
     }
 
@@ -148,6 +168,7 @@ class FileComponent extends React.Component {
                         : <FileNameContainer>
                             <FileName
                             onContextMenu={this.fileNameLongClick}
+                            ref={this.setFileNameNode.bind(this)}
                             >
                                 {displayName}
                             </FileName>
