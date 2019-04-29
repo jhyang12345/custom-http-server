@@ -3,8 +3,8 @@ import React from "react"
 import { connect } from 'react-redux'
 import { withRouter, Redirect} from 'react-router-dom'
 import Moment from "react-moment"
-import { bytesToSize } from "../utils"
-import { FileWrapper, FileName, FileEditName,  FileIcon, FileSize, FileModifiedDate } from "./File"
+import { bytesToSize, absorbEvent } from "../utils"
+import { FileWrapper, FileName, FileEditName,  FileIcon, FileSize, FileModifiedDate, FileEditNameContainer, FileNameContainer } from "./File"
 import GridFile, { GridFileEditName } from "./GridFile"
 import { handleOpenPopup } from '../actions/optionPopup'
 import prettyFileIcons from '../pretty-file-icons'
@@ -14,9 +14,13 @@ import { handleFetchDirectory } from '../actions/currentDirectory';
 
 class FileComponent extends React.Component {
     
-    state = {
-        displayMode: null,
-        editing: false,
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            displayMode: null,
+            editing: false,
+        }
     }
 
     componentDidUpdate(prevProps) {
@@ -88,9 +92,11 @@ class FileComponent extends React.Component {
          }))
     }
 
-    absorbEvent = (evt) => {
+    editTextBlurCallback = (evt) => {
         evt.preventDefault()
-        evt.stopPropagation()
+        this.setState(() => ({
+            editing: false,
+        }))
     }
 
     render() {
@@ -131,15 +137,21 @@ class FileComponent extends React.Component {
                     />
                     {
                         editing === true
-                        ? <FileEditName
-                            onClick={this.absorbEvent}
-                            value={displayName}>
-                        </FileEditName>
-                        : <FileName
+                        ? 
+                        <FileEditNameContainer>
+                            <FileEditName
+                                onClick={absorbEvent}
+                                onBlur={this.editTextBlurCallback}
+                                value={displayName}>
+                            </FileEditName>
+                        </FileEditNameContainer>                        
+                        : <FileNameContainer>
+                            <FileName
                             onContextMenu={this.fileNameLongClick}
                             >
-                            {displayName}
-                        </FileName>
+                                {displayName}
+                            </FileName>
+                        </FileNameContainer>
                     }
                     <FileSize>
                         {bytesToSize(stat.size)}
@@ -167,7 +179,8 @@ class FileComponent extends React.Component {
                     {
                         editing === true
                         ? <GridFile.EditName
-                            onClick={this.absorbEvent}
+                            onClick={absorbEvent}
+                            onBlur={this.editTextBlurCallback}
                             value={displayName}>
                         </GridFile.EditName>
                         : <GridFile.Name

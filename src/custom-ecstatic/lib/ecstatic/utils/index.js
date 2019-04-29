@@ -159,3 +159,9 @@ export function fetchDirectory(directory) {
       return response.json()
    })
 }
+
+
+export function absorbEvent(evt) {
+   evt.preventDefault()
+   evt.stopPropagation()
+}

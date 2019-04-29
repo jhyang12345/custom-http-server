@@ -18,11 +18,11 @@ export const FileWrapper = styled.a`
     }
 `
 
-export const FileName = styled.div`
-    font-size: 1.2em;
-    flex: 1;
-    color: #555;
-    line-height: 60px;
+export const FileName = styled.span`
+    display: inline-block;
+    max-width: 100%;
+    font-size: 1.2em;    
+    color: #555;    
     padding-left: 4px;
     padding-right: 12px;
     white-space: nowrap; 
@@ -30,11 +30,22 @@ export const FileName = styled.div`
     text-overflow: ellipsis;
 `
 
-export const FileEditName = styled.input`
-    font-size: 1.2em;
-    flex: 1;
-    color: #555;
+export const FileNameContainer = styled.div`
     line-height: 60px;
+    flex: 1;
+`
+
+export const FileEditNameContainer = styled.div`
+    flex: 1;
+`
+
+export const FileEditName = styled.input`
+    display: inline-block;
+    max-width: 100%;
+    height: 48px;
+    font-size: 1.2em;
+    color: #555;
+    line-height: 48px;
     padding-right: 12px;
     margin: 6px 0px;
     padding-left: 3px;
