@@ -165,3 +165,12 @@ export function absorbEvent(evt) {
    evt.preventDefault()
    evt.stopPropagation()
 }
+
+// assuming that both objects have the same properties
+export function getUnmatchingKeys(a, b) {
+   const diffKeys = []
+   for(let key in a) {
+      if (a[key] != b[key]) diffKeys.push(key)
+   }
+   return diffKeys
+}

@@ -52,7 +52,7 @@ class FileComponent extends React.Component {
     transitionEndCallback = () => {        
         // this.setState(() => ({
         //     displayMode: this.props.displayMode,
-        // }))    
+        // }))
     }
 
     handleClick = (evt) => {
