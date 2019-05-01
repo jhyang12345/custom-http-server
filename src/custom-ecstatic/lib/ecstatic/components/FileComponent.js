@@ -8,7 +8,7 @@ import { FileWrapper, FileName, FileEditName,  FileIcon, FileSize, FileModifiedD
 import GridFile, { GridFileEditName } from "./GridFile"
 import { handleOpenPopup } from '../actions/optionPopup'
 import prettyFileIcons from '../pretty-file-icons'
-import { stripSlashes } from '../utils'
+import { stripSlashes, getUnmatchingKeys } from '../utils'
 import { LIST_MODE } from '../actions/viewState'
 import { handleFetchDirectory } from '../actions/currentDirectory';
 
@@ -25,13 +25,15 @@ class FileComponent extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // if(prevProps.displayMode != this.props.displayMode) {
-        //     setTimeout(this.transitionEndCallback, 300)
-        // }
 
     }
 
     shouldComponentUpdate(prevProps, prevState) {
+        const changedKeys = getUnmatchingKeys(prevState, this.state);
+        if (changedKeys.includes("width") && changedKeys.length == 1) {
+            console.log("Ignoring update!")
+            return false
+        }
         return true
     }
 
@@ -42,17 +44,15 @@ class FileComponent extends React.Component {
     setFileNameNode(nameNode) {
         this.nameNode = nameNode
         console.log(nameNode)
-        // if (nameNode !== null) {
-        //     this.setState(() => ({
-        //         width: nameNode.offsetWidth
-        //     }))
-        // }
+        if (nameNode !== null) {
+            this.setState(() => ({
+                width: nameNode.offsetWidth
+            }))
+        }
     }
 
     transitionEndCallback = () => {        
-        // this.setState(() => ({
-        //     displayMode: this.props.displayMode,
-        // }))
+
     }
 
     handleClick = (evt) => {
@@ -127,7 +127,7 @@ class FileComponent extends React.Component {
             ext,
         } = file
 
-        const { editing } = this.state
+        const { editing, width} = this.state
 
         const transitionTime = index * 0.5
 
@@ -162,7 +162,9 @@ class FileComponent extends React.Component {
                             <FileEditName
                                 onClick={absorbEvent}
                                 onBlur={this.editTextBlurCallback}
-                                value={displayName}>
+                                value={displayName}
+                                width={width}
+                                >
                             </FileEditName>
                         </FileEditNameContainer>                        
                         : <FileNameContainer>

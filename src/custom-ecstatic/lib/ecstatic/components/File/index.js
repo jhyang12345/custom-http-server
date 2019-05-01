@@ -27,7 +27,7 @@ export const FileName = styled.span`
     padding-right: 12px;
     white-space: nowrap; 
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis;    
 `
 
 export const FileNameContainer = styled.div`
@@ -52,6 +52,7 @@ export const FileEditName = styled.input`
     border-radius: 6px;
     border: 1px solid #DDD;
     outline: none;
+    width: ${props => props.width !== 0 ? props.width + "px": '100%'};
 `
 
 export const FileSize = styled.div`
