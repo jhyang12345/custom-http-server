@@ -20,21 +20,12 @@ class FileComponent extends React.Component {
         this.state = {
             displayMode: null,
             editing: false,
-            width: 0,
         }
+        this.width = 0
     }
 
     componentDidUpdate(prevProps, prevState) {
 
-    }
-
-    shouldComponentUpdate(prevProps, prevState) {
-        const changedKeys = getUnmatchingKeys(prevState, this.state);
-        if (changedKeys.includes("width") && changedKeys.length == 1) {
-            console.log("Ignoring update!")
-            return false
-        }
-        return true
     }
 
     componentDidMount() {
@@ -43,11 +34,16 @@ class FileComponent extends React.Component {
 
     setFileNameNode(nameNode) {
         this.nameNode = nameNode
-        console.log(nameNode)
         if (nameNode !== null) {
-            this.setState(() => ({
-                width: nameNode.offsetWidth
-            }))
+            this.width = nameNode.offsetWidth
+        }
+    }
+
+    setFocusEditText(editNode) {
+        if (editNode !== null) {
+            if (editNode !== document.activeElement) {
+                editNode.focus()
+            }
         }
     }
 
@@ -103,6 +99,13 @@ class FileComponent extends React.Component {
         dispatch(handleOpenPopup(popupInfo))
     }
 
+    unsetEditing= () => {
+        this.setState(() => ({
+            editing: false,
+        }))
+        document.removeEventListener('click', this.unsetEditing)
+    }
+
     fileNameLongClick = (evt) => {
          evt.preventDefault()
          evt.stopPropagation()
@@ -127,7 +130,7 @@ class FileComponent extends React.Component {
             ext,
         } = file
 
-        const { editing, width} = this.state
+        const { editing } = this.state
 
         const transitionTime = index * 0.5
 
@@ -161,9 +164,11 @@ class FileComponent extends React.Component {
                         <FileEditNameContainer>
                             <FileEditName
                                 onClick={absorbEvent}
+                                onContextMenu={absorbEvent}
                                 onBlur={this.editTextBlurCallback}
                                 value={displayName}
-                                width={width}
+                                width={this.width}
+                                ref={this.setFocusEditText.bind(this)}
                                 >
                             </FileEditName>
                         </FileEditNameContainer>                        
@@ -203,7 +208,9 @@ class FileComponent extends React.Component {
                         editing === true
                         ? <GridFile.EditName
                             onClick={absorbEvent}
+                            onContextMenu={absorbEvent}
                             onBlur={this.editTextBlurCallback}
+                            ref={this.setFocusEditText.bind(this)}
                             value={displayName}>
                         </GridFile.EditName>
                         : <GridFile.Name
