@@ -7,6 +7,10 @@ import { createStore } from 'redux'
 import reducer from '../reducers'
 import middleware from '../middleware'
 import { filterOutParentDirectory } from '../utils'
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
+import storage from 'redux-persist/lib/storage'
+import { PersistGate } from 'redux-persist/lib/integration/react'
+import { persistStore, persistReducer } from 'redux-persist'
 
 console.log(window.__INITIAL__DATA__)
 
@@ -24,12 +28,22 @@ let initialState = {
     }
 }
 
-const store = createStore(reducer, initialState, middleware)
+const persistConfig = {
+    key: 'root',
+    storage: storage,
+    stateReconciler: autoMergeLevel2 // see "Merge Process" section for details.
+   };
+
+const pReducer = persistReducer(persistConfig, reducer);
+const store = createStore(pReducer, initialState, middleware)
+const persistor = persistStore(store)
 
 ReactDom.hydrate(
     <Router>
         <Provider store={store}>
-            <App />
+            <PersistGate persistor={persistor}>
+                <App />
+            </PersistGate>            
         </Provider>
     </Router>
     ,
