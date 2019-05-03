@@ -2,6 +2,7 @@ import { FETCH_DIRECTORY, SORT_BY_MODIFIED_TIME, SORT_BY_NAME, SORT_AGAIN, SORT_
 import { sortByModifiedTime, sortByName, sortBySize, filterByKeywords } from '../utils'
 
 export default function currentDirectory (state = {}, action) {
+    console.log("currentDirectory", action.type)
     switch (action.type) {
         case FETCH_DIRECTORY :
             return {

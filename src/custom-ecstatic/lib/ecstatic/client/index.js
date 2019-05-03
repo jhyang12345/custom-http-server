@@ -31,7 +31,8 @@ let initialState = {
 const persistConfig = {
     key: 'root',
     storage: storage,
-    stateReconciler: autoMergeLevel2 // see "Merge Process" section for details.
+    stateReconciler: autoMergeLevel2, // see "Merge Process" section for details.
+    blacklist: ["currentDirectory"]
    };
 
 const pReducer = persistReducer(persistConfig, reducer);
