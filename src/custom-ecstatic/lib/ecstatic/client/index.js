@@ -38,7 +38,7 @@ const pReducer = persistReducer(persistConfig, reducer);
 const store = createStore(pReducer, initialState, middleware)
 const persistor = persistStore(store)
 
-ReactDom.hydrate(
+ReactDom.render(
     <Router>
         <Provider store={store}>
             <PersistGate persistor={persistor}>
