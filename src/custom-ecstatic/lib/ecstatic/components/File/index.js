@@ -33,7 +33,9 @@ export const FileName = styled.span`
 export const FileNameContainer = styled.div`
     line-height: 60px;
     flex: 1;
+    min-width: 0;
 `
+// need to add min-width to prevent flex item from overflowing container
 
 export const FileEditNameContainer = styled.div`
     flex: 1;
