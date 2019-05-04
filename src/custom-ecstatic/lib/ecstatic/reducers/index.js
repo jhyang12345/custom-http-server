@@ -9,7 +9,8 @@ import storage from 'redux-persist/lib/storage'
 const curDirConfig = {
     key: 'currentDirectory',
     storage: storage,
-    blacklist: ["pathName", "keyword", "contents", "visibleContent"]
+    blacklist: ["pathName", "keyword", "contents", "visibleContent"],
+    whitelist: ["method", "reverse"],
 }
 
 export default combineReducers({
