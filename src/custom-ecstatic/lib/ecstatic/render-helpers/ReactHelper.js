@@ -81,7 +81,7 @@ class ReactHelper {
         const reactString = renderToString(
             <StaticRouter>
                 <Provider store={store}>
-                    <App />
+                    {/* <App /> */}
                 </Provider>
             </StaticRouter>
         )
