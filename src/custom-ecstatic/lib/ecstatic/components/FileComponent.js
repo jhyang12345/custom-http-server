@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter, Redirect} from 'react-router-dom'
 import Moment from "react-moment"
 import { bytesToSize, absorbEvent } from "../utils"
-import { FileWrapper, FileName, FileEditName,  FileIcon, FileSize, FileModifiedDate, FileEditNameContainer, FileNameContainer } from "./File"
+import File from "./File"
 import GridFile, { GridFileEditName } from "./GridFile"
 import { handleOpenPopup } from '../actions/optionPopup'
 import prettyFileIcons from '../pretty-file-icons'
@@ -147,22 +147,22 @@ class FileComponent extends React.Component {
             // <Redirect>
                 displayMode === LIST_MODE
                 ?
-              (<FileWrapper
+              (<File.Wrapper
                     className="block-copy"
                     href={"./" + displayName}
                     onClick={this.handleClick}
                     onContextMenu={this.handleRightClick}
                     visible={true}
                     index={index}>
-                    <FileIcon
+                    <File.Icon
                         fileIcon={fileIcon}
                         displayMode={displayMode}
                     />
                     {
                         editing === true
                         ? 
-                        <FileEditNameContainer>
-                            <FileEditName
+                        <File.EditNameContainer>
+                            <File.EditName
                                 onClick={absorbEvent}
                                 onContextMenu={absorbEvent}
                                 onBlur={this.editTextBlurCallback}
@@ -170,27 +170,27 @@ class FileComponent extends React.Component {
                                 width={this.width}
                                 ref={this.setFocusEditText.bind(this)}
                                 >
-                            </FileEditName>
-                        </FileEditNameContainer>                        
-                        : <FileNameContainer>
-                            <FileName
+                            </File.EditName>
+                        </File.EditNameContainer>                        
+                        : <File.NameContainer>
+                            <File.Name
                             onContextMenu={this.fileNameLongClick}
                             ref={this.setFileNameNode.bind(this)}
                             >
                                 {displayName}
-                            </FileName>
-                        </FileNameContainer>
+                            </File.Name>
+                        </File.NameContainer>
                     }
-                    <FileSize>
+                    <File.Size>
                         {bytesToSize(stat.size)}
-                    </FileSize>
-                    <FileModifiedDate>
+                    </File.Size>
+                    <File.ModifiedDate>
                         <Moment
                             format="YYYY-MM-DD HH:mm">
                             {stat.mtime}
                         </Moment>
-                    </FileModifiedDate>
-                </FileWrapper>)
+                    </File.ModifiedDate>
+                </File.Wrapper>)
                 :
                 (
                 <GridFile.Wrapper
@@ -200,7 +200,7 @@ class FileComponent extends React.Component {
                     onContextMenu={this.handleRightClick}
                     visible={true}
                     index={index}>
-                    <FileIcon
+                    <File.Icon
                         fileIcon={fileIcon}
                         displayMode={displayMode}
                     />

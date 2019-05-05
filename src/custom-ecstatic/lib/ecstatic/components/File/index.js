@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 import FileIcon from './FileIcon'
-import Moment from 'react-moment'
 
-export const FileWrapper = styled.a`
+const FileWrapper = styled.a`
     color: inherit; /* blue colors for links too */
     text-decoration: inherit; /* no underline */
     display: flex;
@@ -18,7 +17,7 @@ export const FileWrapper = styled.a`
     }
 `
 
-export const FileName = styled.span`
+const FileName = styled.span`
     display: inline-block;
     max-width: 100%;
     font-size: 1.2em;    
@@ -30,18 +29,18 @@ export const FileName = styled.span`
     text-overflow: ellipsis;    
 `
 
-export const FileNameContainer = styled.div`
+const FileNameContainer = styled.div`
     line-height: 60px;
     flex: 1;
     min-width: 0;
 `
 // need to add min-width to prevent flex item from overflowing container
 
-export const FileEditNameContainer = styled.div`
+const FileEditNameContainer = styled.div`
     flex: 1;
 `
 
-export const FileEditName = styled.input.attrs({
+const FileEditName = styled.input.attrs({
     type: 'text',
     spellCheck: "false",
 })`
@@ -59,7 +58,7 @@ export const FileEditName = styled.input.attrs({
     width: ${props => props.width !== 0 ? props.width + "px": '100%'};
 `
 
-export const FileSize = styled.div`
+const FileSize = styled.div`
     width: 80px;
     line-height: 60px;
     font-size: 0.9em;
@@ -68,7 +67,7 @@ export const FileSize = styled.div`
     color: #999;
 `
 
-export const FileModifiedDate = styled.div`
+const FileModifiedDate = styled.div`
     font-size: 0.9em;
     width: 160px;
     line-height: 60px;
@@ -77,4 +76,15 @@ export const FileModifiedDate = styled.div`
     padding-right: 12px;
 `
 
-export  { FileIcon }
+const File = {
+    Icon: FileIcon,
+    Size: FileSize,
+    ModifiedDate: FileModifiedDate,
+    EditName: FileEditName,
+    EditNameContainer: FileEditNameContainer,
+    NameContainer: FileNameContainer,
+    Name: FileName,
+    Wrapper: FileWrapper,
+}
+
+export default File
