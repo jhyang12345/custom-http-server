@@ -51,10 +51,12 @@ export default function currentDirectory (state = {}, action) {
             }
         }
         case REHYDRATE : {
-            state = {
-                ...state,
-                method: action.payload.method,
-                reverse: action.payload.reverse,
+            if (action.payload !== undefined) {
+                state = {
+                    ...state,
+                    method: action.payload.method,
+                    reverse: action.payload.reverse,
+                }
             }
             return {
                 ...state,
