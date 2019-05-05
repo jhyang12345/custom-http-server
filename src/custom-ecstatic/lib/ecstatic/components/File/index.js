@@ -41,14 +41,16 @@ export const FileEditNameContainer = styled.div`
     flex: 1;
 `
 
-export const FileEditName = styled.input`
+export const FileEditName = styled.input.attrs({
+    type: 'text',
+    spellCheck: "false",
+})`
     display: inline-block;
     max-width: 100%;
     height: 48px;
     font-size: 1.2em;
     color: #555;
     line-height: 48px;
-    padding-right: 12px;
     margin: 6px 0px;
     padding-left: 3px;
     border-radius: 6px;

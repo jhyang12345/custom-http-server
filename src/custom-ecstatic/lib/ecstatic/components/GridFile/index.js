@@ -26,8 +26,15 @@ export const GridFileName = styled.div`
     padding: 1px 8px;
 `
 
-export const GridFileEditName = styled.input`
+export const GridFileEditName = styled.input.attrs({
+    type: 'text',
+    spellCheck: "false",
+})`
+    display: inline-block;
+    text-align: center;
+    spellcheck: false;
     height: 30px;
+    width: 100%;
     line-height: 28px;
     vertical-align: middle;
     padding: 0px 8px 2px 8px;
