@@ -125,7 +125,7 @@ function mapStateToProps({currentDirectory, viewState}) {
     } = viewState
     return {
         visibleContent: sortByMethodAndReverse(
-            content, method, reverse
+            filterByKeywords(content, keyword) , method, reverse
         ),
         pathName,
         displayMode: viewState.displayMode,
