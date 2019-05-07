@@ -126,7 +126,7 @@ function separateContentByDirectory(content) {
 export function filterByKeywords(content, keywords) {
    let {directories, files} = separateContentByDirectory(content);
 
-   if(keywords.length === 0 || keywords.split().length === 0) return content 
+   if(keywords === undefined || keywords.length === 0 || keywords.split().length === 0) return content 
 
    directories = directories.filter((directory) => (nameContainsKeywords(directory.displayName, keywords)))
    files = files.filter((file) => (nameContainsKeywords(file.displayName, keywords)))

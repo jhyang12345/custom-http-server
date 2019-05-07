@@ -35,31 +35,11 @@ export default function currentDirectory (state = {}, action) {
                     ? !state.reverse
                     : false,
             }
-        case SORT_AGAIN: {
-            return {
-                ...state,
-                visibleContent: sortByCurrentState(state.content, state)
-            }
-        }
-        case REHYDRATE : {
-            if (action.payload !== undefined) {
-                state = {
-                    ...state,
-                    method: action.payload.method,
-                    reverse: action.payload.reverse,
-                }
-            }
-            return {
-                ...state,
-                visibleContent: sortByCurrentState(state.content, state)
-            }
-        }
         case SORT_AGAIN_WITH_NEW: {
             return {
                 ...state,
                 ...action.currentDirectory,
                 keyword: "",
-                visibleContent: sortByCurrentState(action.currentDirectory.content, state)
             }
 
         }            
@@ -67,7 +47,6 @@ export default function currentDirectory (state = {}, action) {
             return {
                 ...state,
                 keyword: action.keyword,
-                visibleContent: sortByCurrentState(filterByKeywords(state.content, action.keyword), state),
             }
         default:
             return state

@@ -6,7 +6,7 @@ import FileComponent from '../FileComponent'
 import FileList from '../FileList'
 import { handleFetchDirectory } from '../../actions/currentDirectory'
 import { scrollInAction } from '../../actions/viewState'
-import { sortByMethodAndReverse } from '../../utils'
+import { sortByMethodAndReverse, filterByKeywords } from '../../utils'
 
 const maxWidth = 1200
 
@@ -123,7 +123,6 @@ function mapStateToProps({currentDirectory, viewState}) {
         scrollTop,
         scrollInActionFlag,
     } = viewState
-    console.log(sortByMethodAndReverse)
     return {
         visibleContent: sortByMethodAndReverse(
             content, method, reverse
