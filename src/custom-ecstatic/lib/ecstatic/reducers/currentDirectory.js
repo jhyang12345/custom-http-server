@@ -84,15 +84,19 @@ export default function currentDirectory (state = {}, action) {
 }
 
 function sortByCurrentState(content, state) {
-    switch (state.method) {
+    return sortByMethodAndReverse(content, state.method, state.reverse)
+}
+
+function sortByMethodAndReverse(content, method, reverse) {
+    switch (method) {
         case "modified" :
-            return [...sortByModifiedTime(content, state.reverse)]
+            return [...sortByModifiedTime(content, reverse)]
             
         case "name" :
-            return [...sortByName(content, state.reverse)]                            
+            return [...sortByName(content, reverse)]
             
         case "size" :
-            return [...sortBySize(content, state.reverse)]        
+            return [...sortBySize(content, reverse)]
     }
     return content
 }
