@@ -15,9 +15,6 @@ export default function currentDirectory (state = {}, action) {
             return {
                 ...state,
                 method: "modified",
-                visibleContent: state.method == "modified" 
-                    ? [...sortByModifiedTime(state.visibleContent, !state.reverse)]
-                    : [...sortByModifiedTime(state.visibleContent, false)],
                 reverse: state.method == "modified"
                     ? !state.reverse
                     : false,
@@ -26,9 +23,6 @@ export default function currentDirectory (state = {}, action) {
             return {
                 ...state,
                 method: "name",
-                visibleContent: state.method == "name"
-                    ? [...sortByName(state.visibleContent, !state.reverse)]
-                    : [...sortByName(state.visibleContent, false)],
                 reverse: state.method == "name"
                     ? !state.reverse
                     : false,
@@ -37,9 +31,6 @@ export default function currentDirectory (state = {}, action) {
             return {
                 ...state,
                 method: "size",
-                visibleContent: state.method == "size"
-                    ? [...sortBySize(state.visibleContent, !state.reverse)]
-                    : [...sortBySize(state.visibleContent, false)],
                 reverse: state.method == "size"
                     ? !state.reverse
                     : false,
