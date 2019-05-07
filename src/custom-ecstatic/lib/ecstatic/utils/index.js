@@ -96,6 +96,20 @@ export function sortBySize(content, reverse=false) {
    return [...directories, ...files]
 }
 
+export function sortByMethodAndReverse(content, method, reverse) {
+   switch (method) {
+       case "modified" :
+           return [...sortByModifiedTime(content, reverse)]
+           
+       case "name" :
+           return [...sortByName(content, reverse)]
+           
+       case "size" :
+           return [...sortBySize(content, reverse)]
+   }
+   return content
+}
+
 function separateContentByDirectory(content) {
    let directories = []
    let files = []

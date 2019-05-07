@@ -6,6 +6,7 @@ import FileComponent from '../FileComponent'
 import FileList from '../FileList'
 import { handleFetchDirectory } from '../../actions/currentDirectory'
 import { scrollInAction } from '../../actions/viewState'
+import { sortByMethodAndReverse } from '../../utils'
 
 const maxWidth = 1200
 
@@ -117,13 +118,16 @@ class FilesContainerComponent extends React.Component {
 }
 
 function mapStateToProps({currentDirectory, viewState}) {
-    const { pathName, keyword } = currentDirectory
+    const { pathName, keyword, method, reverse, content } = currentDirectory
     const {
         scrollTop,
         scrollInActionFlag,
     } = viewState
+    console.log(sortByMethodAndReverse)
     return {
-        visibleContent: currentDirectory.visibleContent,
+        visibleContent: sortByMethodAndReverse(
+            content, method, reverse
+        ),
         pathName,
         displayMode: viewState.displayMode,
         keyword,
