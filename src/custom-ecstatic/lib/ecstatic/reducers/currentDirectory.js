@@ -11,6 +11,14 @@ export default function currentDirectory (state = {}, action) {
                 ...action.currentDirectory,
                 visibleContent: action.currentDirectory.content,
             }
+        case SORT :
+            return {
+                ...state,
+                method: action.method,
+                reverse: state.method == action.method
+                ? !state.reverse
+                : false,
+            }
         case SORT_BY_MODIFIED_TIME :
             return {
                 ...state,

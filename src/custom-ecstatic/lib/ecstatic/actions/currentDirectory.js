@@ -1,4 +1,5 @@
 export const FETCH_DIRECTORY = 'FETCH_DIRECTORY'
+export const SORT = 'SORT'
 export const SORT_BY_MODIFIED_TIME = 'SORT_BY_MODIFIED_TIME'
 export const SORT_BY_SIZE = 'SORT_BY_SIZE'
 export const SORT_BY_NAME = 'SORT_BY_NAME'
@@ -54,6 +55,13 @@ export function createSortBySizeAction() {
 export function createSortAgainAction() {
     return {
         type: SORT_AGAIN,
+    }
+}
+
+function createSortAction(method) {
+    return {
+        type: SORT,
+        method
     }
 }
 
