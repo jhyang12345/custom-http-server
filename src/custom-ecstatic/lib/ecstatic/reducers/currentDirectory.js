@@ -19,30 +19,6 @@ export default function currentDirectory (state = {}, action) {
                 ? !state.reverse
                 : false,
             }
-        case SORT_BY_MODIFIED_TIME :
-            return {
-                ...state,
-                method: "modified",
-                reverse: state.method == "modified"
-                    ? !state.reverse
-                    : false,
-            }
-        case SORT_BY_NAME:
-            return {
-                ...state,
-                method: "name",
-                reverse: state.method == "name"
-                    ? !state.reverse
-                    : false,
-            }
-        case SORT_BY_SIZE:
-            return {
-                ...state,
-                method: "size",
-                reverse: state.method == "size"
-                    ? !state.reverse
-                    : false,
-            }
         case SORT_AGAIN_WITH_NEW: {
             return {
                 ...state,

@@ -35,21 +35,15 @@ export function handleFetchDirectory(directory) {
 }
 
 export function createSortByModifiedTimeAction() {
-    return {
-        type: SORT_BY_MODIFIED_TIME,
-    }
+    return createSortAction("modified")
 }
 
 export function createSortByNameAction() {
-    return {
-        type: SORT_BY_NAME,
-    }
+    return createSortAction("name")
 }
 
 export function createSortBySizeAction() {
-    return {
-        type: SORT_BY_SIZE,
-    }
+    return createSortAction("size")
 }
 
 export function createSortAgainAction() {
