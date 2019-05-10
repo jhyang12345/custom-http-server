@@ -6,7 +6,7 @@ import FileComponent from '../FileComponent'
 import FileList from '../FileList'
 import { handleFetchDirectory } from '../../actions/currentDirectory'
 import { scrollInAction } from '../../actions/viewState'
-import { sortByMethodAndReverse, filterByKeywords } from '../../utils'
+import { sortByMethodAndReverse, filterByKeywords, fileListEqual } from '../../utils'
 
 const maxWidth = 1200
 
@@ -38,12 +38,13 @@ class FilesContainerComponent extends React.Component {
         const { dispatch } = this.props        
         if(prevProps.location.pathname != this.props.location.pathname) {
             dispatch(handleFetchDirectory(this.props.location.pathname))
-        } else if(prevProps.visibleContent != this.props.visibleContent || 
+        } else if(!fileListEqual(prevProps.visibleContent, this.props.visibleContent) || 
             prevProps.keyword != this.props.keyword || 
             prevProps.displayMode != this.props.displayMode) {
             this.setState(() => ({
                 visible: false
             }))
+            console.log("Setting visibility!", this.props.visibleContent, this.props.keyword, this.props.displayMode)
             setTimeout(this.transitionEndCallback.bind(this), 300);
         }
         if(this.props.scrollInActionFlag === true) {

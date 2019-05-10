@@ -188,3 +188,15 @@ export function getUnmatchingKeys(a, b) {
    }
    return diffKeys
 }
+
+export function fileListEqual(a, b) {
+   if(a.length !== b.length) {
+      return false
+   }
+   for (let i = 0; i < a.length; ++i) {
+      if(a[i]["displayName"] !== b[i]["displayName"]) {
+         return false
+      }
+   }
+   return true
+}
