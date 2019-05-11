@@ -7,7 +7,7 @@ export const SORT_AGAIN = 'SORT_AGAIN'
 export const SORT_AGAIN_WITH_NEW = 'SORT_AGAIN_WITH_NEW'
 export const SET_SEARCH_KEYWORD = "SET_SEARCH_KEYWORD";
 import { fetchDirectory } from '../utils'
-import { showLoading, hideLoading } from 'react-redux-loading'
+import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
 export function setDirectory(currentDirectory) {
     return {
@@ -18,7 +18,7 @@ export function setDirectory(currentDirectory) {
 
 export function handleFetchDirectory(directory) {
     return (dispatch) => {
-        // dispatch(showLoading())
+        dispatch(showLoading())
         return fetchDirectory(directory)
         .then(result => {
             return result
@@ -30,7 +30,7 @@ export function handleFetchDirectory(directory) {
             // empty keyword
   
           })
-        //   .then(() => dispatch(hideLoading()));
+          .then(() => dispatch(hideLoading()));
     }
 }
 

@@ -7,6 +7,7 @@ import FileList from '../FileList'
 import { handleFetchDirectory } from '../../actions/currentDirectory'
 import { scrollInAction } from '../../actions/viewState'
 import { sortByMethodAndReverse, filterByKeywords, fileListEqual } from '../../utils'
+import LoadingBar from "react-redux-loading-bar";
 
 const maxWidth = 1200
 
@@ -44,7 +45,6 @@ class FilesContainerComponent extends React.Component {
             this.setState(() => ({
                 visible: false
             }))
-            console.log("Setting visibility!", this.props.visibleContent, this.props.keyword, this.props.displayMode)
             setTimeout(this.transitionEndCallback.bind(this), 300);
         }
         if(this.props.scrollInActionFlag === true) {
@@ -97,7 +97,7 @@ class FilesContainerComponent extends React.Component {
                 <FileList.Component 
                     pathName={pathName}
                     width={width + "px"}    
-                    />                    
+                    />
                 <FilesContainer
                     width={width + "px"}
                     layoutmode={displayMode}

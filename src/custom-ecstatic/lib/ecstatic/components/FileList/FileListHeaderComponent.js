@@ -5,13 +5,15 @@ import FileList from '../FileList'
 import SearchComponent from '../SearchComponent'
 import { stripSlashes } from '../../utils'
 import { createSortByModifiedTimeAction, createSortByNameAction, createSortBySizeAction } from '../../actions/currentDirectory'
-import LoadingBar from "react-redux-loading";
+import LoadingBar from "react-redux-loading-bar";
 
 class FileListHeaderComponent extends React.Component {
     render() {
         const { pathName , loadingBar} = this.props
+        console.log(loadingBar)
         return (
             <Fragment>
+                <LoadingBar showFastActions loadingBar/>
                 <FileListHeader
                     {...this.props}>
                     <div className="directory-header">
