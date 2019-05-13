@@ -65,6 +65,7 @@ const FileSize = styled.div`
     padding: 0px 12px;
     text-align: right;
     color: #999;
+    overflow: hidden;
 `
 
 const FileModifiedDate = styled.div`

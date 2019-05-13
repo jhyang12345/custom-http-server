@@ -23,14 +23,19 @@ export function handleFetchDirectory(directory) {
         .then(result => {
             return result
         })     
-          .then(result => {
-            dispatch(
-              createSortAgainWithNewAction(result.currentDirectory)
-            );
-            // empty keyword
-  
-          })
-          .then(() => dispatch(hideLoading()));
+        .then(result => {
+        dispatch(
+            createSortAgainWithNewAction(result.currentDirectory)
+        );
+        // empty keyword
+
+        })
+        .then(() => {
+            return new Promise((res, rej) => {
+                setTimeout(() => res(), 1000)
+            })
+        })
+        .then(() => dispatch(hideLoading()));
     }
 }
 
