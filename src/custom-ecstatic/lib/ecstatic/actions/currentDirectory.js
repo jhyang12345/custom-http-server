@@ -24,16 +24,7 @@ export function handleFetchDirectory(directory) {
             return result
         })     
         .then(result => {
-        dispatch(
-            createSortAgainWithNewAction(result.currentDirectory)
-        );
-        // empty keyword
-
-        })
-        .then(() => {
-            return new Promise((res, rej) => {
-                setTimeout(() => res(), 1000)
-            })
+            dispatch(createSortAgainWithNewAction(result.currentDirectory));
         })
         .then(() => dispatch(hideLoading()));
     }
