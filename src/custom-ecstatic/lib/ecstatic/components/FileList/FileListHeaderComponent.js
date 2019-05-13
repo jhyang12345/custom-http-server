@@ -9,13 +9,13 @@ import LoadingBar from "react-redux-loading-bar";
 
 class FileListHeaderComponent extends React.Component {
     render() {
-        const { pathName , loadingBar} = this.props
+        const { pathName } = this.props
         
         return (
             <Fragment>
                 <FileListHeader
                     {...this.props}>
-                    <LoadingBar loadingBar showFastActions={true}/>
+                    <LoadingBar style={{backgroundColor: "#92b4f2"}} showFastActions={true}/>
                     <div className="directory-header">
                         Serving 
                         {/* <SubDirectoryHolderComponent> */}
