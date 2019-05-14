@@ -27,8 +27,10 @@ class FilesContainerComponent extends React.Component {
     }
 
     componentDidMount() {
+        const { dispatch } = this.props;    
         this.updateWindowDimensions()
         window.addEventListener('resize', this.updateWindowDimensions)   
+        dispatch(handleFetchDirectory(this.props.location.pathname));
     }
 
     componentWillUnmount() {
