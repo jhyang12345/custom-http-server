@@ -9,7 +9,6 @@ export default function currentDirectory (state = {}, action) {
             return {
                 ...state,
                 ...action.currentDirectory,
-                visibleContent: action.currentDirectory.content,
             }
         case SORT :
             return {
@@ -18,15 +17,7 @@ export default function currentDirectory (state = {}, action) {
                 reverse: state.method == action.method
                 ? !state.reverse
                 : false,
-            }
-        case SORT_AGAIN_WITH_NEW: {
-            return {
-                ...state,
-                ...action.currentDirectory,
-                keyword: "",
-            }
-
-        }            
+            }        
         case SET_SEARCH_KEYWORD: 
             return {
                 ...state,

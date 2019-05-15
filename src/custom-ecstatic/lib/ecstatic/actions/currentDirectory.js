@@ -24,7 +24,7 @@ export function handleFetchDirectory(directory) {
             return result
         })     
         .then(result => {
-            dispatch(createSortAgainWithNewAction(result.currentDirectory));
+            dispatch(setDirectory(result.currentDirectory));
         })
         .then(() => dispatch(hideLoading()));
     }
