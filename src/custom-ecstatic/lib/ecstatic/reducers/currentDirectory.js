@@ -3,7 +3,6 @@ import { sortByModifiedTime, sortByName, sortBySize, filterByKeywords, sortByMet
 import { REHYDRATE } from 'redux-persist';
 
 export default function currentDirectory (state = {}, action) {
-    console.log("currentDirectory", action.type)
     switch (action.type) {
         case FETCH_DIRECTORY :
             if (action.currentDirectory !== undefined) {

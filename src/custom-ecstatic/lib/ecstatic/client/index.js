@@ -11,9 +11,6 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 import storage from 'redux-persist/lib/storage'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import { persistStore, persistReducer } from 'redux-persist'
-import { createSortAgainAction, createSortAgainWithNewAction } from '../actions/currentDirectory';
-
-console.log(window.__INITIAL__DATA__)
 
 // initialData = {
 //     pathName, content
