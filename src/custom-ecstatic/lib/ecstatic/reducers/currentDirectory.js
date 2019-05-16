@@ -10,6 +10,8 @@ export default function currentDirectory (state = {}, action) {
                     ...action.currentDirectory,
                 }
             } else {
+                // replace history in case of failure?.?
+                history.replace(state.pathName)
                 return state
             }            
         case SORT :

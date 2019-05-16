@@ -7,7 +7,6 @@ import FileList from '../FileList'
 import { handleFetchDirectory } from '../../actions/currentDirectory'
 import { scrollInAction } from '../../actions/viewState'
 import { sortByMethodAndReverse, filterByKeywords, fileListEqual } from '../../utils'
-import LoadingBar from "react-redux-loading-bar";
 
 const maxWidth = 1200
 
