@@ -7,10 +7,9 @@ import { handleFetchDirectory } from "../../actions/currentDirectory";
 class SubDirectoryComponent extends React.Component {
     handleClick = (evt) => {
         evt.preventDefault()
-        const { actualPath, history, dispatch } = this.props
-
-        history.push(actualPath);     
-        // dispatch(handleFetchDirectory(actualPath))
+        const { actualPath, dispatch } = this.props
+  
+        dispatch(handleFetchDirectory(actualPath))
     }
 
     render() {

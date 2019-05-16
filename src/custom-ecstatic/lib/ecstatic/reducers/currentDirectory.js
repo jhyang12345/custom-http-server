@@ -5,6 +5,9 @@ export default function currentDirectory (state = {}, action) {
     switch (action.type) {
         case FETCH_DIRECTORY :
             if (action.currentDirectory !== undefined) {
+                // push history only when currentDirectory is properly loaded
+                console.log("Loaded:", action.currentDirectory.pathName)
+                history.push(action.currentDirectory.pathName)
                 return {
                     ...state,
                     ...action.currentDirectory,

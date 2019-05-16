@@ -40,7 +40,7 @@ class FilesContainerComponent extends React.Component {
     componentDidUpdate(prevProps) {
         const { dispatch } = this.props        
         if(prevProps.location.pathname != this.props.location.pathname) {
-            dispatch(handleFetchDirectory(this.props.location.pathname))
+            // dispatch(handleFetchDirectory(this.props.location.pathname))
         } else if(!fileListEqual(prevProps.visibleContent, this.props.visibleContent) || 
             prevProps.keyword != this.props.keyword || 
             prevProps.displayMode != this.props.displayMode) {

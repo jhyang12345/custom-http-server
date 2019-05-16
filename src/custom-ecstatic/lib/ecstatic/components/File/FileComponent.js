@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom'
 import Moment from "react-moment"
 import File from "../File"
 import GridFile from "../GridFile"
+import { handleFetchDirectory } from '../../actions/currentDirectory'
 import { handleOpenPopup } from '../../actions/optionPopup'
 import prettyFileIcons from '../../pretty-file-icons'
 import { stripSlashes, bytesToSize, absorbEvent } from '../../utils'
@@ -51,7 +52,7 @@ class FileComponent extends React.Component {
     }
 
     handleClick = (evt) => {
-        const { file, history } = this.props
+        const { file, dispatch } = this.props
         let {
             stat,
             displayName,
@@ -73,8 +74,7 @@ class FileComponent extends React.Component {
           displayName
         );
         
-        history.push(newPath)
-        // dispatch(handleFetchDirectory(newPath))
+        dispatch(handleFetchDirectory(href))
     }
 
     handleRightClick = (evt) => {
