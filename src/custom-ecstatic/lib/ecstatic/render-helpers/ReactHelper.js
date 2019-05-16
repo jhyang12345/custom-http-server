@@ -1,15 +1,6 @@
 const styles = require('../show-dir/styles');
 const he = require('he');
-const permsToString = require('../show-dir/perms-to-string');
-const sizeToString = require('../show-dir/size-to-string');
-import React from 'react'
-import { Provider } from 'react-redux'
-import { StaticRouter } from "react-router-dom"
-import { createStore } from 'redux'
-import reducer from '../reducers'
-import middleware from '../middleware'
 import { renderToString } from 'react-dom/server'
-import App from "../components/App"
 import { ServerStyleSheet } from 'styled-components'
 import { filterOutParentDirectory } from '../utils'
 
@@ -76,14 +67,9 @@ class ReactHelper {
             },
         }
 
-        const store = createStore(reducer, initialState, middleware)
 
         const reactString = renderToString(
-            <StaticRouter>
-                <Provider store={store}>
-                    {/* <App /> */}
-                </Provider>
-            </StaticRouter>
+            
         )
 
         const sheet = new ServerStyleSheet(); // <-- creating out stylesheet

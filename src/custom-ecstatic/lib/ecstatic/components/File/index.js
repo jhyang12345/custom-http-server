@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import FileIcon from './FileIcon'
+import FileComponent from './FileComponent'
 
 const FileWrapper = styled.a`
     color: inherit; /* blue colors for links too */
@@ -86,6 +87,7 @@ const File = {
     NameContainer: FileNameContainer,
     Name: FileName,
     Wrapper: FileWrapper,
+    Component: FileComponent
 }
 
 export default File

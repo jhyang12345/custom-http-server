@@ -1,5 +1,5 @@
 import { FETCH_DIRECTORY, SORT_BY_MODIFIED_TIME, SORT_BY_NAME, SORT, SORT_AGAIN, SORT_BY_SIZE, SET_SEARCH_KEYWORD, SORT_AGAIN_WITH_NEW } from '../actions/currentDirectory'
-import history from "./history.js"
+import history from "../history"
 
 export default function currentDirectory (state = {}, action) {
     switch (action.type) {
