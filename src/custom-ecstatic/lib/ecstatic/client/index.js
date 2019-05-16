@@ -11,7 +11,8 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 import storage from 'redux-persist/lib/storage'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import { persistStore, persistReducer } from 'redux-persist'
-import history from '../history'
+// import history from '../history'
+import { createBrowserHistory } from 'history'
 
 // initialData = {
 //     pathName, content
@@ -33,6 +34,8 @@ const persistConfig = {
     stateReconciler: autoMergeLevel2, // see "Merge Process" section for details.
     blacklist: ["currentDirectory", "loadingBar"]
 };
+
+const history = createBrowserHistory()
 
 const pReducer = persistReducer(persistConfig, reducer);
 const store = createStore(pReducer, initialState, middleware)
