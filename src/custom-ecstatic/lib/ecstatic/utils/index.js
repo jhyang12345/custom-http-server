@@ -149,6 +149,7 @@ export function filterOutParentDirectory(content) {
 
 export function fetchManager({ url, method, body, callback }) {
   // TODO: response status 를 자연스럽게 넘기기
+  console.log(`Request made for url: ${url}`)
   fetch(url, {
     method,
     body,
@@ -171,6 +172,10 @@ export function fetchDirectory(directory) {
    })
    .then(response => {
       return response.json()
+   })
+   .catch(error => {
+      console.log("Error")
+      return false
    })
 }
 

@@ -6,10 +6,14 @@ export default function currentDirectory (state = {}, action) {
     console.log("currentDirectory", action.type)
     switch (action.type) {
         case FETCH_DIRECTORY :
-            return {
-                ...state,
-                ...action.currentDirectory,
-            }
+            if (action.currentDirectory !== undefined) {
+                return {
+                    ...state,
+                    ...action.currentDirectory,
+                }
+            } else {
+                return state
+            }            
         case SORT :
             return {
                 ...state,

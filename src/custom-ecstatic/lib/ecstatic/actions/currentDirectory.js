@@ -18,6 +18,7 @@ export function setDirectory(currentDirectory) {
 
 export function handleFetchDirectory(directory) {
     return (dispatch) => {
+        console.log(`Fetching directory: ${directory}`)
         dispatch(showLoading())
         return fetchDirectory(directory)
         .then(result => {

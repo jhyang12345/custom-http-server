@@ -224,6 +224,8 @@ module.exports = function createMiddleware(_dir, _options) {
       return;
     }
 
+    // console.log("Current header:", req.headers)
+
     // TODO: This check is broken, which causes the 403 on the
     // expected 404.
     if (file.slice(0, root.length) !== root) {
@@ -341,7 +343,7 @@ module.exports = function createMiddleware(_dir, _options) {
 
 
     function statFile() {
-      fs.stat(file, (err, stat) => {     
+      fs.stat(file, (err, stat) => {
         if (err && (err.code === 'ENOENT' || err.code === 'ENOTDIR')) {
           if (req.statusCode === 404) {
             // This means we're already trying ./404.html and can not find it.
