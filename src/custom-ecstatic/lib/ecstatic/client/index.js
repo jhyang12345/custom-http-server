@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { Router } from 'react-router-dom'
 import App from '../components/App'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
@@ -11,6 +11,7 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 import storage from 'redux-persist/lib/storage'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import { persistStore, persistReducer } from 'redux-persist'
+import history from '../history'
 
 // initialData = {
 //     pathName, content
@@ -38,7 +39,7 @@ const store = createStore(pReducer, initialState, middleware)
 const persistor = persistStore(store)
 
 ReactDom.render(
-    <Router>
+    <Router history={history}>
         <Provider store={store}>
             <PersistGate persistor={persistor}>
                 <App />

@@ -1,6 +1,5 @@
 import { FETCH_DIRECTORY, SORT_BY_MODIFIED_TIME, SORT_BY_NAME, SORT, SORT_AGAIN, SORT_BY_SIZE, SET_SEARCH_KEYWORD, SORT_AGAIN_WITH_NEW } from '../actions/currentDirectory'
-import { sortByModifiedTime, sortByName, sortBySize, filterByKeywords, sortByMethodAndReverse } from '../utils'
-import { REHYDRATE } from 'redux-persist';
+import history from "./history.js"
 
 export default function currentDirectory (state = {}, action) {
     switch (action.type) {
@@ -31,9 +30,6 @@ export default function currentDirectory (state = {}, action) {
     }
 }
 
-function sortByCurrentState(content, state) {
-    return sortByMethodAndReverse(content, state.method, state.reverse)
-}
 
 // example object
 // {

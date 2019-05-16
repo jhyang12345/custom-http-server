@@ -56,6 +56,7 @@ class FileComponent extends React.Component {
         let {
             stat,
             displayName,
+            href
         } = file
 
         const isDir = stat.isDir
