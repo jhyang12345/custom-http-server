@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import { Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import App from '../components/App'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
@@ -39,7 +39,7 @@ const store = createStore(pReducer, initialState, middleware)
 const persistor = persistStore(store)
 
 ReactDom.render(
-    <Router history={history}>
+    <Router>
         <Provider store={store}>
             <PersistGate persistor={persistor}>
                 <App />

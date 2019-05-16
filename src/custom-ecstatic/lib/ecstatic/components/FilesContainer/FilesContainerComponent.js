@@ -2,7 +2,7 @@ import React, {Fragment} from "react"
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import FilesContainer from '../FilesContainer'
-import FileComponent from '../FileComponent'
+import File from '../File'
 import FileList from '../FileList'
 import { handleFetchDirectory } from '../../actions/currentDirectory'
 import { scrollInAction } from '../../actions/viewState'
@@ -107,7 +107,7 @@ class FilesContainerComponent extends React.Component {
                     ref={this.filesContainerRef}
                     >
                         {visibleContent.map((file, i) => (
-                            <FileComponent key={file.key}
+                            <File.Component key={file.key}
                                 file={file}
                                 index={i}
                                 displayMode={displayMode}

@@ -1,16 +1,15 @@
 import path from 'path'
 import React from "react"
 import { connect } from 'react-redux'
-import { withRouter, Redirect} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import Moment from "react-moment"
-import { bytesToSize, absorbEvent } from "../utils"
-import File from "./File"
-import GridFile, { GridFileEditName } from "./GridFile"
-import { handleOpenPopup } from '../actions/optionPopup'
-import prettyFileIcons from '../pretty-file-icons'
-import { stripSlashes, getUnmatchingKeys } from '../utils'
-import { LIST_MODE } from '../actions/viewState'
-import { handleFetchDirectory } from '../actions/currentDirectory';
+import File from "../File"
+import GridFile from "../GridFile"
+import { handleOpenPopup } from '../../actions/optionPopup'
+import prettyFileIcons from '../../pretty-file-icons'
+import { stripSlashes, bytesToSize, absorbEvent } from '../../utils'
+import { LIST_MODE } from '../../actions/viewState'
+
 
 class FileComponent extends React.Component {
     
