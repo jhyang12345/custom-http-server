@@ -1,3 +1,5 @@
+import queryString from 'query-string'
+
 export function bytesToSize(bytes) {
    var sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
    if (bytes == 0) return '';
@@ -136,10 +138,10 @@ export function filterByKeywords(content, keywords) {
 
 function nameContainsKeywords(fileName, keywords) {
    const words = keywords.split(" ")
-   let wordsInFileName = false;
+   let wordsInFileName = true
    for(let word of words) {
       if (word === "") continue
-      wordsInFileName = wordsInFileName || fileName.toLowerCase().includes(word.toLowerCase())
+      wordsInFileName = wordsInFileName && fileName.toLowerCase().includes(word.toLowerCase())
    }
    return wordsInFileName
 }
@@ -205,4 +207,13 @@ export function fileListEqual(a, b) {
       }
    }
    return true
+}
+
+export function getSearchQuery(history) {
+   const { location } = history
+   const parsed = queryString.parse(location.search)
+   if ("query" in parsed) {
+      return parsed["query"]
+   }
+   return ""
 }

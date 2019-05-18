@@ -4,9 +4,10 @@ import { withRouter } from 'react-router-dom'
 import FilesContainer from '../FilesContainer'
 import File from '../File'
 import FileList from '../FileList'
-import { handleFetchDirectory } from '../../actions/currentDirectory'
+import { handleFetchDirectory, setSearchKeyword } from '../../actions/currentDirectory'
 import { scrollInAction } from '../../actions/viewState'
 import { sortByMethodAndReverse, filterByKeywords, fileListEqual } from '../../utils'
+import { getSearchQuery } from "../../utils"
 
 const maxWidth = 1200
 
@@ -26,10 +27,15 @@ class FilesContainerComponent extends React.Component {
     }
 
     componentDidMount() {
-        const { dispatch } = this.props;    
+        const { dispatch, history, keyword } = this.props
         this.updateWindowDimensions()
         window.addEventListener('resize', this.updateWindowDimensions)   
         dispatch(handleFetchDirectory(this.props.location.pathname));
+        const searchQuery = getSearchQuery(history)
+        console.log("SearchQuery", searchQuery)
+        if(keyword !== searchQuery) {
+            dispatch(setSearchKeyword(searchQuery))
+        }
     }
 
     componentWillUnmount() {
@@ -37,7 +43,8 @@ class FilesContainerComponent extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { dispatch } = this.props        
+        const { dispatch } = this.props
+
         if(prevProps.location.pathname != this.props.location.pathname) {
             dispatch(handleFetchDirectory(this.props.location.pathname))
         } else if(!fileListEqual(prevProps.visibleContent, this.props.visibleContent) || 

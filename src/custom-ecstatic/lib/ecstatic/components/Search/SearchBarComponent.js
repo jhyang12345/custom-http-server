@@ -21,10 +21,10 @@ class SearchBarComponent extends React.Component {
         const { history } = this.props
         if(evt.key == 'Enter'){
             const searchText = evt.target.value
-            // history.push({
-            //     pathname: history.pathname,
-            //     search: `?query=${searchText}`,
-            // })
+            history.push({
+                pathname: history.pathname,
+                search: `?query=${searchText}`,
+            })
         }
     }
 
