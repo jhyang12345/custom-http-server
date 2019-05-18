@@ -32,7 +32,6 @@ class FilesContainerComponent extends React.Component {
         window.addEventListener('resize', this.updateWindowDimensions)   
         dispatch(handleFetchDirectory(this.props.location.pathname));
         const searchQuery = getSearchQuery(history)
-        console.log("SearchQuery", searchQuery)
         if(keyword !== searchQuery) {
             dispatch(setSearchKeyword(searchQuery))
         }
@@ -43,7 +42,7 @@ class FilesContainerComponent extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { dispatch } = this.props
+        const { dispatch, history } = this.props
 
         if(prevProps.location.pathname != this.props.location.pathname) {
             dispatch(handleFetchDirectory(this.props.location.pathname))
@@ -54,6 +53,10 @@ class FilesContainerComponent extends React.Component {
                 visible: false
             }))
             setTimeout(this.transitionEndCallback.bind(this), 300);
+        }
+        if(prevProps.location.search !== this.props.location.search) {
+            const searchQuery = getSearchQuery(history)
+            dispatch(setSearchKeyword(searchQuery))
         }
         if(this.props.scrollInActionFlag === true) {
             dispatch(scrollInAction(false))

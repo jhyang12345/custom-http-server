@@ -11,6 +11,7 @@ class SearchBarComponent extends React.Component {
         this.searchBarRef = React.createRef()
     }
 
+
     handleChange = (evt) => {
         const { dispatch } = this.props
         const searchText = evt.target.value

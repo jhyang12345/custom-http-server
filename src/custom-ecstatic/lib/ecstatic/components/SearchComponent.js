@@ -10,6 +10,28 @@ class SearchComponent extends React.Component {
         barRevealed: false,
     }
 
+    componentDidMount() {
+        const { keyword } = this.props
+        console.log("Keyword", keyword)
+        if(keyword !== "" && keyword !== undefined) {
+            console.log("Show bar!")
+            this.setState(() => ({
+                barRevealed: true,
+            }))
+        }
+    }
+
+    componentDidUpdate(prevProps, prevStates) {
+        const { keyword } = this.props
+        if(prevStates.barRevealed === false && 
+            prevProps.keyword !== keyword &&
+            keyword !== "" && keyword !== undefined) {
+            this.setState(() => ({
+                barRevealed: true,
+            }))
+        }
+    }
+
     handleFocus = () => {
         this.setState((prevState) => ({
             barRevealed: !prevState.barRevealed,
@@ -33,4 +55,10 @@ class SearchComponent extends React.Component {
     }
 }
 
-export default connect()(SearchComponent)
+function mapStateToProps({ currentDirectory }) {
+    return {
+        keyword: currentDirectory["keyword"],
+    }
+}
+
+export default connect(mapStateToProps)(SearchComponent)

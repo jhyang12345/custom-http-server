@@ -1,7 +1,11 @@
 import { FETCH_DIRECTORY, SORT_BY_MODIFIED_TIME, SORT_BY_NAME, SORT, SORT_AGAIN, SORT_BY_SIZE, SET_SEARCH_KEYWORD, SORT_AGAIN_WITH_NEW } from '../actions/currentDirectory'
 import history from "../history"
 
-export default function currentDirectory (state = {}, action) {
+const defaultState = {
+    keyword: ""
+}
+
+export default function currentDirectory (state = defaultState, action) {
     switch (action.type) {
         case FETCH_DIRECTORY :
             if (action.currentDirectory !== undefined) {
