@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { setSearchKeyword } from "../../actions/currentDirectory";
 
 class SearchBarComponent extends React.Component {
@@ -17,8 +18,13 @@ class SearchBarComponent extends React.Component {
     }
 
     handleEnter = (evt) => {
+        const { history } = this.props
         if(evt.key == 'Enter'){
             const searchText = evt.target.value
+            // history.push({
+            //     pathname: history.pathname,
+            //     search: `?query=${searchText}`,
+            // })
         }
     }
 
@@ -81,4 +87,4 @@ function mapStateToProps({ currentDirectory }) {
     }
 }
 
-export default connect(mapStateToProps)(SearchBarComponent)
+export default withRouter(connect(mapStateToProps)(SearchBarComponent))

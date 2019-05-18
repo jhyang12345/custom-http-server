@@ -11,7 +11,8 @@ export default function currentDirectory (state = {}, action) {
                 }
             } else {
                 // replace history in case of failure?.?
-                history.replace(state.pathName)
+                // history.replace(state.pathName)
+                // history.goBack()
                 return state
             }            
         case SORT :

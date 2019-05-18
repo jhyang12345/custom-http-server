@@ -135,9 +135,10 @@ export function filterByKeywords(content, keywords) {
 }
 
 function nameContainsKeywords(fileName, keywords) {
-   const words = keywords.split()
+   const words = keywords.split(" ")
    let wordsInFileName = false;
    for(let word of words) {
+      if (word === "") continue
       wordsInFileName = wordsInFileName || fileName.toLowerCase().includes(word.toLowerCase())
    }
    return wordsInFileName
