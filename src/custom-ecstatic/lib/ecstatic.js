@@ -122,8 +122,7 @@ module.exports = function createMiddleware(_dir, _options) {
       mime.define(opts.mimeTypes);
     }
   }
-
-  console.log("Dir, Opts", dir, opts)
+  
   return middleware.bind({dir, opts})
 };
 
