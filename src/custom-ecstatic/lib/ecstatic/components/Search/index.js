@@ -3,9 +3,9 @@ import SearchButtonComponent from './SearchButtonComponent'
 import SearchBox from './SearchBox'
 
 const Search = {
-    SearchBar: SearchBarComponent,
-    SearchButton: SearchButtonComponent,
-    SearchBox: SearchBox,
+    Bar: SearchBarComponent,
+    Button: SearchButtonComponent,
+    Box: SearchBox,
 }
 
 export default Search

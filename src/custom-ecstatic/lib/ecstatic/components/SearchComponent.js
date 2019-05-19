@@ -42,15 +42,15 @@ class SearchComponent extends React.Component {
     render() {
         const { barRevealed } = this.state
         return (
-            <Search.SearchBox>
-                <Search.SearchBar 
+            <Search.Box>
+                <Search.Bar 
                     revealed={barRevealed}
                 />
-                <Search.SearchButton
+                <Search.Button
                     revealed={barRevealed}
                     handleFocus={this.handleFocus}
                     />
-            </Search.SearchBox>
+            </Search.Box>
         )
     }
 }
