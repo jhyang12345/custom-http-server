@@ -12,7 +12,6 @@ class SearchComponent extends React.Component {
 
     componentDidMount() {
         const { keyword } = this.props
-        console.log("Keyword", keyword)
         if(keyword !== "" && keyword !== undefined) {
             console.log("Show bar!")
             this.setState(() => ({

@@ -31,10 +31,6 @@ class FilesContainerComponent extends React.Component {
         this.updateWindowDimensions()
         window.addEventListener('resize', this.updateWindowDimensions)   
         dispatch(handleFetchDirectory(this.props.location.pathname));
-        const searchQuery = getSearchQuery(history)
-        if(keyword !== searchQuery) {
-            dispatch(setSearchKeyword(searchQuery))
-        }
     }
 
     componentWillUnmount() {

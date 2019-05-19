@@ -24,6 +24,7 @@ let initialState = {
         method: "name",
         reverse: false,
         visibleContent: filterOutParentDirectory(initialData.content),
+        keyword: "",
     }
 }
 

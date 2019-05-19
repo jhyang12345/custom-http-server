@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react"
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 import FilesContainer from './FilesContainer'
@@ -7,6 +8,8 @@ import PopupComponent from './PopupComponent'
 import { Normalize } from 'styled-normalize'
 import FloatingButtonComponent from "./FloatingButtonComponent"
 import OptionsComponent from './OptionsComponent'
+import { setSearchKeyword } from '../actions/currentDirectory'
+import { getSearchQuery } from '../utils'
 
 class App extends Component {
     
@@ -19,8 +22,12 @@ class App extends Component {
 
 
     // TODO: Make request for current directory information here
-    componentDidMount() {
-        
+    componentWillMount() {
+        const { dispatch, history, keyword } = this.props
+        const searchQuery = getSearchQuery(history)
+        if (keyword !== searchQuery) {
+            dispatch(setSearchKeyword(searchQuery))
+        }
     }
 
     componentWillUnmount() {
@@ -113,12 +120,14 @@ function mapStateToProps({ currentDirectory, viewState }) {
     const {
         scrollTop,
         scrollInActionFlag,
+        keyword
     } = viewState
     return {
         currentDirectory,
         scrollTop,
         scrollInActionFlag,
+        keyword,
     }
 }
 
-export default connect(mapStateToProps)(App)
+export default withRouter(connect(mapStateToProps)(App))

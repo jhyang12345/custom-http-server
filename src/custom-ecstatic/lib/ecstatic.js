@@ -127,7 +127,7 @@ module.exports = function createMiddleware(_dir, _options) {
   return middleware.bind({dir, opts})
 };
 
-function shouldReturn304(req, serverLastModified, serverEtag) {
+function shouldReturn304(opts, req, serverLastModified, serverEtag) {
   if (!req || !req.headers) {
     return false;
   }
@@ -251,7 +251,7 @@ function serve(stat, opts, req, res, file) {
   res.setHeader('etag', etag);
 
   // Return a 304 if necessary
-  if (shouldReturn304(req, lastModified, etag)) {
+  if (shouldReturn304(opts, req, lastModified, etag)) {
     status[304](res, next);
     return;
   }
