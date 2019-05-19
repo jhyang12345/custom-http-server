@@ -19,7 +19,6 @@ module.exports = (opts) => {
 
   const handleError = opts.handleError;
   const showDotfiles = opts.showDotfiles;
-  const si = opts.si;
   const weakEtags = opts.weakEtags;
 
   // node express app middleware format

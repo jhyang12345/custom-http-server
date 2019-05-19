@@ -13,6 +13,7 @@ const status = require('./ecstatic/status-handlers');
 const generateEtag = require('./ecstatic/etag');
 const optsParser = require('./ecstatic/opts');
 import staticFileName from './staticFiles'
+import { decode } from 'punycode';
 
 let ecstatic = null;
 
@@ -71,11 +72,9 @@ function hasGzipId12(gzipped, cb) {
   });
 }
 
-
-module.exports = function createMiddleware(_dir, _options) {
+function getDirAndOptions(_dir, _options) {
   let dir;
   let options;
-
   if (typeof _dir === 'string') {
     dir = _dir;
     options = _options;
@@ -83,6 +82,12 @@ module.exports = function createMiddleware(_dir, _options) {
     options = _dir;
     dir = options.root;
   }
+  return {dir, options}
+}
+
+module.exports = function createMiddleware(_dir, _options) {
+
+  let { dir, options } = getDirAndOptions(_dir, _options)
 
   const root = path.join(path.resolve(dir), '/');
   const opts = optsParser(options);
@@ -118,330 +123,341 @@ module.exports = function createMiddleware(_dir, _options) {
     }
   }
 
-  function shouldReturn304(req, serverLastModified, serverEtag) {
-    if (!req || !req.headers) {
-      return false;
-    }
+  console.log("Dir, Opts", dir, opts)
+  return middleware.bind({dir, opts})
+};
 
-    const clientModifiedSince = req.headers['if-modified-since'];
-    const clientEtag = req.headers['if-none-match'];
-    let clientModifiedDate;
-
-    if (!clientModifiedSince && !clientEtag) {
-      // Client did not provide any conditional caching headers
-      return false;
-    }
-
-    if (clientModifiedSince) {
-      // Catch "illegal access" dates that will crash v8
-      // https://github.com/jfhbrook/node-ecstatic/pull/179
-      try {
-        clientModifiedDate = new Date(Date.parse(clientModifiedSince));
-      } catch (err) {
-        return false;
-      }
-
-      if (clientModifiedDate.toString() === 'Invalid Date') {
-        return false;
-      }
-      // If the client's copy is older than the server's, don't return 304
-      if (clientModifiedDate < new Date(serverLastModified)) {
-        return false;
-      }
-    }
-
-    if (clientEtag) {
-      // Do a strong or weak etag comparison based on setting
-      // https://www.ietf.org/rfc/rfc2616.txt Section 13.3.3
-      if (opts.weakCompare && clientEtag !== serverEtag
-        && clientEtag !== `W/${serverEtag}` && `W/${clientEtag}` !== serverEtag) {
-        return false;
-      } else if (!opts.weakCompare && (clientEtag !== serverEtag || clientEtag.indexOf('W/') === 0)) {
-        return false;
-      }
-    }
-
-    return true;
+function shouldReturn304(req, serverLastModified, serverEtag) {
+  if (!req || !req.headers) {
+    return false;
   }
 
-  return function middleware(req, res, next) {
-    // Figure out the path for the file from the given url
-    const parsed = url.parse(req.url);
-    let pathname = null;
-    let file = null;
-    let gzipped = null;
+  const clientModifiedSince = req.headers['if-modified-since'];
+  const clientEtag = req.headers['if-none-match'];
+  let clientModifiedDate;
 
-    // Strip any null bytes from the url
-    // This was at one point necessary because of an old bug in url.parse
-    //
-    // See: https://github.com/jfhbrook/node-ecstatic/issues/16#issuecomment-3039914
-    // See: https://github.com/jfhbrook/node-ecstatic/commit/43f7e72a31524f88f47e367c3cc3af710e67c9f4
-    //
-    // But this opens up a regex dos attack vector! D:
-    //
-    // Based on some research (ie asking #node-dev if this is still an issue),
-    // it's *probably* not an issue. :)
-    /*
-    while (req.url.indexOf('%00') !== -1) {
-      req.url = req.url.replace(/\%00/g, '');
-    }
-    */
+  if (!clientModifiedSince && !clientEtag) {
+    // Client did not provide any conditional caching headers
+    return false;
+  }
 
-    
-
+  if (clientModifiedSince) {
+    // Catch "illegal access" dates that will crash v8
+    // https://github.com/jfhbrook/node-ecstatic/pull/179
     try {
-      decodeURIComponent(req.url); // check validity of url
-      pathname = decodePathname(parsed.pathname);
+      clientModifiedDate = new Date(Date.parse(clientModifiedSince));
     } catch (err) {
-      status[400](res, next, { error: err });
+      return false;
+    }
+
+    if (clientModifiedDate.toString() === 'Invalid Date') {
+      return false;
+    }
+    // If the client's copy is older than the server's, don't return 304
+    if (clientModifiedDate < new Date(serverLastModified)) {
+      return false;
+    }
+  }
+
+  if (clientEtag) {
+    // Do a strong or weak etag comparison based on setting
+    // https://www.ietf.org/rfc/rfc2616.txt Section 13.3.3
+    if (opts.weakCompare && clientEtag !== serverEtag
+      && clientEtag !== `W/${serverEtag}` && `W/${clientEtag}` !== serverEtag) {
+      return false;
+    } else if (!opts.weakCompare && (clientEtag !== serverEtag || clientEtag.indexOf('W/') === 0)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function serve(stat, opts, req, res, file) {
+  // Do a MIME lookup, fall back to octet-stream and handle gzip
+  // special case.
+  const defaultType = opts.contentType || 'application/octet-stream';
+  let contentType = mime.lookup(file, defaultType);
+  let charSet;
+  const range = (req.headers && req.headers.range);
+  const lastModified = (new Date(stat.mtime)).toUTCString();
+  const etag = generateEtag(stat, opts.weakEtags);
+  let cacheControl = opts.cache;
+  let stream = null;
+  const gzipped = `${file}.gz`;
+
+  if (contentType) {
+    charSet = mime.charsets.lookup(contentType, 'utf-8');
+    if (charSet) {
+      contentType += `; charset=${charSet}`;
+    }
+  }
+
+  if (file === gzipped) { // is .gz picked up
+    res.setHeader('Content-Encoding', 'gzip');
+
+    // strip gz ending and lookup mime type
+    contentType = mime.lookup(path.basename(file, '.gz'), defaultType);
+  }
+
+  if (typeof cacheControl === 'function') {
+    cacheControl = cache(pathname);
+  }
+  if (typeof cacheControl === 'number') {
+    cacheControl = `max-age=${cacheControl}`;
+  }
+
+  if (range) {
+    const total = stat.size;
+    const parts = range.trim().replace(/bytes=/, '').split('-');
+    const partialstart = parts[0];
+    const partialend = parts[1];
+    const start = parseInt(partialstart, 10);
+    const end = Math.min(
+      total - 1,
+      partialend ? parseInt(partialend, 10) : total - 1
+    );
+    const chunksize = (end - start) + 1;
+    let fstream = null;
+
+    if (start > end || isNaN(start) || isNaN(end)) {
+      status['416'](res, next);
       return;
     }
 
-    if (pathname !== staticFileName(pathname)) {
-      file = staticFileName(pathname)
-    } else {
-      file = path.normalize(
-        path.join(
-          root,
-          path.relative(path.join('/', baseDir), pathname)
-        )
-      );
-    }
-  
-    gzipped = `${file}.gz`;
-
-    if (serverHeader !== false) {
-      // Set common headers.
-      res.setHeader('server', `ecstatic-${version}`);
-    }
-
-    Object.keys(headers).forEach((key) => {
-      res.setHeader(key, headers[key]);
+    fstream = fs.createReadStream(file, { start, end });
+    fstream.on('error', (err) => {
+      status['500'](res, next, { error: err });
     });
+    res.on('close', () => {
+      fstream.destroy();
+    });
+    res.writeHead(206, {
+      'Content-Range': `bytes ${start}-${end}/${total}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': contentType,
+      'cache-control': cacheControl,
+      'last-modified': lastModified,
+      etag,
+    });
+    fstream.pipe(res);
+    return;
+  }
 
-    if (req.method === 'OPTIONS' && handleOptionsMethod) {
-      res.end();
-      return;
-    }
+  // TODO: Helper for this, with default headers.
+  res.setHeader('cache-control', cacheControl);
+  res.setHeader('last-modified', lastModified);
+  res.setHeader('etag', etag);
 
-    // console.log("Current header:", req.headers)
+  // Return a 304 if necessary
+  if (shouldReturn304(req, lastModified, etag)) {
+    status[304](res, next);
+    return;
+  }
 
-    // TODO: This check is broken, which causes the 403 on the
-    // expected 404.
-    if (file.slice(0, root.length) !== root) {
-      status[403](res, next);
-      return;
-    }
+  res.setHeader('content-length', stat.size);
+  res.setHeader('content-type', contentType);
 
-    if (req.method && (req.method !== 'GET' && req.method !== 'HEAD')) {
-      status[405](res, next);
-      return;
-    }
+  // set the response statusCode if we have a request statusCode.
+  // This only can happen if we have a 404 with some kind of 404.html
+  // In all other cases where we have a file we serve the 200
+  res.statusCode = req.statusCode || 200;
 
-    function serve(stat) {
-      // Do a MIME lookup, fall back to octet-stream and handle gzip
-      // special case.
-      const defaultType = opts.contentType || 'application/octet-stream';
-      let contentType = mime.lookup(file, defaultType);
-      let charSet;
-      const range = (req.headers && req.headers.range);
-      const lastModified = (new Date(stat.mtime)).toUTCString();
-      const etag = generateEtag(stat, weakEtags);
-      let cacheControl = cache;
-      let stream = null;
+  if (req.method === 'HEAD') {
+    res.end();
+    return;
+  }
 
-      if (contentType) {
-        charSet = mime.charsets.lookup(contentType, 'utf-8');
-        if (charSet) {
-          contentType += `; charset=${charSet}`;
-        }
+  stream = fs.createReadStream(file);
+
+  stream.pipe(res);
+  stream.on('error', (err) => {
+    status['500'](res, next, { error: err });
+  });
+}
+
+
+function statFile(dir, opts, res, next, req, file) {
+  const parsed = url.parse(req.url);
+  const pathname = decodePathname(parsed.pathname)
+  fs.stat(file, (err, stat) => {
+    if (err && (err.code === 'ENOENT' || err.code === 'ENOTDIR')) {
+      if (req.statusCode === 404) {
+        // This means we're already trying ./404.html and can not find it.
+        // So send plain text response with 404 status code
+        status[404](res, next);
+      } else if (!path.extname(parsed.pathname).length && opts.defaultExt) {
+        // If there is no file extension in the path and we have a default
+        // extension try filename and default extension combination before rendering 404.html.
+        middleware.call({dir, opts}, {
+          url: `${parsed.pathname}.${opts.defaultExt}${(parsed.search) ? parsed.search : ''}`,
+          headers: req.headers,
+        }, res, next);
+      } else {
+        // Try to serve default ./404.html
+        middleware.call({ dir, opts }, {
+          url: (opts.handleError ? `/${path.join(opts.baseDir, `404.${opts.defaultExt}`)}` : req.url),
+          headers: req.headers,
+          statusCode: 404,
+        }, res, next);
       }
-
-      if (file === gzipped) { // is .gz picked up
-        res.setHeader('Content-Encoding', 'gzip');
-
-        // strip gz ending and lookup mime type
-        contentType = mime.lookup(path.basename(file, '.gz'), defaultType);
-      }
-
-      if (typeof cacheControl === 'function') {
-        cacheControl = cache(pathname);
-      }
-      if (typeof cacheControl === 'number') {
-        cacheControl = `max-age=${cacheControl}`;
-      }
-
-      if (range) {
-        const total = stat.size;
-        const parts = range.trim().replace(/bytes=/, '').split('-');
-        const partialstart = parts[0];
-        const partialend = parts[1];
-        const start = parseInt(partialstart, 10);
-        const end = Math.min(
-          total - 1,
-          partialend ? parseInt(partialend, 10) : total - 1
-        );
-        const chunksize = (end - start) + 1;
-        let fstream = null;
-
-        if (start > end || isNaN(start) || isNaN(end)) {
-          status['416'](res, next);
-          return;
-        }
-
-        fstream = fs.createReadStream(file, { start, end });
-        fstream.on('error', (err) => {
-          status['500'](res, next, { error: err });
-        });
-        res.on('close', () => {
-          fstream.destroy();
-        });
-        res.writeHead(206, {
-          'Content-Range': `bytes ${start}-${end}/${total}`,
-          'Accept-Ranges': 'bytes',
-          'Content-Length': chunksize,
-          'Content-Type': contentType,
-          'cache-control': cacheControl,
-          'last-modified': lastModified,
-          etag,
-        });
-        fstream.pipe(res);
+    } else if (err) {
+      status[500](res, next, { error: err });
+    } else if (stat.isDirectory()) {
+      if (!opts.autoIndex && !opts.showDir) {
+        status[404](res, next);
         return;
       }
 
-      // TODO: Helper for this, with default headers.
-      res.setHeader('cache-control', cacheControl);
-      res.setHeader('last-modified', lastModified);
-      res.setHeader('etag', etag);
-
-      // Return a 304 if necessary
-      if (shouldReturn304(req, lastModified, etag)) {
-        status[304](res, next);
-        return;
-      }
-
-      res.setHeader('content-length', stat.size);
-      res.setHeader('content-type', contentType);
-
-      // set the response statusCode if we have a request statusCode.
-      // This only can happen if we have a 404 with some kind of 404.html
-      // In all other cases where we have a file we serve the 200
-      res.statusCode = req.statusCode || 200;
-
-      if (req.method === 'HEAD') {
+      // 302 to / if necessary
+      if (!parsed.pathname.match(/\/$/)) {
+        res.statusCode = 302;
+        const q = parsed.query ? `?${parsed.query}` : '';
+        res.setHeader('location', `${parsed.pathname}/${q}`);
         res.end();
         return;
       }
 
-      stream = fs.createReadStream(file);
+      let requestJsonFlag = false
+      if (req.headers["request-type"] == "api") {
+        requestJsonFlag = true
+      }
 
-      stream.pipe(res);
-      stream.on('error', (err) => {
-        status['500'](res, next, { error: err });
-      });
-    }
-
-
-    function statFile() {
-      fs.stat(file, (err, stat) => {
-        if (err && (err.code === 'ENOENT' || err.code === 'ENOTDIR')) {
-          if (req.statusCode === 404) {
-            // This means we're already trying ./404.html and can not find it.
-            // So send plain text response with 404 status code
-            status[404](res, next);
-          } else if (!path.extname(parsed.pathname).length && defaultExt) {
-            // If there is no file extension in the path and we have a default
-            // extension try filename and default extension combination before rendering 404.html.
-            middleware({
-              url: `${parsed.pathname}.${defaultExt}${(parsed.search) ? parsed.search : ''}`,
-              headers: req.headers,
-            }, res, next);
-          } else {
-            // Try to serve default ./404.html
-            middleware({
-              url: (handleError ? `/${path.join(baseDir, `404.${defaultExt}`)}` : req.url),
-              headers: req.headers,
-              statusCode: 404,
-            }, res, next);
+      if (opts.autoIndex) {
+        middleware.call({dir, opts}, {
+          url: urlJoin(
+            encodeURIComponent(pathname),
+            `/index.${opts.defaultExt}`
+          ),
+          headers: req.headers,
+        }, res, (autoIndexError) => {
+          if (autoIndexError) {
+            status[500](res, next, { error: autoIndexError });
+            return;
           }
-        } else if (err) {
-          status[500](res, next, { error: err });
-        } else if (stat.isDirectory()) {
-          if (!autoIndex && !opts.showDir) {
-            status[404](res, next);
+          // Testing without showDir
+          if (opts.showDir) {
+            // Adding showDir as middleware
+            showDir(opts)(req, res, next, requestJsonFlag);
             return;
           }
 
-          // 302 to / if necessary
-          if (!parsed.pathname.match(/\/$/)) {
-            res.statusCode = 302;
-            const q = parsed.query ? `?${parsed.query}` : '';
-            res.setHeader('location', `${parsed.pathname}/${q}`);
-            res.end();
-            return;
-          }
+          status[403](res, next);
+        });
+        return;
+      }
 
-          let requestJsonFlag = false
-          if (req.headers["request-type"] == "api") {
-            requestJsonFlag = true
-          }
-
-          if (autoIndex) {           
-            middleware({
-              url: urlJoin(
-                encodeURIComponent(pathname),
-                `/index.${defaultExt}`
-              ),
-              headers: req.headers,
-            }, res, (autoIndexError) => {
-              if (autoIndexError) {
-                status[500](res, next, { error: autoIndexError });
-                return;
-              }
-              // Testing without showDir
-              if (opts.showDir) {
-                // Adding showDir as middleware
-                showDir(opts)(req, res, next, requestJsonFlag);
-                return;
-              }
-
-              status[403](res, next);
-            });
-            return;
-          }
-
-          if (opts.showDir) {            
-            showDir(opts)(req, res, next, requestJsonFlag);            
-          }
-        } else {
-          // serve if not a directory?.?
-          serve(stat);
-        }
-      });
-    }
-
-    // Look for a gzipped file if this is turned on
-    if (opts.gzip && shouldCompress(req)) {
-      fs.stat(gzipped, (err, stat) => {
-        if (!err && stat.isFile()) {
-          hasGzipId12(gzipped, (gzipErr, isGzip) => {
-            if (!gzipErr && isGzip) {
-              file = gzipped;
-              serve(stat);
-            } else {
-              statFile();
-            }
-          });
-        } else {
-          statFile();
-        }
-      });
+      if (opts.showDir) {
+        showDir(opts)(req, res, next, requestJsonFlag);
+      }
     } else {
-      statFile();
+      // serve if not a directory?.?
+      serve(stat, opts, req, res, file);
     }
-  };
-};
+  });
+}
 
+function middleware(req, res, next) {
+  
+  // console.log("This:", this)
+  const opts = this.opts
+  const dir = this.dir
+  const root = path.join(path.resolve(dir), '/');
+  // Figure out the path for the file from the given url
+  // const opts = optsParser(options);
+  const parsed = url.parse(req.url);
+  let pathname = null;
+  let file = null;
+  let gzipped = null;
+
+  // Strip any null bytes from the url
+  // This was at one point necessary because of an old bug in url.parse
+  //
+  // See: https://github.com/jfhbrook/node-ecstatic/issues/16#issuecomment-3039914
+  // See: https://github.com/jfhbrook/node-ecstatic/commit/43f7e72a31524f88f47e367c3cc3af710e67c9f4
+  //
+  // But this opens up a regex dos attack vector! D:
+  //
+  // Based on some research (ie asking #node-dev if this is still an issue),
+  // it's *probably* not an issue. :)
+  /*
+  while (req.url.indexOf('%00') !== -1) {
+    req.url = req.url.replace(/\%00/g, '');
+  }
+  */
+
+
+
+  try {
+    decodeURIComponent(req.url); // check validity of url
+    pathname = decodePathname(parsed.pathname);
+  } catch (err) {
+    status[400](res, next, { error: err });
+    return;
+  }
+
+  if (pathname !== staticFileName(pathname)) {
+    file = staticFileName(pathname)
+  } else {
+    file = path.normalize(
+      path.join(
+        root,
+        path.relative(path.join('/', opts.baseDir), pathname)
+      )
+    );
+  }
+
+  gzipped = `${file}.gz`;
+
+  if (opts.serverHeader !== false) {
+    // Set common headers.
+    res.setHeader('server', `ecstatic-${version}`);
+  }
+
+  Object.keys(opts.headers).forEach((key) => {
+    res.setHeader(key, opts.headers[key]);
+  });
+
+  if (req.method === 'OPTIONS' && handleOptionsMethod) {
+    res.end();
+    return;
+  }
+
+  // console.log("Current header:", req.headers)
+
+  // TODO: This check is broken, which causes the 403 on the
+  // expected 404.
+  if (file.slice(0, root.length) !== root) {
+    status[403](res, next);
+    return;
+  }
+
+  if (req.method && (req.method !== 'GET' && req.method !== 'HEAD')) {
+    status[405](res, next);
+    return;
+  }
+
+  // Look for a gzipped file if this is turned on
+  if (opts.gzip && shouldCompress(req)) {
+    fs.stat(gzipped, (err, stat) => {
+      if (!err && stat.isFile()) {
+        hasGzipId12(gzipped, (gzipErr, isGzip) => {
+          if (!gzipErr && isGzip) {
+            file = gzipped;
+            serve(stat, opts, req, res, file);
+          } else {
+            statFile(dir, opts, res, next, req, file);
+          }
+        });
+      } else {
+        statFile(dir, opts, res, next, req, file);
+      }
+    });
+  } else {
+    statFile(dir, opts, res, next, req, file);
+  }
+};
 
 ecstatic = module.exports;
 ecstatic.version = version;
@@ -475,6 +491,6 @@ if (!module.parent) {
       .listen(port, () => {
         console.log(`ecstatic serving ${dir} at http://0.0.0.0:${port}`);
       })
-    ;
+      ;
   }
 }
