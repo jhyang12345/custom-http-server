@@ -17,6 +17,11 @@ class SearchComponent extends React.Component {
             this.setState(() => ({
                 barRevealed: true,
             }))
+        } else if(keyword === "") {
+            console.log("Hide bar!")
+            this.setState(() => ({
+                barRevealed: false
+            }));
         }
     }
 
@@ -27,6 +32,11 @@ class SearchComponent extends React.Component {
             keyword !== "" && keyword !== undefined) {
             this.setState(() => ({
                 barRevealed: true,
+            }))
+        } else if (prevProps.keyword !== keyword &&
+            (keyword === "" || keyword === undefined)) {
+            this.setState(() => ({
+                barRevealed: false,
             }))
         }
     }
