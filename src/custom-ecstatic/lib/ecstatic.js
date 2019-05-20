@@ -172,7 +172,7 @@ function shouldReturn304(opts, req, serverLastModified, serverEtag) {
   return true;
 }
 
-function serve(stat, opts, req, res, file) {
+function serve(stat, opts, req, res, next, file) {
   // Do a MIME lookup, fall back to octet-stream and handle gzip
   // special case.
   const defaultType = opts.contentType || 'application/octet-stream';
@@ -352,7 +352,7 @@ function statFile(dir, opts, res, next, req, file) {
       }
     } else {
       // serve if not a directory?.?
-      serve(stat, opts, req, res, file);
+      serve(stat, opts, req, res, next, file);
     }
   });
 }
@@ -444,7 +444,7 @@ function middleware(req, res, next) {
         hasGzipId12(gzipped, (gzipErr, isGzip) => {
           if (!gzipErr && isGzip) {
             file = gzipped;
-            serve(stat, opts, req, res, file);
+            serve(stat, opts, req, res, next, file);
           } else {
             statFile(dir, opts, res, next, req, file);
           }
