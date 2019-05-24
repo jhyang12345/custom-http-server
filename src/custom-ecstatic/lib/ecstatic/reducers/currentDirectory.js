@@ -1,5 +1,5 @@
-import { FETCH_DIRECTORY, SORT_BY_MODIFIED_TIME, SORT_BY_NAME, SORT, SORT_AGAIN, SORT_BY_SIZE, SET_SEARCH_KEYWORD, SORT_AGAIN_WITH_NEW } from '../actions/currentDirectory'
-import history from "../history"
+import { FETCH_DIRECTORY,  SORT, SET_SEARCH_KEYWORD } from '../actions/currentDirectory'
+
 
 const defaultState = {
     keyword: ""
