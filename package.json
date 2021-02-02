@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "start": "nodemon  --exec \"yarn run pack && yarn build && node ./bin/http-server\"",
+    "serve": "node ./bin/http-server",
     "pretest": "common bin/http-server lib/ test",
     "build": "babel src -d dev --copy-files",
     "pack": "webpack --config webpack.config.js",

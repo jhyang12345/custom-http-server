@@ -418,7 +418,8 @@ function middleware(req, res, next) {
     res.setHeader(key, opts.headers[key]);
   });
 
-  if (req.method === 'OPTIONS' && handleOptionsMethod) {
+  if (req.method === 'OPTIONS' && opts.handleOptionsMethod) {
+  // if (req.method === 'OPTIONS') {
     res.end();
     return;
   }
