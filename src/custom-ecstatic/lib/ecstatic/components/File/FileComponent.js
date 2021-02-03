@@ -19,6 +19,7 @@ class FileComponent extends React.Component {
         this.state = {
             displayMode: null,
             editing: false,
+            size: '',
         }
         this.width = 0
     }
@@ -27,8 +28,15 @@ class FileComponent extends React.Component {
 
     }
 
+    
     componentDidMount() {
-
+      const { file } = this.props
+      let {
+          stat,
+      } = file
+      this.setState({
+        size: bytesToSize(stat.size)
+      })
     }
 
     setFileNameNode(nameNode) {
@@ -126,11 +134,10 @@ class FileComponent extends React.Component {
         const { file, index, displayMode } = this.props
         let {
             stat,
-            displayName,
-            ext,
+            displayName
         } = file
 
-        const { editing } = this.state
+        const { editing, size } = this.state
 
         const transitionTime = index * 0.5
 
@@ -182,7 +189,7 @@ class FileComponent extends React.Component {
                         </File.NameContainer>
                     }
                     <File.Size>
-                        {bytesToSize(stat.size)}
+                        {size}
                     </File.Size>
                     <File.ModifiedDate>
                         <Moment
