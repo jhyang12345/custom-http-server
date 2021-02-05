@@ -130,4 +130,4 @@ function mapStateToProps({ currentDirectory, viewState }) {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(App))
+export default withRouter(App)
