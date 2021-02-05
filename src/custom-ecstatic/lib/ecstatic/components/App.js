@@ -21,37 +21,16 @@ class App extends Component {
     }
 
 
-    // TODO: Make request for current directory information here
-    componentWillMount() {
-        const { dispatch, history, keyword } = this.props
-        const searchQuery = getSearchQuery(history)
-        if (keyword !== searchQuery) {
-            dispatch(setSearchKeyword(searchQuery))
-        }
-    }
-
-    componentWillUnmount() {
-        
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-
-    }
 
     render() {
         return (
           <Fragment>
             <Normalize />
             <AppContainer />
-            <Route
-              path=""              
-              render={(props) => 
-                <FilesContainer.Component 
-                    {...props}
-                    scrollTop={this.state.scrollTop}
-                    scrollCallBack={this.scrollCallBack}
-                    />}
-            />
+            <FilesContainer.Component 
+                scrollTop={this.state.scrollTop}
+                scrollCallBack={this.scrollCallBack}
+                />
             <PopupComponent />
             <OptionsComponent />
             <FloatingButtonComponent />
@@ -116,18 +95,10 @@ div,span,input {
 
 `;
 
-function mapStateToProps({ currentDirectory, viewState }) {
-    const {
-        scrollTop,
-        scrollInActionFlag,
-        keyword
-    } = viewState
+function mapStateToProps() {
     return {
-        currentDirectory,
-        scrollTop,
-        scrollInActionFlag,
-        keyword,
+        
     }
 }
 
-export default withRouter(App)
+export default App

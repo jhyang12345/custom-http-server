@@ -128,7 +128,6 @@ class FilesContainerComponent extends React.Component {
                                 displayMode={displayMode}
                             />
                         ))}
-                    
                 </FilesContainer>
             </Fragment>
         )
