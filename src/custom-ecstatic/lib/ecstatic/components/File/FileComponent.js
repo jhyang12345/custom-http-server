@@ -54,10 +54,6 @@ class FileComponent extends React.Component {
         }
     }
 
-    transitionEndCallback = () => {        
-
-    }
-
     handleClick = (evt) => {
         const { file, history } = this.props
         let {
@@ -107,7 +103,7 @@ class FileComponent extends React.Component {
         dispatch(handleOpenPopup(popupInfo))
     }
 
-    unsetEditing= () => {
+    unsetEditing = () => {
         this.setState(() => ({
             editing: false,
         }))
@@ -138,8 +134,6 @@ class FileComponent extends React.Component {
         } = file
 
         const { editing, size } = this.state
-
-        const transitionTime = index * 0.5
 
         const isDir = stat.isDir
         let fileIcon;
